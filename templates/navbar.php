@@ -1,5 +1,5 @@
 <!-- Navbar -->
-<nav class="navbar navbar-expand-lg fixed-top">
+<nav class="navbar navbar-expand-lg fixed-top shadow-sm p-3 mb-5 bg-body rounded">
   <div class="container-fluid">
     <a class="navbar-brand" href="#">Bookie</a>
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown"
@@ -12,7 +12,7 @@
           <a class="nav-link active" aria-current="page" href="#">Home</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="#">Features</a>
+          <a class="nav-link" href="#popular-books">Books</a>
         </li>
         <li class="nav-item">
           <a class="nav-link" href="#">Pricing</a>
