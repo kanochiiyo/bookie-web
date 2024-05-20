@@ -1,0 +1,133 @@
+body,
+* {
+  padding: 0;
+  margin: 0;
+  font-family: "Poppins", sans-serif;
+}
+
+a {
+  margin-right: 15px;
+  text-decoration: none;
+  font-size: 14px;
+  font-weight: 500;
+  color: #463610;
+}
+hr {
+  border: 0; /* Menghilangkan border default */
+  height: 2px; /* Ketebalan garis */
+  background: black; /* Warna garis */
+}
+
+/* Navbar */
+.navbar {
+  height: 70px;
+  background-color: #fff;
+}
+/* End Navbar */
+
+/* Hero */
+.hero {
+  padding-top: 70px;
+  height: 550px;
+  background-color: #f4f1ea;
+}
+
+.hero h1 {
+  font-size: 7vmin;
+}
+
+.hero-img {
+  width: 100%;
+  height: 400px;
+}
+
+form::placeholder {
+  font-size: 12px;
+}
+
+#hero .disclaimer {
+  border: solid;
+  border-width: 1px;
+  border-radius: 20px;
+  border-color: #463610;
+  padding: 7px;
+}
+/* End Hero */
+
+/* section 2 description*/
+.disclaimer {
+  border-radius: 20px;
+  padding: 7px;
+  background-color: #f4f1ea;
+  color: #463610;
+}
+
+#desc h2 {
+  color: #463610;
+  font-size: 20px;
+}
+
+#desc i {
+  color: #463610;
+  font-size: 26px;
+}
+/* end section 2 */
+
+/* detail */
+.sec-detail {
+  background-color: #f4f1ea;
+}
+
+#detail h2 {
+  font-size: 20px;
+}
+
+.detail-img {
+  width: 50%;
+  height: 100%;
+  box-shadow: -10px 10px 20px rgba(0, 0, 0, 0.5);
+}
+
+.links-bg-white,
+.links-bg:hover {
+  background-color: #fff;
+  border-radius: 20px;
+  padding: 10px 15px;
+  color: #463610;
+  border-style: solid;
+  border-width: 1px;
+  border-color: #463610;
+}
+
+.links-bg-white:hover,
+.links-bg {
+  background-color: #463610;
+  border-radius: 20px;
+  padding: 10px 15px;
+  color: #fff;
+  border-style: solid;
+  border-width: 1px;
+  border-color: #463610;
+}
+
+.mini-nav {
+  color: #71613c;
+}
+
+.mini-nav:hover {
+  color: #463610;
+}
+
+.dark-brown {
+  color: #463610;
+}
+
+.medium-brown {
+  color: #71613c;
+}
+
+.user-review {
+  border-radius: 50%;
+  width: 50px;
+  height: 50px;
+}
