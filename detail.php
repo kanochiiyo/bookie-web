@@ -8,7 +8,7 @@ include (__DIR__ . "/templates/navbar.php");
       <!-- foto buku disini -->
       <div class="col-6 p-5">
         <div class="position-absolute d-flex justify-content-center">
-          <img class="detail-img d-block object-fit-cover" src="assets/book/book1.jpg" alt="buku1">
+          <img class="detail-img d-block object-fit-cover" src="assets/books/book1.jpg" alt="buku1">
         </div>
       </div>
       <!-- judul buku disini -->
@@ -50,7 +50,7 @@ include (__DIR__ . "/templates/navbar.php");
         </div>
       </div>
       <!-- start synopsis -->
-      <div class="m-5" id="#synopsis">
+      <div class="m-5" id="synopsis">
         <h2 class="mb-3 fw-bold">Synopsis</h2>
         <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Ullam, id sapiente magnam consequuntur eius ad autem
           odio tempore, dignissimos, animi vel impedit iure. Cumque perspiciatis, consectetur quidem delectus
@@ -64,7 +64,7 @@ include (__DIR__ . "/templates/navbar.php");
       </div>
       <!-- end synopsis -->
       <!-- start details -->
-      <div class="mx-5 mb-5 card p-3 shadow" id="#details">
+      <div class="mx-5 mb-5 card p-3 shadow" id="details">
         <h2 class="mb-3 fw-bold">Book's Details</h2>
         <div class="row">
           <div class="col-6">
@@ -135,7 +135,7 @@ include (__DIR__ . "/templates/navbar.php");
       </div>
       <!-- end details -->
       <!-- start reviews -->
-      <div class="mx-5" id="#reviews">
+      <div class="mx-5" id="reviews">
         <h2 class="mb-0 fw-bold">Reviews</h2>
         <div class="d-flex justify-content-end">
           <p class="dark-brown fw-bold" style="font-size: 22px;">

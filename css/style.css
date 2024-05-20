@@ -2,7 +2,7 @@ body,
 * {
   padding: 0;
   margin: 0;
-  font-family: "Poppins", sans-serif;
+  font-family: "Inter", sans-serif;
 }
 
 a {
@@ -12,10 +12,29 @@ a {
   font-weight: 500;
   color: #463610;
 }
+
+.links-bg-white,
+.links-bg:hover {
+  background-color: #fff;
+  border-radius: 17px;
+  padding: 7px 12px;
+  color: #463610;
+  border: 1px solid #463610;
+}
+
+.links-bg-white:hover,
+.links-bg {
+  background-color: #463610;
+  border-radius: 17px;
+  padding: 7px 12px;
+  color: #fff;
+  border: 1px solid #463610;
+}
+
 hr {
-  border: 0; /* Menghilangkan border default */
-  height: 2px; /* Ketebalan garis */
-  background: black; /* Warna garis */
+  border: 0;
+  height: 2px;
+  background: black;
 }
 
 /* Navbar */
@@ -28,8 +47,11 @@ hr {
 /* Hero */
 .hero {
   padding-top: 70px;
-  height: 550px;
   background-color: #f4f1ea;
+}
+
+#hero .container {
+  height: 550px;
 }
 
 .hero h1 {
@@ -46,20 +68,20 @@ form::placeholder {
 }
 
 #hero .disclaimer {
-  border: solid;
-  border-width: 1px;
+  border: 1px solid #463610;
   border-radius: 20px;
-  border-color: #463610;
   padding: 7px;
+  font-weight: 600;
 }
 /* End Hero */
 
-/* section 2 description*/
+/* Section 2 Description */
 .disclaimer {
   border-radius: 20px;
   padding: 7px;
   background-color: #f4f1ea;
   color: #463610;
+  font-weight: 600;
 }
 
 #desc h2 {
@@ -71,9 +93,61 @@ form::placeholder {
   color: #463610;
   font-size: 26px;
 }
-/* end section 2 */
+/* End Section 2 */
 
-/* detail */
+/* Books Section */
+#popular-books .custom-card,
+#best-seller .custom-card {
+  width: 190px;
+  height: 350px;
+  margin: 20px;
+  padding: 0;
+}
+
+#best-seller,
+#best-seller .custom-card {
+  background-color: #f4f1ea;
+}
+/* End Books Section */
+
+/* Join Section */
+#join .card {
+  width: 50rem;
+  height: 23rem;
+  background-color: #f4f1ea;
+}
+/* End Join Section */
+
+/* Footer */
+footer {
+  background-color: #f4f1ea;
+  padding: 20px 0;
+}
+
+.img-get {
+  width: 150px;
+  height: auto;
+}
+
+footer .row {
+  padding: 0 15px;
+}
+
+footer p {
+  margin: 0;
+}
+
+footer i {
+  color: #463610;
+  font-size: 23px;
+}
+
+footer .fa-brands {
+  margin: 0 10px;
+}
+/* End Footer */
+
+/* Detail Page */
 .sec-detail {
   background-color: #f4f1ea;
 }
@@ -86,28 +160,6 @@ form::placeholder {
   width: 50%;
   height: 100%;
   box-shadow: -10px 10px 20px rgba(0, 0, 0, 0.5);
-}
-
-.links-bg-white,
-.links-bg:hover {
-  background-color: #fff;
-  border-radius: 20px;
-  padding: 10px 15px;
-  color: #463610;
-  border-style: solid;
-  border-width: 1px;
-  border-color: #463610;
-}
-
-.links-bg-white:hover,
-.links-bg {
-  background-color: #463610;
-  border-radius: 20px;
-  padding: 10px 15px;
-  color: #fff;
-  border-style: solid;
-  border-width: 1px;
-  border-color: #463610;
 }
 
 .mini-nav {
@@ -131,3 +183,4 @@ form::placeholder {
   width: 50px;
   height: 50px;
 }
+/* End Detail Page */
