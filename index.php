@@ -1,6 +1,7 @@
 <?php
 include (__DIR__ . "/templates/header.php");
 include (__DIR__ . "/templates/navbar.php");
+include (__DIR__ . "/templates/modal.php");
 ?>
 
 <main>
@@ -148,16 +149,17 @@ include (__DIR__ . "/templates/navbar.php");
       <div class="row justify-content-between mx-1 mb-5">
         <?php for ($i = 1; $i <= 10; $i++) { ?>
           <div class="custom-card col-2 mx-1 mb-5">
-            <img src="assets/books/moby-dick.jpg" alt="Moby-Dick by Harper Lee" class="rounded-end-1 object-fit-fill"
-              style="width: 100%; height: auto; max-height: 250px;" />
-            <a href="detail.php" class="text-decoration-none m-1 fw-bold" style="font-size: 17px; color:#000">
-              Moby-Dick
+            <a href="detail.php" class="text-decoration-none fw-bold mb-0" style="font-size: 17px; color:#000">
+              <img src="assets/books/moby-dick.jpg" alt="Moby-Dick by Harper Lee" class="rounded-end-1 object-fit-fill"
+                style="width: 100%; height: auto; max-height: 250px;" />
+              <span class="ms-1">Moby-Dick<span>
             </a>
             <p class="m-1">Harper Lee</p>
             <p class="m-1 fw-bold" style="font-size: 13px; margin-bottom: 0;"><i class="fa-solid fa-star"></i> 4,5</p>
             <div class="d-flex justify-content-between align-items-center m-1">
               <p class="fw-bold mb-0" style="font-size: 17px; margin-bottom: 0;">$25</p>
-              <a href="#" class="links-bg-white">Add to cart</a>
+              <a href="#" class="links-bg-white mt-1 mb-3" data-bs-toggle="modal" data-bs-target="#cartModal"
+                type="button"> Add to cart</a>
             </div>
           </div>
         <?php } ?>
@@ -183,16 +185,17 @@ include (__DIR__ . "/templates/navbar.php");
       <div class="row justify-content-between mx-1">
         <?php for ($i = 1; $i <= 5; $i++) { ?>
           <div class="custom-card col-2 mx-1 mb-5">
-            <img src="assets/books/moby-dick.jpg" alt="Moby-Dick by Harper Lee" class="rounded-end-1 object-fit-fill"
-              style="width: 100%; height: auto; max-height: 250px;" />
-            <a href="detail.php" class="text-decoration-none m-1 fw-bold" style="font-size: 17px; color:#000">
-              Moby-Dick
+            <a href="detail.php" class="text-decoration-none fw-bold mb-0" style="font-size: 17px; color:#000">
+              <img src="assets/books/moby-dick.jpg" alt="Moby-Dick by Harper Lee" class="rounded-end-1 object-fit-fill"
+                style="width: 100%; height: auto; max-height: 250px;" />
+              <span class="ms-1">Moby-Dick<span>
             </a>
             <p class="m-1">Harper Lee</p>
             <p class="m-1 fw-bold" style="font-size: 13px; margin-bottom: 0;"><i class="fa-solid fa-star"></i> 4,5</p>
             <div class="d-flex justify-content-between align-items-center m-1">
               <p class="fw-bold mb-0" style="font-size: 17px; margin-bottom: 0;">$25</p>
-              <a href="#" class="links-bg-white">Add to cart</a>
+              <a href="#" class="links-bg-white mt-1 mb-3" data-bs-toggle="modal" data-bs-target="#cartModal"
+                type="button"> Add to cart</a>
             </div>
           </div>
         <?php } ?>
@@ -232,5 +235,6 @@ include (__DIR__ . "/templates/navbar.php");
 </main>
 
 <?php
+include (__DIR__ . "/templates/credit.php");
 include (__DIR__ . "/templates/footer.php");
 ?>
