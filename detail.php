@@ -1,6 +1,7 @@
 <?php
 include (__DIR__ . "/templates/header.php");
 include (__DIR__ . "/templates/navbar.php");
+include (__DIR__ . "/templates/modal.php");
 ?>
 <section class="sec-detail max-vw-100 min-vh-100" id="detail">
   <div class="container mt-5 pt-5">
@@ -29,6 +30,7 @@ include (__DIR__ . "/templates/navbar.php");
         <p class="fw-bold mb-0" style="font-size:28px">$20</p>
       </div>
     </div>
+
     <!-- content bg putih -->
     <div class="container bg-white min-vh-100">
       <div class="row mt-5 pt-4">
@@ -36,8 +38,10 @@ include (__DIR__ . "/templates/navbar.php");
         </div>
         <div class="col-6">
           <div>
-            <a href="#" class="links-bg mt-1 mb-3" type="submit">Buy now</a>
-            <a href="#" class="links-bg-white mt-1 mb-3" type="submit">Add to cart</a>
+            <a href="#" class="links-bg mt-1 mb-3" data-bs-toggle="modal" data-bs-target="#buyModal" type="button">Buy
+              now</a>
+            <a href="#" class="links-bg-white mt-1 mb-3" data-bs-toggle="modal" data-bs-target="#cartModal"
+              type="button"> Add to cart</a>
           </div>
           <div class="me-5">
             <div class="d-flex justify-content-end">
@@ -144,54 +148,66 @@ include (__DIR__ . "/templates/navbar.php");
           </p>
         </div>
         <hr class="mt-0">
-        <div class="row">
-          <div class="col-1 d-flex mx-0 justify-content-center">
-            <img class="user-review" src="assets/user/user.png" alt="user">
-          </div>
-          <div class="col-11 mx-0">
-            <p class="fw-bold medium-brown mb-0"> user12323232</p>
-            <p class=" fw-bold mb-0 dark-brown" style="font-size:12px">
-              <i class="fa-solid fa-star"></i>
-              5
-            </p>
-            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Ullam, id sapiente magnam consequuntur eius ad
-              autem
-              odio tempore, dignissimos, animi vel impedit iure. Cumque perspiciatis, consectetur quidem delectus
-              voluptatibus beatae?</p>
-          </div>
-        </div>
-        <div class="row">
-          <div class="col-1 d-flex mx-0 justify-content-center">
-            <img class="user-review" src="assets/user/user.png" alt="user">
-          </div>
-          <div class="col-11 mx-0">
-            <p class="fw-bold medium-brown mb-0"> user12323232</p>
-            <p class=" fw-bold mb-0 dark-brown" style="font-size:12px">
-              <i class="fa-solid fa-star"></i>
-              4
-            </p>
-            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Ullam, id sapiente magnam
-              consequuntur eius ad
-              autem
-              odio tempore, dignissimos, animi vel impedit iure. Cumque perspiciatis, consectetur quidem delectus
-              voluptatibus beatae?</p>
+        <div class="card p-2 m-3">
+          <div class="row">
+            <div class="col-1 d-flex mx-0 justify-content-center">
+              <img class="user-review" src="assets/user/user.png" alt="user">
+            </div>
+            <div class="col-11 mx-0">
+              <p class="fw-bold medium-brown mb-0"> user12323232</p>
+              <p class=" fw-bold mb-0 dark-brown" style="font-size:12px">
+                <i class="fa-solid fa-star"></i>
+                5
+              </p>
+              <p class="mb-0">Lorem ipsum dolor sit amet consectetur adipisicing elit. Ullam, id sapiente magnam
+                consequuntur eius ad
+                autem
+                odio tempore, dignissimos, animi vel impedit iure. Cumque perspiciatis, consectetur quidem delectus
+                voluptatibus beatae?</p>
+            </div>
           </div>
         </div>
-        <div class="row">
-          <div class="col-1 d-flex mx-0 justify-content-center">
-            <img class="user-review" src="assets/user/user.png" alt="user">
+        <div class="card p-2 m-3">
+          <div class="row">
+            <div class="col-1 d-flex mx-0 justify-content-center">
+              <img class="user-review" src="assets/user/user.png" alt="user">
+            </div>
+            <div class="col-11 mx-0">
+              <p class="fw-bold medium-brown mb-0"> user12323232</p>
+              <p class=" fw-bold mb-0 dark-brown" style="font-size:12px">
+                <i class="fa-solid fa-star"></i>
+                5
+              </p>
+              <p class="mb-0">Lorem ipsum dolor sit amet consectetur adipisicing elit. Ullam, id sapiente magnam
+                consequuntur eius ad
+                autem
+                odio tempore, dignissimos, animi vel impedit iure. Cumque perspiciatis, consectetur quidem delectus
+                voluptatibus beatae?</p>
+            </div>
           </div>
-          <div class="col-11 mx-0">
-            <p class="fw-bold medium-brown mb-0"> user12323232</p>
-            <p class=" fw-bold mb-0 dark-brown" style="font-size:12px">
-              <i class="fa-solid fa-star"></i>
-              5
-            </p>
-            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Ullam, id sapiente magnam consequuntur eius ad
-              autem
-              odio tempore, dignissimos, animi vel impedit iure. Cumque perspiciatis, consectetur quidem delectus
-              voluptatibus beatae?</p>
+        </div>
+        <div class="card p-2 m-3">
+          <div class="row">
+            <div class="col-1 d-flex mx-0 justify-content-center">
+              <img class="user-review" src="assets/user/user.png" alt="user">
+            </div>
+            <div class="col-11 mx-0">
+              <p class="fw-bold medium-brown mb-0"> user12323232</p>
+              <p class=" fw-bold mb-0 dark-brown" style="font-size:12px">
+                <i class="fa-solid fa-star"></i>
+                5
+              </p>
+              <p class="mb-0">Lorem ipsum dolor sit amet consectetur adipisicing elit. Ullam, id sapiente magnam
+                consequuntur eius ad
+                autem
+                odio tempore, dignissimos, animi vel impedit iure. Cumque perspiciatis, consectetur quidem delectus
+                voluptatibus beatae?</p>
+            </div>
           </div>
+        </div>
+        <div class="d-flex justify-content-end pb-5">
+          <a href="#" class="dark-brown fw-bold" data-bs-toggle="modal" data-bs-target="#reviewModal"
+            type="button"><u>More reviews..</u></a>
         </div>
       </div>
       <!-- end reviews -->
@@ -199,5 +215,6 @@ include (__DIR__ . "/templates/navbar.php");
   </div>
 </section>
 <?php
+include (__DIR__ . "/templates/credit.php");
 include (__DIR__ . "/templates/footer.php");
 ?>
