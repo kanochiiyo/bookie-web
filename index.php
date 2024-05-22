@@ -124,8 +124,8 @@ include (__DIR__ . "/templates/navbar.php");
   <!-- End Section 3 -->
 
   <!-- Popular Books Section -->
-  <section class="popular-books" id="popular-books" data-aos="fade-right">
-    <div class="container pt-4 px-0">
+  <section class="popular-books py-5" id="popular-books" data-aos="fade-right">
+    <div class="container">
       <div class="row">
         <div class="col-6">
           <h1 class="mt-1 mb-3">
@@ -143,24 +143,68 @@ include (__DIR__ . "/templates/navbar.php");
             <a href="">Most Viewed</a>
           </div>
         </div>
-      </div>
-
-      <div class="row justify-content-between mx-1 mb-5">
-        <?php for ($i = 1; $i <= 10; $i++) { ?>
-          <div class="custom-card col-2 mx-1 mb-5">
-            <img src="assets/books/moby-dick.jpg" alt="Moby-Dick by Harper Lee" class="rounded-end-1 object-fit-fill"
-              style="width: 100%; height: auto; max-height: 250px;" />
-            <a href="detail.php" class="text-decoration-none m-1 fw-bold" style="font-size: 17px; color:#000">
-              Moby-Dick
-            </a>
-            <p class="m-1">Harper Lee</p>
-            <p class="m-1 fw-bold" style="font-size: 13px; margin-bottom: 0;"><i class="fa-solid fa-star"></i> 4,5</p>
-            <div class="d-flex justify-content-between align-items-center m-1">
-              <p class="fw-bold mb-0" style="font-size: 17px; margin-bottom: 0;">$25</p>
-              <a href="#" class="links-bg-white">Add to cart</a>
+        <div class="row">
+          <div class="col-12">
+            <div id="carouselExampleIndicators2" class="carousel slide" data-bs-ride="carousel">
+              <div class="carousel-inner">
+                <div class="carousel-item active">
+                  <div class="row justify-content-between mx-1">
+                    <?php for ($i = 1; $i <= 5; $i++) { ?>
+                      <div class="custom-card col-2 mx-1 mb-5">
+                        <img src="assets/books/moby-dick.jpg" alt="Moby-Dick by Harper Lee"
+                          class="rounded-end-1 object-fit-fill" style="width: 100%; height: auto; max-height: 250px;" />
+                        <a href="detail.php" class="text-decoration-none m-1 fw-bold" style="font-size: 17px; color:#000">
+                          Moby-Dick
+                        </a>
+                        <p class="m-1">Harper Lee</p>
+                        <p class="m-1 fw-bold" style="font-size: 13px; margin-bottom: 0;"><i class="fa-solid fa-star"></i>
+                          4,5</p>
+                        <div class="d-flex justify-content-between align-items-center m-1">
+                          <p class="fw-bold mb-0" style="font-size: 17px; margin-bottom: 0;">$25</p>
+                          <a href="#" class="links-bg-white">Add to cart</a>
+                        </div>
+                      </div>
+                    <?php } ?>
+                  </div>
+                </div>
+                <div class="carousel-item">
+                  <div class="row justify-content-between mx-1">
+                    <?php for ($i = 1; $i <= 5; $i++) { ?>
+                      <div class="custom-card col-2 mx-1 mb-5">
+                        <img src="assets/books/moby-dick.jpg" alt="Moby-Dick by Harper Lee"
+                          class="rounded-end-1 object-fit-fill" style="width: 100%; height: auto; max-height: 250px;" />
+                        <a href="detail.php" class="text-decoration-none m-1 fw-bold" style="font-size: 17px; color:#000">
+                          Moby-Dick
+                        </a>
+                        <p class="m-1">Harper Lee</p>
+                        <p class="m-1 fw-bold" style="font-size: 13px; margin-bottom: 0;"><i class="fa-solid fa-star"></i>
+                          4,5</p>
+                        <div class="d-flex justify-content-between align-items-center m-1">
+                          <p class="fw-bold mb-0" style="font-size: 17px; margin-bottom: 0;">$25</p>
+                          <a href="#" class="links-bg-white">Add to cart</a>
+                        </div>
+                      </div>
+                    <?php } ?>
+                  </div>
+                </div>
+              </div>
             </div>
           </div>
-        <?php } ?>
+        </div>
+
+
+        <div class="row">
+          <div class="col-12">
+            <div class="col-6 text-right">
+              <a class="btn btn-primary mb-3 mr-1" href="#carouselExampleIndicators2" role="button" data-slide="prev">
+                <i class="fa fa-arrow-left"></i>
+              </a>
+              <a class="btn btn-primary mb-3" href="#carouselExampleIndicators2" role="button" data-slide="next">
+                <i class="fa fa-arrow-right"></i>
+              </a>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
   </section>
