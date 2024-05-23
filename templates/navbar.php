@@ -31,8 +31,8 @@
         </li>
       </ul>
       <span>
-        <a href="#" class="links">Login</a>
-        <a href="#" class="links-bg">Sign up</a>
+        <a href="login.php" class="links">Login</a>
+        <a href="signup.php" class="links-bg">Sign up</a>
       </span>
     </div>
   </div>
