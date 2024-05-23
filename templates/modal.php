@@ -32,7 +32,7 @@
               </div>
             </div>
           </div>
-          <div class="form-group mt-3">
+          <div id="input-number-purchase-buy" class="form-group mt-3 d-none">
             <label class="fw-bold" for="size">number of add cart:</label>
             <input type="number" class="form-control" id="size" min="1" placeholder="Enter the number of purchases"
               name="size" required>
@@ -83,7 +83,7 @@
               </div>
             </div>
           </div>
-          <div class="form-group mt-3">
+          <div id="input-number-purchase" class="form-group mt-3 d-none">
             <label class="fw-bold" for="size">number of add cart:</label>
             <input type="number" class="form-control" id="size" min="1" placeholder="Enter the number of purchases"
               name="size" required>
