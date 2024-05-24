@@ -56,7 +56,6 @@ include (__DIR__ . "/../templates/header.php");
     border-bottom-right-radius: 10px;
   }
 
-
   a.text-black {
     display: inline-flex;
     align-items: center;
