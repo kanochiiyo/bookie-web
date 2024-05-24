@@ -22,6 +22,7 @@ document.addEventListener("DOMContentLoaded", function () {
   });
 });
 
+// function untuk menghilangkan input nominal ketika klik ebook
 function runRadioChooseBook(modalClass, elementId) {
   const inputCountElement = document.querySelector("#" + elementId);
   const inputCount = document.querySelector("#" + elementId + " input");
