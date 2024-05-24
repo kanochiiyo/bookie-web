@@ -2,11 +2,11 @@
 include (__DIR__ . "/templates/header.php");
 ?>
 
-<main id="login" class="font-inter d-flex align-items-center justify-content-center">
-  <div class="container-fluid" style="height: 100vh;">
-    <div class="row align-items-center" style="height: 100%;">
+<main id="login" class="font-inter d-flex align-items-center justify-content-center min-vh-100">
+  <div class="container-fluid m-0" style="height: 100vh">
+    <div class="row align-items-center">
       <div class="col-lg-6 p-0">
-        <img src="assets/login.png" alt="Log in img" id="login-img" class="float-start object-fit-cover h-100">
+        <img src="assets/login.png" alt="Log in img" id="login-img" class="float-start object-fit-cover min-vh-100">
       </div>
       <div class="col-lg-6 d-flex align-items-center justify-content-center">
         <div class="container">
@@ -16,8 +16,8 @@ include (__DIR__ . "/templates/header.php");
           </p>
           <form id="loginForm" class="login-form-container float-start">
             <div class="mb-3">
-              <label for="exampleInputEmail1" class="form-label">Email address</label>
-              <input type="email" class="input form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
+              <label for="exampleInputEmail1" class="form-label">Username</label>
+              <input type="text" class="input form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
             </div>
             <div class="mb-3">
               <label for="exampleInputPassword1" class="form-label">Password</label>

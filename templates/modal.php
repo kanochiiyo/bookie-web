@@ -1,8 +1,7 @@
 <!-- Modal buy now -->
 <div class="modal fade" id="buyModal" tabindex="-1" aria-labelledby="buyModalLabel" aria-hidden="true">
   <div class="modal-dialog modal-dialog-centered">
-    <div class="modal-content"
-      style="background: linear-gradient(to bottom, #ece0c4 0%, #ece0c4 25%, #ffffff 75%, #ffffff 100%);">
+    <div class="modal-content modal-bg">
       <div class="modal-header">
         <div>
           <h1 class="modal-title fs-5" id="buyModalLabel">Purchase details</h1>
@@ -52,8 +51,7 @@
 <!-- modal cart -->
 <div class="modal fade" id="cartModal" tabindex="-1" aria-labelledby="cartModalLabel" aria-hidden="true">
   <div class="modal-dialog modal-dialog-centered">
-    <div class="modal-content"
-      style="background: linear-gradient(to bottom, #ece0c4 0%, #ece0c4 25%, #ffffff 75%, #ffffff 100%);">
+    <div class="modal-content modal-bg">
       <div class="modal-header">
         <div>
           <h1 class="modal-title fs-5" id="cartModalLabel">Add to cart details</h1>
@@ -103,8 +101,7 @@
 <!-- modal reviews -->
 <div class="modal fade" id="reviewModal" tabindex="-1" aria-labelledby="reviewModalLabel" aria-hidden="true">
   <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable modal-lg">
-    <div class="modal-content"
-      style="background: linear-gradient(to bottom, #ece0c4 0%, #ece0c4 25%, #ffffff 75%, #ffffff 100%);">
+    <div class="modal-content modal-bg">
       <div class="modal-header">
         <div>
           <h1 class="modal-title fs-5" id="reviewModalLabel">Reviews</h1>

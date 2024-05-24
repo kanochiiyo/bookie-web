@@ -278,3 +278,40 @@ footer .fa-brands {
   color: #000;
 }
 /* End Login */
+
+/* start cart  */
+.bg-dark-brown {
+  background-color: #463610;
+}
+
+.bg-light-brown {
+  background-color: #f4f1ea;
+}
+
+.links-co,
+.links-co-white:hover {
+  background-color: #fff;
+  border-radius: 17px;
+  padding: 7px 12px;
+  color: #463610;
+  border: 1px solid #fff;
+}
+
+.links-co:hover,
+.links-co-white {
+  background-color: #463610;
+  border-radius: 17px;
+  padding: 7px 12px;
+  color: #fff;
+  border: 1px solid #fff;
+}
+
+.modal-bg {
+  background: linear-gradient(
+    to bottom,
+    #ece0c4 0%,
+    #ece0c4 25%,
+    #ffffff 75%,
+    #ffffff 100%
+  );
+}
