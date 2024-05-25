@@ -9,24 +9,20 @@ include (__DIR__ . "/../templates/header.php");
   a {
     text-decoration: none;
     color: #333;
-    /* Warna teks yang lebih gelap untuk kontras yang lebih baik */
   }
 
   #book-crud .sidebar {
     position: sticky;
     top: 0;
     height: 100vh;
-    overflow-y: auto;
-    z-index: 2;
-    /* Tingkatkan z-index agar sidebar di atas navbar */
   }
+
 
   #book-crud .sidebar-item {
     display: block;
     padding: 10px;
     margin: 5px;
     transition: background-color 0.3s;
-    /* Tambahkan transisi untuk hover */
   }
 
   #book-crud .sidebar-item:hover {
@@ -61,25 +57,6 @@ include (__DIR__ . "/../templates/header.php");
     border-bottom-right-radius: 10px;
   }
 
-  /* Responsivitas untuk perangkat mobile */
-  @media (max-width: 768px) {
-    .sidebar {
-      min-width: 80px;
-      /* Atur lebar minimum sidebar */
-    }
-
-    .navbar .container-fluid {
-      padding-left: 85px;
-      /* Beri ruang untuk sidebar */
-    }
-
-    .table-responsive {
-      overflow-x: auto;
-      /* Tambahkan scroll horizontal untuk tabel */
-    }
-  }
-
-  /* Aksesibilitas untuk ikon */
   a.text-black {
     display: inline-flex;
     align-items: center;
@@ -90,9 +67,6 @@ include (__DIR__ . "/../templates/header.php");
 
   a.text-black:hover {
     background-color: #f0f0f0;
-    /* Tambahkan feedback visual saat hover */
-    border-radius: 18px;
-    /* Bentuk lingkaran */
   }
 </style>
 <main id="book-crud" class="font-notosans no-padding-margin"
@@ -161,5 +135,4 @@ include (__DIR__ . "/../templates/header.php");
   </div>
 </main>
 <?php
-include (__DIR__ . "/../templates/footer.php");
-?>
+include (__DIR__ . "/../templates/footer.php"); ?>
