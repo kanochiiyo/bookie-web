@@ -4,6 +4,7 @@ body,
   margin: 0;
 }
 
+/* Fonts */
 .font-inter {
   font-family: "Inter", sans-serif;
 }
@@ -20,6 +21,7 @@ body,
   font-family: "Raleway", sans-serif;
 }
 
+/* For All */
 a {
   margin-right: 15px;
   text-decoration: none;
@@ -29,7 +31,8 @@ a {
 }
 
 .links-bg-white,
-.links-bg:hover {
+.links-bg:hover,
+.submit:hover {
   background-color: #fff;
   border-radius: 17px;
   padding: 7px 12px;
@@ -38,7 +41,8 @@ a {
 }
 
 .links-bg-white:hover,
-.links-bg {
+.links-bg,
+.submit {
   background-color: #463610;
   border-radius: 17px;
   padding: 7px 12px;
@@ -52,10 +56,50 @@ hr {
   background: black;
 }
 
+/* Table for All */
+.borderless td,
+.borderless th {
+  border: none;
+  padding: 20px;
+}
+
+#transaction th,
+#book-crud th,
+#cart th,
+#transaction th {
+  color: #000;
+}
+.table thead th {
+  background-color: #f4f4f5;
+  font-weight: 500;
+  color: #5a6278;
+  font-size: 14px;
+}
+
+.table thead th:first-child {
+  border-top-left-radius: 10px;
+  border-bottom-left-radius: 10px;
+}
+
+.table thead th:last-child {
+  border-top-right-radius: 10px;
+  border-bottom-right-radius: 10px;
+}
+
 /* Navbar */
 .navbar {
   height: 70px;
   background-color: #fff;
+}
+.navbar-user-info {
+  display: flex;
+  align-items: center;
+}
+
+.navbar-user-info .nav-link,
+.navbar-user-info .links-bg {
+  margin-left: 10px;
+  margin-right: 10px;
 }
 /* End Navbar */
 
@@ -242,6 +286,25 @@ footer .fa-brands {
 }
 /* End Product Page */
 
+/* Transaction Page */
+#transaction {
+  padding-top: 50px;
+  background-color: #f9f9f9;
+}
+
+#transaction .card {
+  font-size: 14px;
+  border-radius: 10px;
+}
+
+#transaction .book-cover {
+  width: 50px;
+  height: 70px;
+  border-radius: 4px;
+}
+
+/* End Transaction Page */
+
 /* Login */
 #login {
   padding: 0;
@@ -316,22 +379,74 @@ footer .fa-brands {
   );
 }
 
-/* Book Crud */
-#book-crud .sidebar {
-  padding-top: 150px;
+/* transaction admin*/
+
+#transaction-admin a {
+  text-decoration: none;
+}
+
+#transaction-admin .sidebar {
+  position: sticky;
+  top: 0;
   height: 100vh;
-  width: 15vh;
-  background-color: #e2ac6b;
-  background-image: linear-gradient(315deg, #e2ac6b 0%, #cba36d 74%);
+  overflow-y: auto;
+  z-index: 1;
+}
+
+#transaction-admin .sidebar-item {
+  display: block;
+  padding: 10px;
+  margin: 5px;
+}
+
+/* Sebenernya ini untuk kalau page nya aktif */
+#transaction-admin .sidebar-item:hover {
+  background-color: rgba(255, 255, 255, 0.25);
+  border-radius: 20px;
+}
+
+.no-padding-margin {
+  padding: 0;
+  margin: 0;
+}
+
+.container-img {
+  border-top-left-radius: 40px;
+  border-bottom-left-radius: 40px;
+}
+/* End transaction admin*/
+
+/* start book crud */
+#book-crud a {
+  text-decoration: none;
+  color: #333;
+}
+
+#book-crud .sidebar {
+  position: sticky;
+  top: 0;
+  height: 100vh;
 }
 
 #book-crud .sidebar-item {
   display: block;
   padding: 10px;
-  border-radius: 20px;
+  margin: 5px;
+  transition: background-color 0.3s;
 }
 
 #book-crud .sidebar-item:hover {
-  background-color: rgba(255, 255, 255, 0.5);
+  background-color: rgba(255, 255, 255, 0.25);
+  border-radius: 20px;
 }
-/* End Book Crud */
+
+#book-crud .col-10 {
+  border-top-left-radius: 40px;
+  border-bottom-left-radius: 40px;
+  padding: 0 15px;
+}
+#book-crud .container-card {
+  width: 100%;
+  max-width: 100%;
+}
+/* end book crud */

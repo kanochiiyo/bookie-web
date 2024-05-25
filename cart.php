@@ -1,8 +1,16 @@
 <?php
+session_start();
+
+require_once (__DIR__ . "/functions/authentication.php");
+
+if (!isLogged()) {
+  header("Location:login.php");
+}
+
 include (__DIR__ . "/templates/header.php");
 include (__DIR__ . "/templates/navbar.php");
 ?>
-<section class="sec-detail max-vw-100" id="cart" style="margin-top: 70px">
+<section class="sec-detail max-vw-100 font-inter" id="cart" style="margin-top: 70px">
   <div class="w-100" style="height: 250px; background-image: url(assets/cart.jpg); background-size: cover;">
     <div class="pt-3 px-5">
       <h1 class="text-white fw-bold m-5">Your shopping cart</h1>
@@ -15,7 +23,7 @@ include (__DIR__ . "/templates/navbar.php");
     <div class="card">
       <div class="card-body p-3">
         <form action="checkout.php" method="get" id="cart">
-          <table class="table">
+          <table class="table borderless font-poppins">
             <thead>
               <tr>
                 <th scope="col">#</th>
@@ -26,7 +34,7 @@ include (__DIR__ . "/templates/navbar.php");
                 <th scope="col">Action</th>
               </tr>
             </thead>
-            <tbody class="table-group-divider">
+            <tbody>
               <?php for ($i = 1; $i <= 5; $i++) { ?>
                 <tr>
                   <th scope="row">

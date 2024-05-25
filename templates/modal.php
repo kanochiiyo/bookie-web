@@ -1,3 +1,4 @@
+<?php include (__DIR__ . "/header.php") ?>
 <!-- Modal buy now -->
 <div class="modal fade" id="buyModal" tabindex="-1" aria-labelledby="buyModalLabel" aria-hidden="true">
   <div class="modal-dialog modal-dialog-centered">
@@ -18,7 +19,7 @@
               <div class="col-6">
                 <div class="form-check form-check-inline p-0" style="width: 100%">
                   <input class="btn-check" type="radio" id="buy-e-book" name="type" value="e-book" autocomplete="off"
-                    required checked>
+                    required>
                   <label class="btn" for="buy-e-book" style="width: 100%">e-book</label>
                 </div>
               </div>
@@ -68,7 +69,7 @@
               <div class="col-6">
                 <div class="form-check form-check-inline p-0" style="width: 100%">
                   <input class="btn-check" type="radio" id="cart-e-book" name="type" value="e-book" autocomplete="off"
-                    required checked>
+                    required>
                   <label class="btn" for="cart-e-book" style="width: 100%">e-book</label>
                 </div>
               </div>
@@ -139,3 +140,126 @@
   </div>
 </div>
 <!-- end modal reviews -->
+
+<!-- CRUD modal -->
+<div class="modal fade font-inter" id="crudModal" tabindex="-1" aria-labelledby="crudModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content modal-bg">
+      <div class="modal-header">
+        <div>
+          <h1 class="modal-title fs-5" id="crudModalLabel">Add book's data</h1>
+        </div>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <form action="" method="post" id="bookReviewForm">
+          <div class="mb-3">
+            <label for="bookCover" class="form-label">Book Cover</label>
+            <input class="form-control" type="file" id="bookCover">
+          </div>
+          <div class="mb-3 row d-flex align-items-center">
+            <label for="bookTitle" class="col-sm-2 col-form-label">Book Title</label>
+            <div class="col-sm-10">
+              <input type="text" id="bookTitle" class="form-control" name="bookTitle">
+            </div>
+          </div>
+          <div class="mb-3 row d-flex align-items-center">
+            <label for="bookGenre" class="col-sm-2 col-form-label">Genre</label>
+            <div class="col-sm-10">
+              <input type="text" id="bookGenre" class="form-control" name="bookGenre">
+            </div>
+          </div>
+          <div class="mb-3 row d-flex align-items-center">
+            <label for="bookSynopsis" class="col-sm-2 col-form-label">Synopsis</label>
+            <div class="col-sm-10">
+              <input type="text" id="bookSynopsis" class="form-control" name="bookSynopsis">
+            </div>
+          </div>
+          <div class="mb-3 row d-flex align-items-center">
+            <label for="author" class="col-sm-2 col-form-label">Author</label>
+            <div class="col-sm-10">
+              <input type="text" id="author" class="form-control" name="author">
+            </div>
+          </div>
+          <div class="mb-3 row d-flex align-items-center">
+            <label for="publisher" class="col-sm-2 col-form-label">Publisher</label>
+            <div class="col-sm-10">
+              <input type="text" id="publisher" class="form-control" name="publisher">
+            </div>
+          </div>
+          <div class="mb-3 row d-flex align-items-center">
+            <label for="lang" class="col-sm-2 col-form-label">Language</label>
+            <div class="col-sm-10">
+              <input type="text" id="lang" class="form-control" name="lang">
+            </div>
+          </div>
+          <div class="mb-3 row d-flex align-items-center">
+            <label for="pages" class="col-sm-2 col-form-label">Pages</label>
+            <div class="col-sm-10">
+              <input type="number" id="pages" class="form-control" name="pages" min=0>
+            </div>
+          </div>
+          <div class="mb-3 row d-flex align-items-center">
+            <label for="weight" class="col-sm-2 col-form-label">Weight</label>
+            <div class="col-sm-10">
+              <input type="number" id="weight" class="form-control" name="weight" min=0>
+            </div>
+          </div>
+          <div class="mb-3 row d-flex align-items-center">
+            <label for="price" class="col-sm-2 col-form-label">Price</label>
+            <div class="col-sm-10">
+              <input type="text" id="price" class="form-control" name="weight" min=0>
+            </div>
+          </div>
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="links-bg-white" data-bs-dismiss="modal">Close</button>
+        <button type="submit" class="links-bg" form="crudForm">Submit</button>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- End CRUD modal -->
+
+<!-- Modal Book Review -->
+<div class="modal fade font-inter" id="bookReviewModal" tabindex="-1" aria-labelledby="bookReviewModalLabel"
+  aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content modal-bg">
+      <div class="modal-header">
+        <div>
+          <h1 class="modal-title fs-5" id="bookReviewModalLabel">Add Review</h1>
+        </div>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <form action="" method="post" id="crudForm">
+          <div class="mb-3">
+            <p>Review for Moby-Dick by Harper Lee</p>
+          </div>
+          <div class="mb-3">
+            <label for="rating" class="form-label">Rating</label><br>
+            <div class="d-flex align-items-center">
+              <span class="first font-inter me-2"></span>
+              <input type="range" class="rating me-2" name="rating" min="0" max="5" id="rating">
+              <span class="last font-inter"></span>
+            </div>
+          </div>
+          <div class="mb-3">
+            <label for="review" class="form-label">Review</label>
+            <textarea class="form-control" id="review" rows="3"></textarea>
+          </div>
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="links-bg-white" data-bs-dismiss="modal">Close</button>
+        <button type="submit" class="links-bg" form="crudForm">Submit</button>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- End Modal Book Review -->
+
+
+<?php include (__DIR__ . "/footer.php") ?>

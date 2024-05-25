@@ -1,74 +1,22 @@
 <?php
+session_start();
+
+require_once (__DIR__ . "/../functions/authentication.php");
+include (__DIR__ . "/../templates/modal.php");
+
+if (!isLogged()) {
+  header("Location: ../login.php?message=login_admin");
+  exit();
+} else {
+  if (!isAdmin()) {
+    header("Location: ../index.php?message=not_admin");
+    exit();
+  }
+}
+
 include (__DIR__ . "/../templates/header.php");
 ?>
-<style>
-  .font-notosans {
-    font-family: "Noto Sans", sans-serif;
-  }
 
-  a {
-    text-decoration: none;
-    color: #333;
-  }
-
-  #book-crud .sidebar {
-    position: sticky;
-    top: 0;
-    height: 100vh;
-  }
-
-  #book-crud .sidebar-item {
-    display: block;
-    padding: 10px;
-    margin: 5px;
-    transition: background-color 0.3s;
-  }
-
-  #book-crud .sidebar-item:hover {
-    background-color: rgba(255, 255, 255, 0.25);
-    border-radius: 20px;
-  }
-
-  .no-padding-margin {
-    padding: 0;
-    margin: 0;
-  }
-
-  .container-img {
-    border-top-left-radius: 40px;
-    border-bottom-left-radius: 40px;
-  }
-
-  .table thead th {
-    background-color: #F4F4F5;
-    font-weight: 500;
-    color: #5A6278;
-    font-size: 14px;
-  }
-
-  .table thead th:first-child {
-    border-top-left-radius: 10px;
-    border-bottom-left-radius: 10px;
-  }
-
-  .table thead th:last-child {
-    border-top-right-radius: 10px;
-    border-bottom-right-radius: 10px;
-  }
-
-  a.text-black {
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    width: 36px;
-    height: 36px;
-  }
-
-  a.text-black:hover {
-    background-color: #f0f0f0;
-    border-radius: 18px;
-  }
-</style>
 <main id="book-crud" class="font-notosans no-padding-margin"
   style="background-color: #e2ac6b; background-image: linear-gradient(315deg, #e2ac6b 0%, #cba36d 74%)">
   <div class="container-fluid no-padding-margin">
@@ -77,17 +25,15 @@ include (__DIR__ . "/../templates/header.php");
       <?php include (__DIR__ . "/../templates/sidebar.php"); ?>
 
       <!-- Container -->
-      <div class="col-10 d-flex flex-column justify-content-start align-items-center no-padding-margin bg-white" style="border-top-left-radius: 40px;
-    border-bottom-left-radius: 40px">
-        <div class="row p-4">
+      <div class="col-10 d-flex flex-column justify-content-start align-items-center no-padding-margin bg-white">
+        <div class="row p-4 w-100">
           <h1 class="text-start fw-3">Books Data</h1>
         </div>
-        <div class="row">
-          <div class="card p-4 container-card mb-5 border-0">
-            <button class="p-2 my-2 text-white border-0"
-              style="text-decoration: none; background-color:#463610; border-radius: 20px; width:110px"><i
-                class="fa-solid fa-plus"></i>Add Data</button>
-            <table class="table align-items-center">
+        <div class="row w-100">
+          <div class="card py-3 container-card mb-5 border-0 w-100">
+            <a href="#" class="links-bg-white mt-1 mb-3" style="width:110px" data-bs-toggle="modal"
+              data-bs-target="#crudModal"><i class="fa-solid fa-plus"></i> Add Data</a>
+            <table class="table align-items-center borderless" style="font-size:14px">
               <thead>
                 <tr>
                   <th class="Child">Books ID</th>
@@ -98,8 +44,8 @@ include (__DIR__ . "/../templates/header.php");
                   <th>Author</th>
                   <th>Publisher</th>
                   <th>Publication Date</th>
-                  <th>Pages</th>
                   <th>Language</th>
+                  <th>Pages</th>
                   <th>Weight</th>
                   <th>Price</th>
                   <th class="Child">Action</th>
