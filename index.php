@@ -1,4 +1,18 @@
 <?php
+session_start();
+
+require_once (__DIR__ . "/functions/authentication.php");
+
+if (isset($_GET['message'])) {
+  if ($_GET['message'] == "not_admin") {
+    ?>
+    <script>
+      alert('Hanya Admin yang bisa mengakses halaman admin!')
+    </script>
+    <?php
+  }
+}
+
 include (__DIR__ . "/templates/header.php");
 include (__DIR__ . "/templates/navbar.php");
 include (__DIR__ . "/templates/modal.php");

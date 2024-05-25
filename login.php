@@ -1,4 +1,39 @@
 <?php
+
+session_start();
+
+require_once (__DIR__ . "/functions/authentication.php");
+
+if (isLogged()) {
+  header("Location:index.php");
+}
+
+
+if (isset($_POST["login"])) {
+  $result = loginAttempt($_POST);
+  if ($result) {
+    header("Location:index.php");
+  } else {
+    header("Location:login.php");
+  }
+}
+
+if (isset($_GET['message'])) {
+  if ($_GET['message'] == "not_admin") {
+    ?>
+    <script>
+      alert('Hanya Admin yang bisa mengakses halaman admin!')
+    </script>
+    <?php
+  } elseif ($_GET['message'] == "login_admin") {
+    ?>
+    <script>
+      alert('Silahkan login untuk mengakses halaman admin!')
+    </script>
+    <?php
+  }
+}
+
 include (__DIR__ . "/templates/header.php");
 ?>
 
@@ -14,17 +49,16 @@ include (__DIR__ . "/templates/header.php");
           <h4 class="font-raleway fw-bold" style="padding-right: 125px">Log in now</h4>
           <p style="padding-right: 125px">New to Bookie? <a href="signup.php" id="lp-link">Sign up here</a>
           </p>
-          <form id="loginForm" class="login-form-container float-start">
+          <form id="loginForm" class="login-form-container float-start" method="post">
             <div class="mb-3">
-              <label for="exampleInputEmail1" class="form-label">Username</label>
-              <input type="text" class="input form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
+              <label for="username" class="form-label">Username</label>
+              <input type="text" class="input form-control" id="username" name="username" aria-describedby="emailHelp">
             </div>
             <div class="mb-3">
-              <label for="exampleInputPassword1" class="form-label">Password</label>
-              <input type="password" class="input form-control" id="exampleInputPassword1">
+              <label for="password" class="form-label">Password</label>
+              <input type="password" class="input form-control" id="password" name="password">
             </div>
-
-            <button type="submit" class="links-bg btn btn-primary w-100">Submit</button>
+            <button type="submit" class="links-bg btn btn-primary w-100" name="login">Login</button>
           </form>
         </div>
       </div>
