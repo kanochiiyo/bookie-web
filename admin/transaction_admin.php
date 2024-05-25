@@ -2,6 +2,9 @@
 session_start();
 
 require_once (__DIR__ . "/../functions/authentication.php");
+require_once (__DIR__ . "/../functions/connection.php");
+
+$connection = getConnection();
 
 if (!isLogged()) {
   header("Location: ../login.php?message=login_admin");
@@ -13,8 +16,31 @@ if (!isLogged()) {
   }
 }
 
+if (isset($_SESSION["error"])) {
+  echo "<script>
+        alert('" . $_SESSION['error'] . "');
+    </script>";
+  unset($_SESSION["error"]);
+}
+
+if (isset($_SESSION["success"])) {
+  echo "<script>
+        alert('" . $_SESSION['success'] . "');
+    </script>";
+  unset($_SESSION["success"]);
+}
 
 include (__DIR__ . "/../templates/header.php");
+include (__DIR__ . "/../templates/modal.php");
+include (__DIR__ . "/../functions/read.php");
+
+$data = query("SELECT t.id, t.transaction_date, u.username, b.title, b.price, td.qty, td.type 
+FROM transaction t 
+INNER JOIN user u ON t.user_id = u.id 
+INNER JOIN transaction_detail td ON t.id = td.transaction_id 
+INNER JOIN books b ON td.book_id = b.id");
+;
+// var_dump($data);
 ?>
 <main id="transaction-admin" class="font-notosans no-padding-margin"
   style="background-color: #e2ac6b; background-image: linear-gradient(315deg, #e2ac6b 0%, #cba36d 74%)">
@@ -22,7 +48,6 @@ include (__DIR__ . "/../templates/header.php");
     <div class="row no-padding-margin">
 
       <?php include (__DIR__ . "/../templates/sidebar.php"); ?>
-
 
       <!-- Container -->
       <div class="col-10 d-flex flex-column justify-content-start align-items-center no-padding-margin bg-white" style="border-top-left-radius: 40px;
@@ -35,25 +60,30 @@ include (__DIR__ . "/../templates/header.php");
             <table class="table align-items-center borderless" style="font-size:14px">
               <thead>
                 <tr>
-                  <th>Transaction ID</th>
-                  <th>Buyer Name</th>
-                  <th>Book Name</th>
-                  <th>Quantity</th>
-                  <th>Type</th>
-                  <th>Date</th>
-                  <th>Total</th>
+                  <th class="text-center">Transaction ID</th>
+                  <th class="text-center">Buyer Username</th>
+                  <th class="text-center">Date</th>
+                  <th class="text-center">Book Title</th>
+                  <th class="text-center">Quantity</th>
+                  <th class="text-center">Type</th>
+                  <th class="text-center">Total</th>
                 </tr>
               </thead>
               <tbody>
-                <?php for ($i = 0; $i < 10; $i++) { ?>
+                <?php foreach ($data as $row) { ?>
                   <tr>
-                    <td>Data </td>
-                    <td>Data </td>
-                    <td>Data </td>
-                    <td>Data </td>
-                    <td>Data </td>
-                    <td>Data </td>
-                    <td>$$$</td>
+                    <?php
+                    $qty = intval($row["qty"]);
+                    $price = intval($row["price"]);
+                    $total = $qty * $price;
+                    ?>
+                    <td class="text-center"><?= $row["id"] ?></td>
+                    <td class="text-center"><?= $row["username"] ?></td>
+                    <td class="text-center"><?= $row["transaction_date"] ?> </td>
+                    <td class="text-center"><?= $row["title"] ?> </td>
+                    <td class="text-center"><?= $row["qty"] ?> </td>
+                    <td class="text-center"><?= $row["type"] ?> </td>
+                    <td class="text-center"><?= $total ?></td>
                   </tr>
                 <?php } ?>
               </tbody>

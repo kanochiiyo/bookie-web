@@ -20,5 +20,10 @@
     <p class="my-1 d-inline-block"><a class="text-white p-3" href="../admin/transaction_admin.php">Data Transaksi</a>
     </p>
   </div>
+  <div class="sidebar-item align-items-center">
+    <h6 class="my-2 d-inline-block text-white" style="font-size: 24px"><i class="fa-solid fa-list"></i></h6>
+    <p class="my-1 d-inline-block"><a class="text-white p-3" href="../admin/category_crud.php">Data Kategori</a>
+    </p>
+  </div>
 </div>
 <!-- End Sidebar -->
