@@ -2,7 +2,9 @@
 session_start();
 
 require_once (__DIR__ . "/../functions/authentication.php");
-include (__DIR__ . "/../templates/modal.php");
+require_once (__DIR__ . "/../functions/connection.php");
+
+$connection = getConnection();
 
 if (!isLogged()) {
   header("Location: ../login.php?message=login_admin");
@@ -14,7 +16,23 @@ if (!isLogged()) {
   }
 }
 
+
+if (isset($_SESSION["error"])) {
+  echo "<script>
+        alert('" . $_SESSION['error'] . "');
+    </script>";
+  unset($_SESSION["error"]);
+}
+
+if (isset($_SESSION["success"])) {
+  echo "<script>
+        alert('" . $_SESSION['success'] . "');
+    </script>";
+  unset($_SESSION["success"]);
+}
+
 include (__DIR__ . "/../templates/header.php");
+include (__DIR__ . "/../templates/modal.php");
 ?>
 
 <main id="book-crud" class="font-notosans no-padding-margin"
