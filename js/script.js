@@ -45,3 +45,17 @@ function runRadioChooseBook(modalClass, elementId) {
     };
   }
 }
+
+// Function untuk slider di Review Buku modal
+document.addEventListener("DOMContentLoaded", function () {
+  const slider = document.querySelector("#rating");
+  const first = document.querySelector(".first");
+  const last = document.querySelector(".last");
+
+  first.innerHTML = slider.min;
+  last.innerHTML = slider.value;
+
+  slider.addEventListener("input", function () {
+    last.innerHTML = slider.value;
+  });
+});

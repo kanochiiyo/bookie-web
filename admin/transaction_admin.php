@@ -16,7 +16,6 @@ if (!isLogged()) {
 
 include (__DIR__ . "/../templates/header.php");
 ?>
-
 <main id="transaction-admin" class="font-notosans no-padding-margin"
   style="background-color: #e2ac6b; background-image: linear-gradient(315deg, #e2ac6b 0%, #cba36d 74%)">
   <div class="container-fluid no-padding-margin">
@@ -33,16 +32,16 @@ include (__DIR__ . "/../templates/header.php");
         </div>
         <div class="row">
           <div class="card p-4 container-card mb-5 border-0" style="width: 1000px">
-            <table class="table align-items-center">
+            <table class="table align-items-center borderless" style="font-size:14px">
               <thead>
                 <tr>
-                  <th class="Child">Transaction ID</th>
+                  <th>Transaction ID</th>
                   <th>Buyer Name</th>
                   <th>Book Name</th>
                   <th>Quantity</th>
                   <th>Type</th>
                   <th>Date</th>
-                  <th class="Child">Total</th>
+                  <th>Total</th>
                 </tr>
               </thead>
               <tbody>

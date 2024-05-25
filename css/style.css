@@ -4,6 +4,7 @@ body,
   margin: 0;
 }
 
+/* Fonts */
 .font-inter {
   font-family: "Inter", sans-serif;
 }
@@ -20,6 +21,7 @@ body,
   font-family: "Raleway", sans-serif;
 }
 
+/* For All */
 a {
   margin-right: 15px;
   text-decoration: none;
@@ -52,6 +54,36 @@ hr {
   border: 0;
   height: 2px;
   background: black;
+}
+
+/* Table for All */
+.borderless td,
+.borderless th {
+  border: none;
+  padding: 20px;
+}
+
+#transaction th,
+#book-crud th,
+#cart th,
+#transaction th {
+  color: #000;
+}
+.table thead th {
+  background-color: #f4f4f5;
+  font-weight: 500;
+  color: #5a6278;
+  font-size: 14px;
+}
+
+.table thead th:first-child {
+  border-top-left-radius: 10px;
+  border-bottom-left-radius: 10px;
+}
+
+.table thead th:last-child {
+  border-top-right-radius: 10px;
+  border-bottom-right-radius: 10px;
 }
 
 /* Navbar */
@@ -254,6 +286,25 @@ footer .fa-brands {
 }
 /* End Product Page */
 
+/* Transaction Page */
+#transaction {
+  padding-top: 50px;
+  background-color: #f9f9f9;
+}
+
+#transaction .card {
+  font-size: 14px;
+  border-radius: 10px;
+}
+
+#transaction .book-cover {
+  width: 50px;
+  height: 70px;
+  border-radius: 4px;
+}
+
+/* End Transaction Page */
+
 /* Login */
 #login {
   padding: 0;
@@ -363,23 +414,6 @@ footer .fa-brands {
   border-top-left-radius: 40px;
   border-bottom-left-radius: 40px;
 }
-
-.table thead th {
-  background-color: #f4f4f5;
-  font-weight: 500;
-  color: #5a6278;
-  font-size: 14px;
-}
-
-.table thead th:first-child {
-  border-top-left-radius: 10px;
-  border-bottom-left-radius: 10px;
-}
-
-.table thead th:last-child {
-  border-top-right-radius: 10px;
-  border-bottom-right-radius: 10px;
-}
 /* End transaction admin*/
 
 /* start book crud */
@@ -409,14 +443,10 @@ footer .fa-brands {
 #book-crud .col-10 {
   border-top-left-radius: 40px;
   border-bottom-left-radius: 40px;
+  padding: 0 15px;
 }
-
-#book-crud a {
-  width: 110px;
-  color: white;
+#book-crud .container-card {
+  width: 100%;
+  max-width: 100%;
 }
-#book-crud a:hover {
-  color: black;
-}
-
 /* end book crud */
