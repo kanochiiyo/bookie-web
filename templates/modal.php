@@ -18,7 +18,7 @@
               <div class="col-6">
                 <div class="form-check form-check-inline p-0" style="width: 100%">
                   <input class="btn-check" type="radio" id="buy-e-book" name="type" value="e-book" autocomplete="off"
-                    required checked>
+                    required>
                   <label class="btn" for="buy-e-book" style="width: 100%">e-book</label>
                 </div>
               </div>
@@ -68,7 +68,7 @@
               <div class="col-6">
                 <div class="form-check form-check-inline p-0" style="width: 100%">
                   <input class="btn-check" type="radio" id="cart-e-book" name="type" value="e-book" autocomplete="off"
-                    required checked>
+                    required>
                   <label class="btn" for="cart-e-book" style="width: 100%">e-book</label>
                 </div>
               </div>

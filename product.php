@@ -1,4 +1,7 @@
 <?php
+session_start();
+
+require_once (__DIR__ . "/functions/authentication.php");
 include (__DIR__ . "/templates/header.php");
 include (__DIR__ . "/templates/modal.php");
 ?>
@@ -15,10 +18,29 @@ include (__DIR__ . "/templates/modal.php");
           <button class="btn border-0" type="submit"><i class="fa-solid fa-magnifying-glass"></i></button>
         </form>
       </div>
-      <span>
-        <a href="login.php" class="links">Login</a>
-        <a href="signup.php" class="links-bg">Sign up</a>
-      </span>
+      <?php
+      if (!isLogged()) {
+        ?>
+        <span>
+          <a href="login.php" class="links">Login</a>
+          <a href="signup.php" class="links-bg">Sign up</a>
+        </span>
+        <?php
+      } else { ?>
+        <span>
+          <?php
+          if (!isAdmin()) {
+            ?>
+            <a href="cart.php" style="font-size:18px"> <i class="fa-solid fa-shopping-cart me-2 dark-brown"></i></a>
+            <?php
+          }
+          ?>
+
+          <a href="logout.php" class="links-bg">Logout</a>
+        </span>
+        <?php
+      }
+      ?>
     </div>
   </nav>
   <!-- End Navbar -->
