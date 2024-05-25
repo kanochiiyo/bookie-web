@@ -35,10 +35,10 @@
         <p class="m-0">Bookie 2024</p>
       </div>
       <div class="col-2 d-flex justify-content-end align-items-center text-end">
-        <a href="" class="mx-2"><i class="fa-brands fa-facebook"></i></a>
-        <a href="" class="mx-2"><i class="fa-brands fa-square-x-twitter"></i></a>
-        <a href="" class="mx-2"><i class="fa-brands fa-youtube"></i></a>
-        <a href="" class="mx-2"><i class="fa-brands fa-linkedin"></i></a>
+        <a href=""><i class="fa-brands fa-facebook"></i></a>
+        <a href=""><i class="fa-brands fa-square-x-twitter"></i></a>
+        <a href=""><i class="fa-brands fa-youtube"></i></a>
+        <a href=""><i class="fa-brands fa-linkedin"></i></a>
       </div>
     </div>
 

@@ -2,7 +2,22 @@ body,
 * {
   padding: 0;
   margin: 0;
+}
+
+.font-inter {
   font-family: "Inter", sans-serif;
+}
+.font-poppins {
+  font-family: "Poppins", sans-serif;
+}
+.font-montserrat {
+  font-family: "Montserrat", sans-serif;
+}
+.font-notosans {
+  font-family: "Noto Sans", sans-serif;
+}
+.font-raleway {
+  font-family: "Raleway", sans-serif;
 }
 
 a {
@@ -14,7 +29,8 @@ a {
 }
 
 .links-bg-white,
-.links-bg:hover {
+.links-bg:hover,
+.submit:hover {
   background-color: #fff;
   border-radius: 17px;
   padding: 7px 12px;
@@ -23,7 +39,8 @@ a {
 }
 
 .links-bg-white:hover,
-.links-bg {
+.links-bg,
+.submit {
   background-color: #463610;
   border-radius: 17px;
   padding: 7px 12px;
@@ -42,10 +59,20 @@ hr {
   height: 70px;
   background-color: #fff;
 }
+.navbar-user-info {
+  display: flex;
+  align-items: center;
+}
+
+.navbar-user-info .nav-link,
+.navbar-user-info .links-bg {
+  margin-left: 10px;
+  margin-right: 10px;
+}
 /* End Navbar */
 
 /* Hero */
-.hero {
+#hero {
   padding-top: 70px;
   background-color: #f4f1ea;
 }
@@ -54,7 +81,7 @@ hr {
   height: 550px;
 }
 
-.hero h1 {
+#hero h1 {
   font-size: 7vmin;
 }
 
@@ -184,3 +211,212 @@ footer .fa-brands {
   height: 50px;
 }
 /* End Detail Page */
+
+/* Product Page */
+
+/* Carousel */
+.product-carousel-img {
+  width: 873px;
+  height: 300px;
+}
+
+.carousel-indicators {
+  justify-content: center;
+}
+
+.carousel-indicators button {
+  height: 10px !important;
+  width: 10px !important;
+  margin: 0 5px !important;
+  border-radius: 100%;
+  background-color: #fff !important;
+}
+
+/* Product List */
+#catalogue .custom-card {
+  width: 190px;
+  height: 350px;
+  margin: 20px;
+  padding: 0;
+}
+
+.product-carousel-img {
+  width: 100%;
+  height: 300px;
+  object-fit: cover;
+}
+
+.custom-card img {
+  width: 100%;
+  height: auto;
+  max-height: 250px;
+  object-fit: cover;
+}
+/* End Product Page */
+
+/* Login */
+#login {
+  padding: 0;
+}
+
+#login h4 {
+  font-weight: 900px;
+}
+
+.login-form-container {
+  width: 80%;
+}
+
+.login #login .input {
+  border: solid;
+  border-width: 1px;
+  border-color: #d7d7d7;
+  border-radius: 15px;
+  width: 100%;
+  padding: 5px;
+  margin-bottom: 10px;
+}
+
+/* #login img {
+  width: 960px;
+  height: 356px;
+} */
+
+#lp-link {
+  text-decoration: underline;
+  margin-right: 15px;
+  font-size: 16px;
+  font-weight: 500;
+  color: #000;
+}
+/* End Login */
+
+/* start cart  */
+.bg-dark-brown {
+  background-color: #463610;
+}
+
+.bg-light-brown {
+  background-color: #f4f1ea;
+}
+
+.links-co,
+.links-co-white:hover {
+  background-color: #fff;
+  border-radius: 17px;
+  padding: 7px 12px;
+  color: #463610;
+  border: 1px solid #fff;
+}
+
+.links-co:hover,
+.links-co-white {
+  background-color: #463610;
+  border-radius: 17px;
+  padding: 7px 12px;
+  color: #fff;
+  border: 1px solid #fff;
+}
+
+.modal-bg {
+  background: linear-gradient(
+    to bottom,
+    #ece0c4 0%,
+    #ece0c4 25%,
+    #ffffff 75%,
+    #ffffff 100%
+  );
+}
+
+/* transaction admin*/
+
+#transaction-admin a {
+  text-decoration: none;
+}
+
+#transaction-admin .sidebar {
+  position: sticky;
+  top: 0;
+  height: 100vh;
+  overflow-y: auto;
+  z-index: 1;
+}
+
+#transaction-admin .sidebar-item {
+  display: block;
+  padding: 10px;
+  margin: 5px;
+}
+
+/* Sebenernya ini untuk kalau page nya aktif */
+#transaction-admin .sidebar-item:hover {
+  background-color: rgba(255, 255, 255, 0.25);
+  border-radius: 20px;
+}
+
+.no-padding-margin {
+  padding: 0;
+  margin: 0;
+}
+
+.container-img {
+  border-top-left-radius: 40px;
+  border-bottom-left-radius: 40px;
+}
+
+.table thead th {
+  background-color: #f4f4f5;
+  font-weight: 500;
+  color: #5a6278;
+  font-size: 14px;
+}
+
+.table thead th:first-child {
+  border-top-left-radius: 10px;
+  border-bottom-left-radius: 10px;
+}
+
+.table thead th:last-child {
+  border-top-right-radius: 10px;
+  border-bottom-right-radius: 10px;
+}
+/* End transaction admin*/
+
+/* start book crud */
+#book-crud a {
+  text-decoration: none;
+  color: #333;
+}
+
+#book-crud .sidebar {
+  position: sticky;
+  top: 0;
+  height: 100vh;
+}
+
+#book-crud .sidebar-item {
+  display: block;
+  padding: 10px;
+  margin: 5px;
+  transition: background-color 0.3s;
+}
+
+#book-crud .sidebar-item:hover {
+  background-color: rgba(255, 255, 255, 0.25);
+  border-radius: 20px;
+}
+
+#book-crud .col-10 {
+  border-top-left-radius: 40px;
+  border-bottom-left-radius: 40px;
+}
+
+#book-crud a {
+  width: 110px;
+  color: white;
+}
+#book-crud a:hover {
+  color: black;
+}
+
+/* end book crud */

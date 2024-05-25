@@ -1,10 +1,24 @@
 <?php
+session_start();
+
+require_once (__DIR__ . "/functions/authentication.php");
+
+if (isset($_GET['message'])) {
+  if ($_GET['message'] == "not_admin") {
+    ?>
+    <script>
+      alert('Hanya Admin yang bisa mengakses halaman admin!')
+    </script>
+    <?php
+  }
+}
+
 include (__DIR__ . "/templates/header.php");
 include (__DIR__ . "/templates/navbar.php");
 include (__DIR__ . "/templates/modal.php");
 ?>
 
-<main>
+<main class="font-inter">
   <!-- Hero -->
   <section class="hero" id="hero">
     <div class="container pt-3 pb-0 px-0 p-0">
@@ -22,13 +36,9 @@ include (__DIR__ . "/templates/modal.php");
             non quidem obcaecati, porro iusto aliquam quam. Quae,
             consectetur minus?
           </p>
-          <form class="d-inline-block mt-3 mb-3" role="search">
-            <input class="form-control me-2 border-1" style="border-color: black" type="search"
-              placeholder="Search books" />
-            <span>
-              <a href="#" class="links-bg my-3" type="submit">Browse books</a>
-            </span>
-          </form>
+          <span>
+            <a href="product.php" class="links-bg my-3" type="submit">Browse books</a>
+          </span>
         </div>
 
         <div class="col-4" style="height: 480px; margin-top: 40px">
@@ -125,8 +135,8 @@ include (__DIR__ . "/templates/modal.php");
   <!-- End Section 3 -->
 
   <!-- Popular Books Section -->
-  <section class="popular-books" id="popular-books" data-aos="fade-right">
-    <div class="container pt-4 px-0">
+  <section class="popular-books py-5" id="popular-books" data-aos="fade-right">
+    <div class="container">
       <div class="row">
         <div class="col-6">
           <h1 class="mt-1 mb-3">
@@ -144,27 +154,65 @@ include (__DIR__ . "/templates/modal.php");
             <a href="">Most Viewed</a>
           </div>
         </div>
-      </div>
-
-      <div class="row justify-content-between mx-1 mb-5">
-        <?php for ($i = 1; $i <= 10; $i++) { ?>
-          <div class="custom-card col-2 mx-1 mb-5">
-            <a href="detail.php" class="text-decoration-none fw-bold mb-0" style="font-size: 17px; color:#000">
-              <img src="assets/books/moby-dick.jpg" alt="Moby-Dick by Harper Lee" class="rounded-end-1 object-fit-fill"
-                style="width: 100%; height: auto; max-height: 250px;" />
-              <span class="ms-1">Moby-Dick<span>
-            </a>
-            <p class="m-1">Harper Lee</p>
-            <p class="m-1 fw-bold" style="font-size: 13px; margin-bottom: 0;"><i class="fa-solid fa-star"></i> 4,5</p>
-            <div class="d-flex justify-content-between align-items-center m-1">
-              <p class="fw-bold mb-0" style="font-size: 17px; margin-bottom: 0;">$25</p>
-              <a href="#" class="links-bg-white mt-1 mb-3" data-bs-toggle="modal" data-bs-target="#cartModal"
-                type="button"> Add to cart</a>
+        <div class="row">
+          <div class="col-12">
+            <div id="carouselExampleIndicators" class="carousel slide" data-bs-ride="carousel">
+              <div class="carousel-inner">
+                <div class="carousel-item active">
+                  <div class="row justify-content-between mx-1">
+                    <?php for ($i = 1; $i <= 5; $i++) { ?>
+                      <div class="custom-card col-2 mx-1 mb-5">
+                        <img src="assets/books/moby-dick.jpg" alt="Moby-Dick by Harper Lee"
+                          class="rounded-end-1 object-fit-fill" style="width: 100%; height: auto; max-height: 250px;" />
+                        <a href="detail.php" class="text-decoration-none m-1 fw-bold" style="font-size: 17px; color:#000">
+                          Moby-Dick
+                        </a>
+                        <p class="m-1">Harper Lee</p>
+                        <p class="m-1 fw-bold" style="font-size: 13px; margin-bottom: 0;"><i class="fa-solid fa-star"></i>
+                          4.5</p>
+                        <div class="d-flex justify-content-between align-items-center m-1">
+                          <p class="fw-bold mb-0" style="font-size: 17px; margin-bottom: 0;">$25</p>
+                          <a href="#" class="links-bg-white">Add to cart</a>
+                        </div>
+                      </div>
+                    <?php } ?>
+                  </div>
+                </div>
+                <div class="carousel-item">
+                  <div class="row justify-content-between mx-1">
+                    <?php for ($i = 1; $i <= 5; $i++) { ?>
+                      <div class="custom-card col-2 mx-1 mb-5">
+                        <img src="assets/books/moby-dick.jpg" alt="Moby-Dick by Harper Lee"
+                          class="rounded-end-1 object-fit-fill" style="width: 100%; height: auto; max-height: 250px;" />
+                        <a href="detail.php" class="text-decoration-none m-1 fw-bold" style="font-size: 17px; color:#000">
+                          Moby-Dick
+                        </a>
+                        <p class="m-1">Harper Lee</p>
+                        <p class="m-1 fw-bold" style="font-size: 13px; margin-bottom: 0;"><i class="fa-solid fa-star"></i>
+                          4.5</p>
+                        <div class="d-flex justify-content-between align-items-center m-1">
+                          <p class="fw-bold mb-0" style="font-size: 17px; margin-bottom: 0;">$25</p>
+                          <a href="#" class="links-bg-white">Add to cart</a>
+                        </div>
+                      </div>
+                    <?php } ?>
+                  </div>
+                </div>
+              </div>
+              <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators"
+                data-bs-slide="prev">
+                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                <span class="visually-hidden">Previous</span>
+              </button>
+              <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleIndicators"
+                data-bs-slide="next">
+                <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                <span class="visually-hidden">Next</span>
+              </button>
             </div>
           </div>
-        <?php } ?>
-      </div>
-    </div>
+        </div>
+
   </section>
   <!-- End Popular Books Section -->
 
@@ -205,6 +253,44 @@ include (__DIR__ . "/templates/modal.php");
   <!-- End Best Seller Section -->
 
   <!-- Review Section -->
+  <section class="review" id="review" data-aos="fade-up">
+    <div class="container pt-5 pb-1">
+      <div class="row">
+        <div class="col-12 d-flex justify-content-center">
+          <p class="disclaimer m-2">● Join Bookie Now</p>
+        </div>
+      </div>
+      <div class="row">
+        <h1 class="text-center">See What Our Members Have to Say</h1>
+      </div>
+      <div class="row justify-content-center pt-5">
+        <div class="card col mx-2 py-4 px-3" style="width: 350px; border-color: #f1f1f1">
+          <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Mollitia facilis molestiae ipsum accusamus non,
+            minus modi cumque, nesciunt tenetur excepturi, temporibus aut. Accusamus veritatis, suscipit voluptatem
+            vitae
+            est tempora quas.</p>
+          <h6 class="fw-bold">Kiyotaka Ayanokouji</h6>
+          <p style="color: grey">Highschool Student</p>
+        </div>
+        <div class="card col mx-2 py-4 px-3" style="width: 350px; border-color: #f1f1f1">
+          <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Mollitia facilis molestiae ipsum accusamus non,
+            minus modi cumque, nesciunt tenetur excepturi, temporibus aut. Accusamus veritatis, suscipit voluptatem
+            vitae
+            est tempora quas.</p>
+          <h6 class="fw-bold">Kiyotaka Ayanokouji</h6>
+          <p style="color: grey">Highschool Student</p>
+        </div>
+        <div class="card col mx-2 py-4 px-3" style="width: 350px; border-color: #f1f1f1">
+          <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Mollitia facilis molestiae ipsum accusamus non,
+            minus modi cumque, nesciunt tenetur excepturi, temporibus aut. Accusamus veritatis, suscipit voluptatem
+            vitae
+            est tempora quas.</p>
+          <h6 class="fw-bold">Kiyotaka Ayanokouji</h6>
+          <p style="color: grey">Highschool Student</p>
+        </div>
+      </div>
+    </div>
+  </section>
   <!-- End Review Section -->
 
   <!-- Join Section -->

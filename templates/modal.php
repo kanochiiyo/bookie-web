@@ -1,8 +1,7 @@
 <!-- Modal buy now -->
 <div class="modal fade" id="buyModal" tabindex="-1" aria-labelledby="buyModalLabel" aria-hidden="true">
   <div class="modal-dialog modal-dialog-centered">
-    <div class="modal-content"
-      style="background: linear-gradient(to bottom, #ece0c4 0%, #ece0c4 25%, #ffffff 75%, #ffffff 100%);">
+    <div class="modal-content modal-bg">
       <div class="modal-header">
         <div>
           <h1 class="modal-title fs-5" id="buyModalLabel">Purchase details</h1>
@@ -19,7 +18,7 @@
               <div class="col-6">
                 <div class="form-check form-check-inline p-0" style="width: 100%">
                   <input class="btn-check" type="radio" id="buy-e-book" name="type" value="e-book" autocomplete="off"
-                    required checked>
+                    required>
                   <label class="btn" for="buy-e-book" style="width: 100%">e-book</label>
                 </div>
               </div>
@@ -52,8 +51,7 @@
 <!-- modal cart -->
 <div class="modal fade" id="cartModal" tabindex="-1" aria-labelledby="cartModalLabel" aria-hidden="true">
   <div class="modal-dialog modal-dialog-centered">
-    <div class="modal-content"
-      style="background: linear-gradient(to bottom, #ece0c4 0%, #ece0c4 25%, #ffffff 75%, #ffffff 100%);">
+    <div class="modal-content modal-bg">
       <div class="modal-header">
         <div>
           <h1 class="modal-title fs-5" id="cartModalLabel">Add to cart details</h1>
@@ -70,7 +68,7 @@
               <div class="col-6">
                 <div class="form-check form-check-inline p-0" style="width: 100%">
                   <input class="btn-check" type="radio" id="cart-e-book" name="type" value="e-book" autocomplete="off"
-                    required checked>
+                    required>
                   <label class="btn" for="cart-e-book" style="width: 100%">e-book</label>
                 </div>
               </div>
@@ -103,8 +101,7 @@
 <!-- modal reviews -->
 <div class="modal fade" id="reviewModal" tabindex="-1" aria-labelledby="reviewModalLabel" aria-hidden="true">
   <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable modal-lg">
-    <div class="modal-content"
-      style="background: linear-gradient(to bottom, #ece0c4 0%, #ece0c4 25%, #ffffff 75%, #ffffff 100%);">
+    <div class="modal-content modal-bg">
       <div class="modal-header">
         <div>
           <h1 class="modal-title fs-5" id="reviewModalLabel">Reviews</h1>
@@ -142,3 +139,84 @@
   </div>
 </div>
 <!-- end modal reviews -->
+
+<!-- CRUD modal -->
+<div class="modal fade font-inter" id="crudModal" tabindex="-1" aria-labelledby="crudModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content modal-bg">
+      <div class="modal-header">
+        <div>
+          <h1 class="modal-title fs-5" id="crudModalLabel">Add book's data</h1>
+        </div>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <form action="" method="post" id="crudForm">
+          <div class="mb-3">
+            <label for="bookCover" class="form-label">Book Cover</label>
+            <input class="form-control" type="file" id="bookCover">
+          </div>
+          <div class="mb-3 row d-flex align-items-center">
+            <label for="bookTitle" class="col-sm-2 col-form-label">Book Title</label>
+            <div class="col-sm-10">
+              <input type="text" id="bookTitle" class="form-control" name="bookTitle">
+            </div>
+          </div>
+          <div class="mb-3 row d-flex align-items-center">
+            <label for="bookGenre" class="col-sm-2 col-form-label">Genre</label>
+            <div class="col-sm-10">
+              <input type="text" id="bookGenre" class="form-control" name="bookGenre">
+            </div>
+          </div>
+          <div class="mb-3 row d-flex align-items-center">
+            <label for="bookSynopsis" class="col-sm-2 col-form-label">Synopsis</label>
+            <div class="col-sm-10">
+              <input type="text" id="bookSynopsis" class="form-control" name="bookSynopsis">
+            </div>
+          </div>
+          <div class="mb-3 row d-flex align-items-center">
+            <label for="author" class="col-sm-2 col-form-label">Author</label>
+            <div class="col-sm-10">
+              <input type="text" id="author" class="form-control" name="author">
+            </div>
+          </div>
+          <div class="mb-3 row d-flex align-items-center">
+            <label for="publisher" class="col-sm-2 col-form-label">Publisher</label>
+            <div class="col-sm-10">
+              <input type="text" id="publisher" class="form-control" name="publisher">
+            </div>
+          </div>
+          <div class="mb-3 row d-flex align-items-center">
+            <label for="lang" class="col-sm-2 col-form-label">Language</label>
+            <div class="col-sm-10">
+              <input type="text" id="lang" class="form-control" name="lang">
+            </div>
+          </div>
+          <div class="mb-3 row d-flex align-items-center">
+            <label for="pages" class="col-sm-2 col-form-label">Pages</label>
+            <div class="col-sm-10">
+              <input type="number" id="pages" class="form-control" name="pages" min=0>
+            </div>
+          </div>
+          <div class="mb-3 row d-flex align-items-center">
+            <label for="weight" class="col-sm-2 col-form-label">Weight</label>
+            <div class="col-sm-10">
+              <input type="number" id="weight" class="form-control" name="weight" min=0>
+            </div>
+          </div>
+          <div class="mb-3 row d-flex align-items-center">
+            <label for="price" class="col-sm-2 col-form-label">Price</label>
+            <div class="col-sm-10">
+              <input type="text" id="price" class="form-control" name="weight" min=0>
+            </div>
+          </div>
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="links-bg-white" data-bs-dismiss="modal">Close</button>
+        <button type="submit" class="links-bg" form="crudForm">Submit</button>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- End CRUD modal -->
