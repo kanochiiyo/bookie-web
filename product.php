@@ -6,11 +6,11 @@ include (__DIR__ . "/templates/header.php");
 include (__DIR__ . "/templates/modal.php");
 ?>
 
-<main>
+<main class="font-inter">
   <!-- Navbar -->
   <nav class="cus-nav navbar navbar-expand-lg fixed-top shadow-sm p-3 bg-body rounded" style="height: 70px">
     <div class="container-fluid align-items-center">
-      <a class="navbar-brand" href="#">Bookie</a>
+      <a class="navbar-brand" href="index.php">Bookie</a>
       <div class="collapse navbar-collapse d-flex justify-content-center" id="navbarNavDropdown">
         <form class="d-flex" role="search" style="width:70%">
           <input class="form-control me-2 border-1" style="border-color: black" type="search"
@@ -27,16 +27,14 @@ include (__DIR__ . "/templates/modal.php");
         </span>
         <?php
       } else { ?>
-        <span>
-          <?php
-          if (!isAdmin()) {
-            ?>
-            <a href="cart.php" style="font-size:18px"> <i class="fa-solid fa-shopping-cart me-2 dark-brown"></i></a>
-            <?php
-          }
-          ?>
-
-          <a href="logout.php" class="links-bg">Logout</a>
+        <span class="navbar-user-info d-flex align-items-center">
+          <?php if (!isAdmin()) { ?>
+            <a href="cart.php" style="font-size:18px">
+              <i class="fa-solid fa-shopping-cart me-2 dark-brown"></i>
+            </a>
+          <?php } ?>
+          <p class="nav-link m-0"><?= $_SESSION['username'] ?></p>
+          <a href="logout.php" class="links-bg ms-3">Logout</a>
         </span>
         <?php
       }

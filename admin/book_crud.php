@@ -26,14 +26,14 @@ include (__DIR__ . "/../templates/header.php");
 
       <!-- Container -->
       <div class="col-10 d-flex flex-column justify-content-start align-items-center no-padding-margin bg-white">
-        <div class="row p-4">
+        <div class="row p-4 w-100">
           <h1 class="text-start fw-3">Books Data</h1>
         </div>
-        <div class="row">
-          <div class="card p-4 container-card mb-5 border-0">
-            <a href="#" class="links-bg mt-1 mb-3" data-bs-toggle="modal" data-bs-target="#crudModal" type=n"><i
-                class="fa-solid fa-plus"></i> Add Data</a>
-            <table class="table align-items-center">
+        <div class="row w-100">
+          <div class="card py-3 container-card mb-5 border-0 w-100">
+            <a href="#" class="links-bg-white mt-1 mb-3" style="width:110px" data-bs-toggle="modal"
+              data-bs-target="#crudModal"><i class="fa-solid fa-plus"></i> Add Data</a>
+            <table class="table align-items-center borderless" style="font-size:14px">
               <thead>
                 <tr>
                   <th class="Child">Books ID</th>

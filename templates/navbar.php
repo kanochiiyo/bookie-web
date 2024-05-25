@@ -1,6 +1,6 @@
 <?php session_start(); ?>
 <!-- Navbar -->
-<nav class="navbar navbar-expand-lg fixed-top shadow-sm p-3 mb-5 bg-body rounded">
+<nav class="navbar navbar-expand-lg fixed-top shadow-sm p-3 mb-5 bg-body rounded font-poppins">
   <div class="container-fluid">
     <a class="navbar-brand" href="index.php">Bookie</a>
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown"
@@ -13,10 +13,7 @@
           <a class="nav-link active" aria-current="page" href="index.php#">Home</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="#popular-books">Books</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" href="product.php">Product</a>
+          <a class="nav-link" href="product.php">Books</a>
         </li>
         <?php
         if (isLogged()) { // Kalau login
