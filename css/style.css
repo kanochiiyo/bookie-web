@@ -29,7 +29,8 @@ a {
 }
 
 .links-bg-white,
-.links-bg:hover {
+.links-bg:hover,
+.submit:hover {
   background-color: #fff;
   border-radius: 17px;
   padding: 7px 12px;
@@ -38,7 +39,8 @@ a {
 }
 
 .links-bg-white:hover,
-.links-bg {
+.links-bg,
+.submit {
   background-color: #463610;
   border-radius: 17px;
   padding: 7px 12px;
@@ -56,6 +58,16 @@ hr {
 .navbar {
   height: 70px;
   background-color: #fff;
+}
+.navbar-user-info {
+  display: flex;
+  align-items: center;
+}
+
+.navbar-user-info .nav-link,
+.navbar-user-info .links-bg {
+  margin-left: 10px;
+  margin-right: 10px;
 }
 /* End Navbar */
 
@@ -394,16 +406,17 @@ footer .fa-brands {
   border-radius: 20px;
 }
 
-a.text-black {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  width: 36px;
-  height: 36px;
+#book-crud .col-10 {
+  border-top-left-radius: 40px;
+  border-bottom-left-radius: 40px;
 }
 
-a.text-black:hover {
-  background-color: #f0f0f0;
-  border-radius: 18px;
+#book-crud a {
+  width: 110px;
+  color: white;
 }
+#book-crud a:hover {
+  color: black;
+}
+
 /* end book crud */

@@ -1,3 +1,4 @@
+<?php session_start(); ?>
 <!-- Navbar -->
 <nav class="navbar navbar-expand-lg fixed-top shadow-sm p-3 mb-5 bg-body rounded">
   <div class="container-fluid">
@@ -18,14 +19,14 @@
           <a class="nav-link" href="product.php">Product</a>
         </li>
         <?php
-        if (isLogged()) {
+        if (isLogged()) { // Kalau login
           if (!isAdmin()) {
             ?>
             <li class="nav-item">
               <a class="nav-link" href="transaction.php">Transaction</a>
             </li>
             <?php
-          } else { ?>
+          } else { ?> <!--Kalau gak login -->
             <li class="nav-item dropdown">
               <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                 Admin page
@@ -40,29 +41,26 @@
         ?>
       </ul>
       <?php
-      if (!isLogged()) {
+      if (!isLogged()) { // Kalau gak login
         ?>
         <span>
           <a href="login.php" class="links">Login</a>
           <a href="signup.php" class="links-bg">Sign up</a>
         </span>
         <?php
-      } else { ?>
-        <span>
-          <?php
-          if (!isAdmin()) {
-            ?>
-            <a href="cart.php" style="font-size:18px"> <i class="fa-solid fa-shopping-cart me-2 dark-brown"></i></a>
-            <?php
-          }
-          ?>
-
-          <a href="logout.php" class="links-bg">Logout</a>
+      } else { ?> <!--Kalau login -->
+        <span class="navbar-user-info d-flex align-items-center">
+          <?php if (!isAdmin()) { ?>
+            <a href="cart.php" style="font-size:18px">
+              <i class="fa-solid fa-shopping-cart me-2 dark-brown"></i>
+            </a>
+          <?php } ?>
+          <p class="nav-link m-0"><?= $_SESSION['username'] ?></p>
+          <a href="logout.php" class="links-bg ms-3">Logout</a>
         </span>
         <?php
       }
       ?>
-
     </div>
   </div>
 </nav>

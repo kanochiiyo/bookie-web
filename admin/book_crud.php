@@ -2,6 +2,7 @@
 session_start();
 
 require_once (__DIR__ . "/../functions/authentication.php");
+include (__DIR__ . "/../templates/modal.php");
 
 if (!isLogged()) {
   header("Location: ../login.php?message=login_admin");
@@ -24,16 +25,14 @@ include (__DIR__ . "/../templates/header.php");
       <?php include (__DIR__ . "/../templates/sidebar.php"); ?>
 
       <!-- Container -->
-      <div class="col-10 d-flex flex-column justify-content-start align-items-center no-padding-margin bg-white" style="border-top-left-radius: 40px;
-    border-bottom-left-radius: 40px">
+      <div class="col-10 d-flex flex-column justify-content-start align-items-center no-padding-margin bg-white">
         <div class="row p-4">
           <h1 class="text-start fw-3">Books Data</h1>
         </div>
         <div class="row">
           <div class="card p-4 container-card mb-5 border-0">
-            <button class="p-2 my-2 text-white border-0"
-              style="text-decoration: none; background-color:#463610; border-radius: 20px; width:110px"><i
-                class="fa-solid fa-plus"></i>Add Data</button>
+            <a href="#" class="links-bg mt-1 mb-3" data-bs-toggle="modal" data-bs-target="#crudModal" type=n"><i
+                class="fa-solid fa-plus"></i> Add Data</a>
             <table class="table align-items-center">
               <thead>
                 <tr>
@@ -45,8 +44,8 @@ include (__DIR__ . "/../templates/header.php");
                   <th>Author</th>
                   <th>Publisher</th>
                   <th>Publication Date</th>
-                  <th>Pages</th>
                   <th>Language</th>
+                  <th>Pages</th>
                   <th>Weight</th>
                   <th>Price</th>
                   <th class="Child">Action</th>

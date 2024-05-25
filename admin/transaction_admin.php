@@ -33,9 +33,6 @@ include (__DIR__ . "/../templates/header.php");
         </div>
         <div class="row">
           <div class="card p-4 container-card mb-5 border-0" style="width: 1000px">
-            <button class="p-2 my-2 text-white border-0"
-              style="text-decoration: none; background-color:#463610; border-radius: 20px; width:110px"><i
-                class="fa-solid fa-plus"></i>Add Data</button>
             <table class="table align-items-center">
               <thead>
                 <tr>
@@ -57,6 +54,7 @@ include (__DIR__ . "/../templates/header.php");
                     <td>Data </td>
                     <td>Data </td>
                     <td>Data </td>
+                    <td>$$$</td>
                   </tr>
                 <?php } ?>
               </tbody>
