@@ -1,74 +1,21 @@
 <?php
+session_start();
+
+require_once (__DIR__ . "/../functions/authentication.php");
+
+if (!isLogged()) {
+  header("Location: ../login.php?message=login_admin");
+  exit();
+} else {
+  if (!isAdmin()) {
+    header("Location: ../index.php?message=not_admin");
+    exit();
+  }
+}
+
 include (__DIR__ . "/../templates/header.php");
 ?>
-<style>
-  .font-notosans {
-    font-family: "Noto Sans", sans-serif;
-  }
 
-  a {
-    text-decoration: none;
-    color: #333;
-  }
-
-  #book-crud .sidebar {
-    position: sticky;
-    top: 0;
-    height: 100vh;
-  }
-
-
-  #book-crud .sidebar-item {
-    display: block;
-    padding: 10px;
-    margin: 5px;
-    transition: background-color 0.3s;
-  }
-
-  #book-crud .sidebar-item:hover {
-    background-color: rgba(255, 255, 255, 0.25);
-    border-radius: 20px;
-  }
-
-  .no-padding-margin {
-    padding: 0;
-    margin: 0;
-  }
-
-  .container-img {
-    border-top-left-radius: 40px;
-    border-bottom-left-radius: 40px;
-  }
-
-  .table thead th {
-    background-color: #F4F4F5;
-    font-weight: 500;
-    color: #5A6278;
-    font-size: 14px;
-  }
-
-  .table thead th:first-child {
-    border-top-left-radius: 10px;
-    border-bottom-left-radius: 10px;
-  }
-
-  .table thead th:last-child {
-    border-top-right-radius: 10px;
-    border-bottom-right-radius: 10px;
-  }
-
-  a.text-black {
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    width: 36px;
-    height: 36px;
-  }
-
-  a.text-black:hover {
-    background-color: #f0f0f0;
-  }
-</style>
 <main id="book-crud" class="font-notosans no-padding-margin"
   style="background-color: #e2ac6b; background-image: linear-gradient(315deg, #e2ac6b 0%, #cba36d 74%)">
   <div class="container-fluid no-padding-margin">
@@ -135,4 +82,5 @@ include (__DIR__ . "/../templates/header.php");
   </div>
 </main>
 <?php
-include (__DIR__ . "/../templates/footer.php"); ?>
+include (__DIR__ . "/../templates/footer.php");
+?>
