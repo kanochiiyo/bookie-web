@@ -1,4 +1,3 @@
-<?php session_start(); ?>
 <!-- Navbar -->
 <nav class="navbar navbar-expand-lg fixed-top shadow-sm p-3 mb-5 bg-body rounded font-poppins">
   <div class="container-fluid">

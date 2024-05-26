@@ -3,6 +3,8 @@ session_start();
 
 require_once (__DIR__ . "/functions/authentication.php");
 
+$connection = getConnection();
+
 if (isset($_GET['message'])) {
   if ($_GET['message'] == "not_admin") {
     ?>

@@ -1,4 +1,3 @@
-<?php include (__DIR__ . "/header.php") ?>
 <!-- Modal buy now -->
 <div class="modal fade" id="buyModal" tabindex="-1" aria-labelledby="buyModalLabel" aria-hidden="true">
   <div class="modal-dialog modal-dialog-centered">
@@ -153,7 +152,7 @@
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
       <div class="modal-body">
-        <form action="../functions/upload.php" method="post" id="bookReviewForm" enctype="multipart/form-data">
+        <form action="../functions/upload.php" method="post" id="crudForm" enctype="multipart/form-data">
           <div class="mb-3">
             <label for="bookCover" class="form-label">Book Cover</label>
             <input class="form-control" type="file" id="bookCover" name="bookCover" required>
@@ -265,7 +264,7 @@
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
       <div class="modal-body">
-        <form action="" method="post" id="crudForm">
+        <form action="" method="post" id="bookReviewForm">
           <div class="mb-3">
             <p>Review for Moby-Dick by Harper Lee</p>
           </div>
@@ -285,12 +284,9 @@
       </div>
       <div class="modal-footer">
         <button type="button" class="links-bg-white" data-bs-dismiss="modal">Close</button>
-        <button type="submit" class="links-bg" form="crudForm">Submit</button>
+        <button type="submit" class="links-bg" form="bookReviewForm">Submit</button>
       </div>
     </div>
   </div>
 </div>
 <!-- End Modal Book Review -->
-
-
-<?php include (__DIR__ . "/footer.php") ?>

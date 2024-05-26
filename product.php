@@ -2,6 +2,9 @@
 session_start();
 
 require_once (__DIR__ . "/functions/authentication.php");
+
+$connection = getConnection();
+
 include (__DIR__ . "/templates/header.php");
 include (__DIR__ . "/templates/modal.php");
 ?>
