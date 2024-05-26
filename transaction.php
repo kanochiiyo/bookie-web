@@ -16,9 +16,47 @@ if (isAdmin()) {
 
 include (__DIR__ . "/templates/header.php");
 include (__DIR__ . "/templates/navbar.php");
-include (__DIR__ . "/templates/modal.php");
 ?>
-</style>
+
+<!-- Modal Book Review -->
+<div class="modal fade font-inter" id="bookReviewModal" tabindex="-1" aria-labelledby="bookReviewModalLabel"
+  aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content modal-bg">
+      <div class="modal-header">
+        <div>
+          <h1 class="modal-title fs-5" id="bookReviewModalLabel">Add Review</h1>
+        </div>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <form action="" method="post" id="bookReviewForm">
+          <div class="mb-3">
+            <p>Review for Moby-Dick by Harper Lee</p>
+          </div>
+          <div class="mb-3">
+            <label for="rating" class="form-label">Rating</label><br>
+            <div class="d-flex align-items-center">
+              <span class="first font-inter me-2"></span>
+              <input type="range" class="rating me-2" name="rating" min="0" max="5" id="rating">
+              <span class="last font-inter"></span>
+            </div>
+          </div>
+          <div class="mb-3">
+            <label for="review" class="form-label">Review</label>
+            <textarea class="form-control" id="review" rows="3"></textarea>
+          </div>
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="links-bg-white" data-bs-dismiss="modal">Close</button>
+        <button type="submit" class="links-bg" form="bookReviewForm">Submit</button>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- End Modal Book Review -->
+
 <main class="font-poppins">
   <section id="transaction">
     <div class="container py-5">
