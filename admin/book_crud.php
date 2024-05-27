@@ -3,6 +3,7 @@ session_start();
 
 require_once (__DIR__ . "/../functions/authentication.php");
 require_once (__DIR__ . "/../functions/connection.php");
+include (__DIR__ . "/../functions/functions.php");
 
 $connection = getConnection();
 
@@ -15,19 +16,19 @@ if (!isLogged()) {
     exit();
   }
 }
+$errorMessage = getFlash('error');
+$successMessage = getFlash('success');
 
-if (isset($_SESSION["error"])) {
+if ($errorMessage) {
   echo "<script>
-        alert('" . $_SESSION['error'] . "');
+        alert('$errorMessage');
     </script>";
-  unset($_SESSION["error"]);
 }
 
-if (isset($_SESSION["success"])) {
+if ($successMessage) {
   echo "<script>
-        alert('" . $_SESSION['success'] . "');
+        alert('$successMessage');
     </script>";
-  unset($_SESSION["success"]);
 }
 
 include (__DIR__ . "/../templates/header.php");

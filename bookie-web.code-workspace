@@ -1,7 +1,10 @@
 {
   "folders": [
 	{
-		"path": "."
+		"path": "../pwd/bookie-web"
+	},
+	{
+		"path": "../pwd/kuliah/php/tugas_session"
 	}
 ],
   "settings": {}

@@ -16,6 +16,7 @@ if (isAdmin()) {
 
 include (__DIR__ . "/templates/header.php");
 include (__DIR__ . "/templates/navbar.php");
+include (__DIR__ . "/functions/functions.php");
 ?>
 
 <!-- Modal Book Review -->
@@ -62,35 +63,44 @@ include (__DIR__ . "/templates/navbar.php");
     <div class="container py-5">
       <h4 class="font-inter ">My Transaction</h4>
       <p class="text-muted my-1 p-0">You've spent</p>
-      <h2>Rp 600.000</h2>
+      <?php
+      $loggedInUserId = $_SESSION['id'];
+      $data = query("SELECT t.id AS transaction_id, t.transaction_date, b.img, u.id AS user_id, b.id AS book_id, b.title, a.id AS author_id, a.name AS author, td.type, b.price, td.qty, r.id AS review_id, r.content, r.rate FROM transaction t INNER JOIN transaction_detail td ON t.id = td.transaction_id INNER JOIN user u ON t.user_id = u.id INNER JOIN books b ON td.book_id = b.id INNER JOIN author a ON b.author_id = a.id INNER JOIN review r ON td.review_id = r.id WHERE t.user_id = $loggedInUserId");
+      $grand_total = 0;
+      foreach ($data as $row) {
+        $qty = intval($row["qty"]);
+        $price = intval($row["price"]);
+        $total = $qty * $price;
+        $grand_total += $total;
+      }
+      ?>
+      <h2><?= "Rp " . number_format($grand_total, 0, ',', '.') ?></h2>
+
       <div class="card d-flex justify-content-center align-items-center p-2 my-5">
         <table class="table borderless">
           <thead>
             <tr>
-              <th>Transaction Date</th>
-              <th>Book Cover</th>
-              <th>Book Title</th>
-              <th>Author</th>
-              <th>Book Type</th>
-              <th>Price</th>
-              <th>Qty</th>
-              <th>Subtotal</th>
-              <th>Review</th>
+              <th class="text-center">Transaction Date</th>
+              <th colspan="2" class="text-center">Book</th>
+              <th class="text-center">Author</th>
+              <th class="text-center">Book Type</th>
+              <th class="text-center">Price</th>
+              <th class="text-center">Qty</th>
+              <th class="text-center">Subtotal</th>
+              <th class="text-center">Review</th>
             </tr>
           </thead>
           <tbody>
-            <?php for ($i = 0; $i <= 5; $i++) { ?>
+            <?php foreach ($data as $row) { ?>
               <tr>
-                <td>23-12-2020</td>
-                <td>
-                  <img src="assets/books/book1.jpg" class="book-cover img-fluid" alt="Book Cover">
-                </td>
-                <td>Moby-Dick</td>
-                <td>Harper Lee</td>
-                <td>E-book</td>
-                <td>Rp 40.000</td>
-                <td>3</td>
-                <td>Rp 120.000</td>
+                <td><?= $row["transaction_date"] ?></td>
+                <td><img src="assets/books/<?= $row["img"] ?>" alt="" class="book-cover img-fluid"> </td>
+                <td><?= $row["title"] ?></td>
+                <td><?= $row["author"] ?></td>
+                <td><?= $row["type"] ?></td>
+                <td>Rp <?= number_format($row["price"], 0, ',', '.') ?></td>
+                <td><?= $row["qty"] ?></td>
+                <td><?= $total ?></td>
                 <td> <a href="#" class=" fs-6 mt-1 mb-3" data-bs-toggle="modal" data-bs-target="#bookReviewModal"><i
                       class="fa-solid fa-pen"></i></a></td>
               </tr>
