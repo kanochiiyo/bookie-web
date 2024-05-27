@@ -88,7 +88,7 @@ $data = query("SELECT b.id as book_id, b.title, b.img, a.id, a.name as author, b
           </div>
 
           <div class="row">
-            <h4 class="fw-bold">Novel</h4>
+            <h4 class="fw-bold">Books</h4>
           </div>
 
           <div class="row justify-content-between pb-5 px-0">
@@ -103,7 +103,7 @@ $data = query("SELECT b.id as book_id, b.title, b.img, a.id, a.name as author, b
                 <p class="m-1 fw-bold" style="font-size: 13px; margin-bottom: 0;"><i class="fa-solid fa-star"></i> 4,5</p>
                 <div class="d-flex justify-content-between align-items-center m-1">
                   <p class="fw-bold mb-0" style="font-size: 17px; margin-bottom: 0;">
-                    Rp<?= number_format($row["price"], 0, ',', '.') ?>
+                    $<?= number_format($row["price"], 0, ',', '.') ?>
                   </p>
                   <div class="ms-auto" style="margin-left: 10px;">
                     <a href="#" class="submitcart links-bg-white mt-1 mb-3" data-bs-toggle="modal"

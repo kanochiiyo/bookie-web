@@ -1,4 +1,6 @@
 <?php
+session_start();
+
 require_once (__DIR__ . "/../functions/authentication.php");
 require_once (__DIR__ . "/../functions/connection.php");
 include (__DIR__ . "/../functions/functions.php");
@@ -6,11 +8,11 @@ include (__DIR__ . "/../functions/functions.php");
 $connection = getConnection();
 $loggedInUserId = $_SESSION['id'];
 
-if (!isset($loggedInUserId)) {
+if (!isLogged()) {
   $message = "You need to be logged in to add items to the cart.";
   echo "<script>
             alert('$message');
-            window.location.href = 'login.php';
+            window.location.href = '../login.php';
           </script>";
   exit();
 }
@@ -24,12 +26,33 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
   setFlash('book_name', $book_name);
 
-  $query = "INSERT INTO shopping_cart (user_id, book_id, type, qty) VALUES ('$loggedInUserId', '$book_id', '$type', '$amount')";
+  $checkCart = $connection->query("SELECT book_id, type, qty FROM shopping_cart WHERE user_id=$loggedInUserId AND book_id=$book_id AND type='$type'");
+  $result = $checkCart->fetch_object();
+  if ($result) {
+    if ($type == 'e-book') {
+      $message = "$book_name is already in your cart!";
+    } else {
+      $amountAdded = $result->qty + $amount;
 
-  if (mysqli_query($connection, $query)) {
-    $message = "$book_name has been added to your cart!";
+      $update = $connection->query("UPDATE shopping_cart SET qty=$amountAdded WHERE user_id=$loggedInUserId AND book_id=$book_id AND type='$type'");
+      if ($update) {
+        $message = "$book_name has been added to your cart!";
+      } else {
+        $message = "Failed to add $book_name to cart. Please try again.";
+      }
+    }
+
+
+
   } else {
-    $message = "Failed to add $book_name to cart. Please try again.";
+    $query = "INSERT INTO shopping_cart (user_id, book_id, type, qty) VALUES ($loggedInUserId, $book_id, '$type', $amount)";
+    // var_dump($query);
+
+    if (mysqli_query($connection, $query)) {
+      $message = "$book_name has been added to your cart!";
+    } else {
+      $message = "Failed to add $book_name to cart. Please try again.";
+    }
   }
 
   echo "<script>
@@ -47,8 +70,8 @@ if (isset($_GET["op"])) {
 }
 
 if ($op == "delete") {
-  $book_id = $_GET["book_id"];
-  $query = "DELETE FROM shopping_cart WHERE book_id = '$book_id' AND user_id = '$loggedInUserId'";
+  $cart_id = $_GET["id"];
+  $query = "DELETE FROM shopping_cart WHERE id = $cart_id";
 
   $book_name = getFlash('book_name');
 

@@ -4,7 +4,7 @@ session_start();
 
 // Koneksi ke database
 require_once (__DIR__ . "/connection.php");
-include (__DIR__ . "/functions/php");
+include (__DIR__ . "/functions.php");
 $connection = getConnection();
 
 $errorMessage = NULL;
@@ -89,10 +89,6 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
 setFlash('error', $errorMessage);
 setFlash('error', $errorMessage);
-
-// Input 
-$query = "INSERT INTO books VALUES ('', '$name', '$category', '$stock', '$price')";
-mysqli_query($mysql, $query);
 
 header("Location: ../admin/book_crud.php");
 

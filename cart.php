@@ -27,7 +27,7 @@ include (__DIR__ . "/templates/navbar.php");
 include (__DIR__ . "/functions/functions.php");
 
 $loggedInUserId = $_SESSION['id'];
-$data = query("SELECT b.id as book_id, b.img, b.title, b.price, c.id, c.user_id, c.book_id, c.type, c.qty, u.id as user_id FROM shopping_cart c INNER JOIN books b ON c.book_id = b.id INNER JOIN user u ON c.user_id = u.id WHERE c.user_id = $loggedInUserId");
+$data = query("SELECT b.id as book_id, b.img, b.title, b.price, c.id, c.user_id, c.book_id, c.type, c.qty FROM shopping_cart c INNER JOIN books b ON c.book_id = b.id WHERE c.user_id = $loggedInUserId ORDER BY c.id DESC");
 // var_dump($data);
 ?>
 <section class="sec-detail max-vw-100 font-inter" id="cart" style="margin-top: 70px">
@@ -66,8 +66,7 @@ $data = query("SELECT b.id as book_id, b.img, b.title, b.price, c.id, c.user_id,
                   $grand_total += $total;
                   ?>
                   <th scope="row">
-                    <input class="form-check-input" type="checkbox" value="check<?= $i; ?>" id="check"
-                      name="check<?= $i; ?>">
+                    <input class="form-check-input" type="checkbox" value="<?= $row["id"]; ?>" name="books[]" required>
                   </th>
                   <td><img src="assets/books/<?= $row["img"] ?>" alt="" class="book-cover img-fluid border-2"
                       style="width: 70px; height: 100px"> </td>
@@ -77,7 +76,7 @@ $data = query("SELECT b.id as book_id, b.img, b.title, b.price, c.id, c.user_id,
                   <td>Rp <?= $price ?></td>
                   <td>
                     <span class="d-flex justify-content-center">
-                      <a href="functions/handle_cart.php?op=delete&book_id=<?= $row["book_id"] ?>"><i class="fa fa-trash"
+                      <a href="functions/handle_cart.php?op=delete&id=<?= $row["id"] ?>"><i class="fa fa-trash"
                           aria-hidden="true"></i></a>
                     </span>
                   </td>
