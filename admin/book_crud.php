@@ -3,7 +3,7 @@ session_start();
 
 require_once (__DIR__ . "/../functions/authentication.php");
 require_once (__DIR__ . "/../functions/connection.php");
-include (__DIR__ . "/../functions/functions.php");
+require_once (__DIR__ . "/../functions/functions.php");
 
 $connection = getConnection();
 
@@ -16,23 +16,8 @@ if (!isLogged()) {
     exit();
   }
 }
-$errorMessage = getFlash('error');
-$successMessage = getFlash('success');
-
-if ($errorMessage) {
-  echo "<script>
-        alert('$errorMessage');
-    </script>";
-}
-
-if ($successMessage) {
-  echo "<script>
-        alert('$successMessage');
-    </script>";
-}
 
 include (__DIR__ . "/../templates/header.php");
-include (__DIR__ . "/../functions/read.php");
 
 $data = query("SELECT b.id, b.img, b.title, b.genre_id, b.author_id, b.publisher_id, g.name as genre, b.synopsis, a.name as author, p.name as publisher, b.publication_date, b.language, b.totalpage, b.weight, b.price 
 FROM books b

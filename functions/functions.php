@@ -1,5 +1,4 @@
 <?php
-session_start();
 // Koneksi ke database
 require_once (__DIR__ . "/connection.php");
 $connection = getConnection();
