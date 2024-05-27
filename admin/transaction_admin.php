@@ -16,25 +16,11 @@ if (!isLogged()) {
   }
 }
 
-if (isset($_SESSION["error"])) {
-  echo "<script>
-        alert('" . $_SESSION['error'] . "');
-    </script>";
-  unset($_SESSION["error"]);
-}
-
-if (isset($_SESSION["success"])) {
-  echo "<script>
-        alert('" . $_SESSION['success'] . "');
-    </script>";
-  unset($_SESSION["success"]);
-}
-
 include (__DIR__ . "/../templates/header.php");
 include (__DIR__ . "/../templates/modal.php");
-include (__DIR__ . "/../functions/read.php");
+include (__DIR__ . "/../functions/functions.php");
 
-$data = query("SELECT t.id, t.transaction_date, u.username, b.title, b.price, td.qty, td.type 
+$data = query("SELECT t.id, t.transaction_date, u.username, b.title, b.price, b.img, td.qty, td.type 
 FROM transaction t 
 INNER JOIN user u ON t.user_id = u.id 
 INNER JOIN transaction_detail td ON t.id = td.transaction_id 
@@ -63,7 +49,7 @@ INNER JOIN books b ON td.book_id = b.id");
                   <th class="text-center">Transaction ID</th>
                   <th class="text-center">Buyer Username</th>
                   <th class="text-center">Date</th>
-                  <th class="text-center">Book Title</th>
+                  <th colspan="2" class="text-center">Book</th>
                   <th class="text-center">Quantity</th>
                   <th class="text-center">Type</th>
                   <th class="text-center">Total</th>
@@ -80,10 +66,12 @@ INNER JOIN books b ON td.book_id = b.id");
                     <td class="text-center"><?= $row["id"] ?></td>
                     <td class="text-center"><?= $row["username"] ?></td>
                     <td class="text-center"><?= $row["transaction_date"] ?> </td>
+                    <td><img src="../assets/books/<?= $row["img"] ?>" alt="" class="book-cover img-fluid border-2"
+                        style="width: 200px; height: 100px"> </td>
                     <td class="text-center"><?= $row["title"] ?> </td>
                     <td class="text-center"><?= $row["qty"] ?> </td>
                     <td class="text-center"><?= $row["type"] ?> </td>
-                    <td class="text-center"><?= $total ?></td>
+                    <td class="text-center">Rp <?= number_format($total, 0, ',', '.') ?></td>
                   </tr>
                 <?php } ?>
               </tbody>

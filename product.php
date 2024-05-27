@@ -7,6 +7,10 @@ $connection = getConnection();
 
 include (__DIR__ . "/templates/header.php");
 include (__DIR__ . "/templates/modal.php");
+include (__DIR__ . "/functions/functions.php");
+
+$data = query("SELECT b.id as book_id, b.title, b.img, a.id, a.name as author, b.price FROM books b INNER JOIN author a ON b.author_id = a.id");
+// var_dump($data);
 ?>
 
 <main class="font-inter">
@@ -51,8 +55,8 @@ include (__DIR__ . "/templates/modal.php");
     <div class="container py-5 pb-0">
       <div class="row">
         <div class="col-3">
-          <h5 class="fw-bold">Kategori</h5>
-          <a href="">Semua Kategori (123)</a>
+          <h5 class="fw-bold">Semua Kategori (123)</h5>
+
         </div>
 
         <div class="col-9">
@@ -88,20 +92,28 @@ include (__DIR__ . "/templates/modal.php");
           </div>
 
           <div class="row justify-content-between pb-5 px-0">
-            <?php for ($i = 1; $i <= 4; $i++) { ?>
+            <?php foreach ($data as $row) { ?>
               <div class="custom-card col-lg-3 col-md-4 col-6 mx-0 my-4" style="padding: 0 12px 0 12px">
                 <a href="detail.php" class="text-decoration-none fw-bold mb-0" style="font-size: 17px; color:#000">
-                  <img src="assets/books/moby-dick.jpg" alt="Moby-Dick by Harper Lee" class="rounded object-fit-fill"
+                  <img src="assets/books/<?= $row["img"] ?>" alt="Moby-Dick by Harper Lee" class="rounded object-fit-fill"
                     style="width: 100%; height: auto; max-height: 250px;" />
-                  <span class="ms-1">Moby-Dick<span>
+                  <span class="ms-1"><?= $row["title"] ?><span>
                 </a>
-                <p class="m-1">Harper Lee</p>
+                <p class="m-1"><?= $row["author"] ?></p>
                 <p class="m-1 fw-bold" style="font-size: 13px; margin-bottom: 0;"><i class="fa-solid fa-star"></i> 4,5</p>
                 <div class="d-flex justify-content-between align-items-center m-1">
-                  <p class="fw-bold mb-0" style="font-size: 17px; margin-bottom: 0;">$25</p>
-                  <a href="#" class="links-bg-white mt-1 mb-3" data-bs-toggle="modal" data-bs-target="#cartModal"
-                    type="button">Add to cart</a>
+                  <p class="fw-bold mb-0" style="font-size: 17px; margin-bottom: 0;">
+                    Rp<?= number_format($row["price"], 0, ',', '.') ?>
+                  </p>
+                  <div class="ms-auto" style="margin-left: 10px;">
+                    <a href="#" class="submitcart links-bg-white mt-1 mb-3" data-bs-toggle="modal"
+                      data-bs-target="#cartModal" type="button" data-id="<?= $row["book_id"] ?>"
+                      data-name="<?= $row["title"] ?>">Add to cart</a>
+                  </div>
                 </div>
+
+
+
               </div>
             <?php } ?>
           </div>

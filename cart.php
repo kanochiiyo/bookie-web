@@ -8,8 +8,27 @@ if (!isLogged()) {
   header("Location:login.php");
 }
 
+if (isset($_SESSION["error"])) {
+  echo "<script>
+        alert('" . $_SESSION['error'] . "');
+    </script>";
+  unset($_SESSION["error"]);
+}
+
+if (isset($_SESSION["success"])) {
+  echo "<script>
+        alert('" . $_SESSION['success'] . "');
+    </script>";
+  unset($_SESSION["success"]);
+}
+
 include (__DIR__ . "/templates/header.php");
 include (__DIR__ . "/templates/navbar.php");
+include (__DIR__ . "/functions/functions.php");
+
+$loggedInUserId = $_SESSION['id'];
+$data = query("SELECT b.id as book_id, b.img, b.title, b.price, c.id, c.user_id, c.book_id, c.type, c.qty, u.id as user_id FROM shopping_cart c INNER JOIN books b ON c.book_id = b.id INNER JOIN user u ON c.user_id = u.id WHERE c.user_id = $loggedInUserId");
+// var_dump($data);
 ?>
 <section class="sec-detail max-vw-100 font-inter" id="cart" style="margin-top: 70px">
   <div class="w-100" style="height: 250px; background-image: url(assets/cart.jpg); background-size: cover;">
@@ -29,31 +48,40 @@ include (__DIR__ . "/templates/navbar.php");
               <tr>
                 <th scope="col">#</th>
                 <th colspan="2" scope="col">Product</th>
-                <th scope="col">Type</th>
                 <th scope="col">Qty</th>
+                <th scope="col">Type</th>
                 <th scope="col">Price</th>
                 <th scope="col">Action</th>
               </tr>
             </thead>
             <tbody>
-              <?php for ($i = 1; $i <= 5; $i++) { ?>
+              <?php $total = 0;
+              $grand_total = 0;
+              foreach ($data as $row) { ?>
                 <tr>
+                  <?php
+                  $qty = intval($row["qty"]);
+                  $price = intval($row["price"]);
+                  $total = $qty * $price;
+                  $grand_total += $total;
+                  ?>
                   <th scope="row">
                     <input class="form-check-input" type="checkbox" value="check<?= $i; ?>" id="check"
                       name="check<?= $i; ?>">
                   </th>
-                  <td>
-                    <img src="assets/books/book1.jpg" alt="book" class="rounded object-fit-cover" style="width: 75px;">
-                  </td>
-                  <td>Harry Potter: Half Blood Prince</td>
-                  <td>e-book</td>
-                  <td>1</td>
-                  <td>$25</td>
+                  <td><img src="assets/books/<?= $row["img"] ?>" alt="" class="book-cover img-fluid border-2"
+                      style="width: 70px; height: 100px"> </td>
+                  <td class="text-center"><?= $row["title"] ?> </td>
+                  <td class="text-center"><?= $row["qty"] ?> </td>
+                  <td class="text-center"><?= $row["type"] ?> </td>
+                  <td>Rp <?= $price ?></td>
                   <td>
                     <span class="d-flex justify-content-center">
-                      <a href=""><i class="fa fa-trash" aria-hidden="true"></i></a>
+                      <a href="functions/handle_cart.php?op=delete&book_id=<?= $row["book_id"] ?>"><i class="fa fa-trash"
+                          aria-hidden="true"></i></a>
                     </span>
                   </td>
+
                 </tr>
               <?php } ?>
               <tr>
@@ -61,7 +89,8 @@ include (__DIR__ . "/templates/navbar.php");
                 <td scope="row"></td>
                 <td scope="row"></td>
                 <td scope="row"></td>
-                <td colspan="2" scope="row" class="fw-bold"><span class="dark-brown">$2000000</span></td>
+                <td colspan="2" scope="row" class="fw-bold"><span class="dark-brown">Rp
+                    <?= number_format($grand_total, 0, ',', '.') ?></span></td>
               </tr>
             </tbody>
           </table>
