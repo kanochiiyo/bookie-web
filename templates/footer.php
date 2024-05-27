@@ -22,9 +22,9 @@
     editButtons.forEach(function (button) {
       button.addEventListener("click", function () {
         var id = button.getAttribute("data-id");
-        var name = button.getAttribute("data-name");
+        // var name = button.getAttribute("data-name");
         document.getElementById("bookId").value = id;
-        document.getElementById("bookName").value = name;
+        // document.getElementById("bookName").value = name;
       });
     });
   });

@@ -9,10 +9,25 @@ if (!isLogged()) {
   header("Location:login.php");
 }
 
+
+if (isset($_GET['books'])) {
+  $book_ids = $_GET['books']; // Array of selected book IDs
+
+  // Create placeholders for the IN clause
+  $placeholders = implode(',', $book_ids);
+
+}
+
+$loggedInUserId = $_SESSION['id'];
+$books = $connection->query("SELECT b.id as book_id, b.img, b.title, b.price, c.id, c.user_id, c.book_id, c.type, c.qty FROM shopping_cart c INNER JOIN books b ON c.book_id = b.id WHERE c.user_id = $loggedInUserId AND c.id IN ($placeholders)");
+$grand_total = 0;
+
+
 include (__DIR__ . "/templates/header.php");
 include (__DIR__ . "/templates/navbar.php");
 ?>
-<section class="d-flex justify-content-center align-items-center min-vh-100 max-vw-100" style="padding-top:80px">
+<section class="d-flex justify-content-center font-inter align-items-center min-vh-100 max-vw-100"
+  style="padding-top:80px">
   <div class="container">
     <div class="card shadow-lg mt-5 mb-5">
       <div class="row">
@@ -34,24 +49,27 @@ include (__DIR__ . "/templates/navbar.php");
             </div>
           </div>
           <!-- card produk -->
-          <?php for ($i = 1; $i <= 3; $i++) { ?>
+          <?php while ($book = $books->fetch_object()) {
+            $total = $book->qty * $book->price;
+            $grand_total += $total; ?>
             <div class="card p-2 mb-2">
               <div class="row">
                 <div class="col-2">
-                  <img src="assets/books/book1.jpg" alt="book" class="rounded object-fit-cover" style="width: 75px;">
+                  <img src="assets/books/<?= $book->img ?>" alt="book" class="rounded object-fit-cover"
+                    style="width: 75px;">
                 </div>
                 <div class="col-4">
-                  <p>Harry Potter: Half Blood Prince</p>
-                  <p>e-book</p>
+                  <p><?= $book->title ?></p>
+                  <p><?= $book->type ?></p>
                 </div>
                 <div class="col-2">
-                  <input class="form-control" type="number" value="2" min="1">
+                  <input class="form-control" type="number" value="<?= $book->qty ?>" min="1">
                 </div>
                 <div class="col-2">
-                  <p>$2544</p>
+                  <p><?= $book->price ?></p>
                 </div>
                 <div class="col-2">
-                  <p>$5044</p>
+                  <p><?= $total ?></p>
                 </div>
               </div>
             </div>
@@ -67,7 +85,7 @@ include (__DIR__ . "/templates/navbar.php");
               </div>
               <div class="col-6 d-flex justify-content-end">
                 <p>
-                  $56890
+                  <?= $grand_total ?>
                 </p>
               </div>
               <div class="col-6">
@@ -81,7 +99,7 @@ include (__DIR__ . "/templates/navbar.php");
               <hr style="background: #fff" class="mt-5 mb-2">
             </div>
             <span class="d-flex justify-content-end" style="width: 100%;">
-              <p class="fw-bold" style="font-size: 20px">$56890</p>
+              <p class="fw-bold" style="font-size: 20px"><?= $grand_total ?></p>
             </span>
             <a href="product.php" class="text-center links-co-white mb-3" style="width: 100%; font-size:15px"> Continue
               shopping </a>

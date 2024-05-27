@@ -16,6 +16,20 @@ if (!isLogged()) {
     exit();
   }
 }
+$errorMessage = getFlash('error');
+$successMessage = getFlash('success');
+
+if ($errorMessage) {
+  echo "<script>
+        alert('$errorMessage');
+    </script>";
+}
+
+if ($successMessage) {
+  echo "<script>
+        alert('$successMessage');
+    </script>";
+}
 
 include (__DIR__ . "/../templates/header.php");
 
