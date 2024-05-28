@@ -88,7 +88,7 @@ $data = query("SELECT b.id as book_id, b.title, b.img, a.id, a.name as author, b
           </div>
 
           <div class="row">
-            <h4 class="fw-bold">Novel</h4>
+            <h4 class="fw-bold">Books</h4>
           </div>
 
           <div class="container pt-3 pb-5">

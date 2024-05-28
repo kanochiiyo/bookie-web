@@ -90,10 +90,6 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 setFlash('error', $errorMessage);
 setFlash('error', $errorMessage);
 
-// Input 
-$query = "INSERT INTO books VALUES ('', '$name', '$category', '$stock', '$price')";
-mysqli_query($mysql, $query);
-
 header("Location: ../admin/book_crud.php");
 
 ?>
