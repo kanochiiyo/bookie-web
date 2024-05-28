@@ -135,7 +135,15 @@ include (__DIR__ . "/templates/modal.php");
 
   </section>
   <!-- End Section 3 -->
+
   <!-- Popular Books Section -->
+  <?php
+  $populars = $connection->query("SELECT b.id as book_id, b.title, b.img, a.id, a.name as author, b.price, c.shopping_cart
+FROM books b INNER JOIN author a ON b.author_id = a.id 
+INNER JOIN (SELECT count(sc.book_id) shopping_cart, sc.book_id FROM shopping_cart sc GROUP BY sc.book_id) c ON b.id = c.book_id
+ORDER BY c.shopping_cart DESC 
+LIMIT 10");
+  ?>
   <section class="popular-books pb-5" id="popular-books" data-aos="fade-right">
     <div class="container">
       <div class="row">
@@ -155,25 +163,29 @@ include (__DIR__ . "/templates/modal.php");
         </div>
         <div class="row">
           <div class="col-12 pb-5">
-    <div id="carouselExampleIndicators" class="carousel slide" data-bs-ride="carousel">
-        <div class="carousel-inner">
-            <?php for ($j = 1; $j <= 2; $j++) { ?>
+            <div id="carouselExampleIndicators" class="carousel slide" data-bs-ride="carousel">
+              <div class="carousel-inner">
+                <?php for ($j = 1; $j <= 2; $j++) { ?>
                   <div class="carousel-item <?php echo ($j == 1) ? 'active' : ''; ?>">
                     <div class="row justify-content-between mx-1">
-                      <?php for ($i = 1; $i <= 5; $i++) { ?>
+                      <?php while ($popular = $populars->fetch_object()) { ?>
                         <div class="custom-card col-2 mx-1 mb-5">
                           <a href="detail.php" class="text-decoration-none">
-                            <img src="assets/books/moby-dick.jpg" alt="Moby-Dick by Harper Lee" class="rounded-end-1 object-fit-fill"
-                              style="width: 100%; height: auto; max-height: 250px;" />
+                            <img src="assets/books/<?= $popular->img ?>" alt="Moby-Dick by Harper Lee"
+                              class="rounded-end-1 object-fit-fill" style="width: 100%; height: auto; max-height: 250px;" />
                             <div class="card-body">
-                              <h5 class="m-1 fw-bold" style="font-size: 17px; color:#000">Moby-Dick</h5>
-                              <p class="m-1">Harper Lee</p>
-                              <p class="m-1 fw-bold" style="font-size: 13px; margin-bottom: 0;"><i class="fa-solid fa-star"></i> 4.5
+                              <h5 class="m-1 fw-bold text-truncate" style="font-size: 17px; color:#000">
+                                <?= $popular->title ?>
+                              </h5>
+                              <p class="m-1"><?= $popular->author ?></p>
+                              <p class="m-1 fw-bold" style="font-size: 13px; margin-bottom: 0;"><i
+                                  class="fa-solid fa-star"></i> 4.5
                               </p>
                               <div class="d-flex justify-content-between align-items-center m-1">
-                                <p class="fw-bold mb-0" style="font-size: 17px; margin-bottom: 0;">$25</p>
+                                <p class="fw-bold mb-0" style="font-size: 17px; margin-bottom: 0;">$<?= $popular->price ?>
+                                </p>
                                 <a href="#" class="submitcart links-bg-white mt-1 mb-3" data-bs-toggle="modal"
-                                  data-bs-target="#cartModal" type="button">Add to cart</a>
+                                  data-bs-target="#cartModal" type="button" data-id="<?= $popular->id ?>">Add to cart</a>
                               </div>
                             </div>
                           </a>
@@ -183,16 +195,6 @@ include (__DIR__ . "/templates/modal.php");
                   </div>
                 <?php } ?>
               </div>
-              <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators"
-                data-bs-slide="prev">
-                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                <span class="visually-hidden">Previous</span>
-              </button>
-              <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleIndicators"
-                data-bs-slide="next">
-                <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                <span class="visually-hidden">Next</span>
-              </button>
             </div>
           </div>
 
@@ -203,6 +205,13 @@ include (__DIR__ . "/templates/modal.php");
   <!-- End Popular Books Section -->
 
   <!-- Best Seller Section -->
+  <?php
+  $best_sellers = $connection->query("SELECT b.id as book_id, b.title, b.img, a.id, a.name as author, b.price, t.qty
+FROM books b INNER JOIN author a ON b.author_id = a.id 
+INNER JOIN (SELECT SUM(td.qty) qty, td.book_id  FROM transaction_detail td GROUP BY td.book_id) t ON b.id = t.book_id
+ORDER BY t.qty DESC 
+LIMIT 5");
+  ?>
   <section class="best-seller" id="best-seller" data-aos="fade-right">
     <div class="container pt-4 px-0">
       <div class="row">
@@ -217,20 +226,26 @@ include (__DIR__ . "/templates/modal.php");
       </div>
 
       <div class="row justify-content-between mx-1">
-        <?php for ($i = 1; $i <= 5; $i++) { ?>
+        <?php while ($best_seller = $best_sellers->fetch_object()) { ?>
           <div class="custom-card col-2 mx-1 mb-5">
-            <a href="detail.php" class="text-decoration-none fw-bold mb-0" style="font-size: 17px; color:#000">
-              <img src="assets/books/moby-dick.jpg" alt="Moby-Dick by Harper Lee" class="rounded-end-1 object-fit-fill"
-                style="width: 100%; height: auto; max-height: 250px;" />
-              <span class="ms-1">Moby-Dick<span>
+            <a href="detail.php" class="text-decoration-none">
+              <img src="assets/books/<?= $best_seller->img ?>" alt="Moby-Dick by Harper Lee"
+                class="rounded-end-1 object-fit-fill" style="width: 100%; height: auto; max-height: 250px;" />
+              <div class="card-body">
+                <h5 class="m-1 fw-bold text-truncate" style="font-size: 17px; color:#000">
+                  <?= $best_seller->title ?>
+                </h5>
+                <p class="m-1"><?= $best_seller->author ?></p>
+                <p class="m-1 fw-bold" style="font-size: 13px; margin-bottom: 0;"><i class="fa-solid fa-star"></i> 4.5
+                </p>
+                <div class="d-flex justify-content-between align-items-center m-1">
+                  <p class="fw-bold mb-0" style="font-size: 17px; margin-bottom: 0;">$<?= $best_seller->price ?>
+                  </p>
+                  <a href="#" class="submitcart links-bg-white mt-1 mb-3" data-bs-toggle="modal"
+                    data-bs-target="#cartModal" type="button" data-id="<?= $best_seller->id ?>">Add to cart</a>
+                </div>
+              </div>
             </a>
-            <p class="m-1">Harper Lee</p>
-            <p class="m-1 fw-bold" style="font-size: 13px; margin-bottom: 0;"><i class="fa-solid fa-star"></i> 4,5</p>
-            <div class="d-flex justify-content-between align-items-center m-1">
-              <p class="fw-bold mb-0" style="font-size: 17px; margin-bottom: 0;">$25</p>
-              <a href="#" class="links-bg-white mt-1 mb-3" data-bs-toggle="modal" data-bs-target="#cartModal"
-                type="button"> Add to cart</a>
-            </div>
           </div>
         <?php } ?>
       </div>
@@ -239,7 +254,7 @@ include (__DIR__ . "/templates/modal.php");
   <!-- End Best Seller Section -->
 
   <!-- Review Section -->
-  <section class="review" id="review" data-aos="fade-up">
+  <section class=" review" id="review" data-aos="fade-up">
     <div class="container pt-5 pb-1">
       <div class="row">
         <div class="col-12 d-flex justify-content-center">
@@ -251,24 +266,30 @@ include (__DIR__ . "/templates/modal.php");
       </div>
       <div class="row justify-content-center pt-5">
         <div class="card col mx-2 py-4 px-3" style="width: 350px; border-color: #f1f1f1">
-          <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Mollitia facilis molestiae ipsum accusamus non,
-            minus modi cumque, nesciunt tenetur excepturi, temporibus aut. Accusamus veritatis, suscipit voluptatem
+          <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Mollitia facilis molestiae ipsum
+            accusamus non,
+            minus modi cumque, nesciunt tenetur excepturi, temporibus aut. Accusamus veritatis, suscipit
+            voluptatem
             vitae
             est tempora quas.</p>
           <h6 class="fw-bold">Kiyotaka Ayanokouji</h6>
           <p style="color: grey">Highschool Student</p>
         </div>
         <div class="card col mx-2 py-4 px-3" style="width: 350px; border-color: #f1f1f1">
-          <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Mollitia facilis molestiae ipsum accusamus non,
-            minus modi cumque, nesciunt tenetur excepturi, temporibus aut. Accusamus veritatis, suscipit voluptatem
+          <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Mollitia facilis molestiae ipsum
+            accusamus non,
+            minus modi cumque, nesciunt tenetur excepturi, temporibus aut. Accusamus veritatis, suscipit
+            voluptatem
             vitae
             est tempora quas.</p>
           <h6 class="fw-bold">Kiyotaka Ayanokouji</h6>
           <p style="color: grey">Highschool Student</p>
         </div>
         <div class="card col mx-2 py-4 px-3" style="width: 350px; border-color: #f1f1f1">
-          <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Mollitia facilis molestiae ipsum accusamus non,
-            minus modi cumque, nesciunt tenetur excepturi, temporibus aut. Accusamus veritatis, suscipit voluptatem
+          <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Mollitia facilis molestiae ipsum
+            accusamus non,
+            minus modi cumque, nesciunt tenetur excepturi, temporibus aut. Accusamus veritatis, suscipit
+            voluptatem
             vitae
             est tempora quas.</p>
           <h6 class="fw-bold">Kiyotaka Ayanokouji</h6>
