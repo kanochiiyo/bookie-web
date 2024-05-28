@@ -155,20 +155,21 @@ include (__DIR__ . "/templates/modal.php");
         </div>
         <div class="row">
           <div class="col-12 pb-5">
-    <div id="carouselExampleIndicators" class="carousel slide" data-bs-ride="carousel">
-        <div class="carousel-inner">
-            <?php for ($j = 1; $j <= 2; $j++) { ?>
+            <div id="carouselExampleIndicators" class="carousel slide" data-bs-ride="carousel">
+              <div class="carousel-inner">
+                <?php for ($j = 1; $j <= 2; $j++) { ?>
                   <div class="carousel-item <?php echo ($j == 1) ? 'active' : ''; ?>">
                     <div class="row justify-content-between mx-1">
                       <?php for ($i = 1; $i <= 5; $i++) { ?>
                         <div class="custom-card col-2 mx-1 mb-5">
                           <a href="detail.php" class="text-decoration-none">
-                            <img src="assets/books/moby-dick.jpg" alt="Moby-Dick by Harper Lee" class="rounded-end-1 object-fit-fill"
-                              style="width: 100%; height: auto; max-height: 250px;" />
+                            <img src="assets/books/moby-dick.jpg" alt="Moby-Dick by Harper Lee"
+                              class="rounded-end-1 object-fit-fill" style="width: 100%; height: auto; max-height: 250px;" />
                             <div class="card-body">
                               <h5 class="m-1 fw-bold" style="font-size: 17px; color:#000">Moby-Dick</h5>
                               <p class="m-1">Harper Lee</p>
-                              <p class="m-1 fw-bold" style="font-size: 13px; margin-bottom: 0;"><i class="fa-solid fa-star"></i> 4.5
+                              <p class="m-1 fw-bold" style="font-size: 13px; margin-bottom: 0;"><i
+                                  class="fa-solid fa-star"></i> 4.5
                               </p>
                               <div class="d-flex justify-content-between align-items-center m-1">
                                 <p class="fw-bold mb-0" style="font-size: 17px; margin-bottom: 0;">$25</p>

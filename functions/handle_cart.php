@@ -1,7 +1,7 @@
 <?php
 require_once (__DIR__ . "/../functions/authentication.php");
 require_once (__DIR__ . "/../functions/connection.php");
-include (__DIR__ . "/../functions/functions.php");
+require_once (__DIR__ . "/../functions/functions.php");
 
 $connection = getConnection();
 $loggedInUserId = $_SESSION['id'];

@@ -3,6 +3,7 @@
 session_start();
 
 require_once (__DIR__ . "/functions/authentication.php");
+require_once (__DIR__ . "/functions/functions.php");
 
 if (isLogged()) {
   header("Location:index.php");
@@ -49,6 +50,13 @@ include (__DIR__ . "/templates/header.php");
           <h4 class="font-raleway fw-bold" style="padding-right: 125px">Log in now</h4>
           <p style="padding-right: 125px">New to Bookie? <a href="signup.php" id="lp-link">Sign up here</a>
           </p>
+          <?php if ($message = getFlash('error')) { ?>
+            <div class="alert alert-danger" role="alert">
+              <?= $message ?>
+
+            </div>
+            <?php var_dump($_SESSION['flash']);
+          } ?>
           <form id="loginForm" class="login-form-container float-start" method="post">
             <div class="mb-3">
               <label for="username" class="form-label">Username</label>

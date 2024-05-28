@@ -4,7 +4,7 @@ session_start();
 
 // Koneksi ke database
 require_once (__DIR__ . "/connection.php");
-include (__DIR__ . "/functions/php");
+include (__DIR__ . "/functions.php");
 $connection = getConnection();
 
 $errorMessage = NULL;
