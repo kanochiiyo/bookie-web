@@ -18,7 +18,7 @@ if (!isLogged()) {
 
 include (__DIR__ . "/../templates/header.php");
 include (__DIR__ . "/../templates/modal.php");
-include (__DIR__ . "/../functions/functions.php");
+require_once (__DIR__ . "/../functions/functions.php");
 
 $data = query("SELECT t.id, t.transaction_date, u.username, b.title, b.price, b.img, td.qty, td.type 
 FROM transaction t 

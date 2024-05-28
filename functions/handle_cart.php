@@ -18,6 +18,15 @@ if (!isLogged()) {
 }
 
 // Add to cart
+if (isAdmin()) {
+  $message = "Sorry, you're an admin.";
+  echo "<script>
+            alert('$message');
+            window.location.href = 'index.php';
+          </script>";
+  exit();
+}
+
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
   $book_id = $_POST['book_id'];
   $book_name = $_POST['book_name'];

@@ -16,7 +16,7 @@ if (isAdmin()) {
 
 include (__DIR__ . "/templates/header.php");
 include (__DIR__ . "/templates/navbar.php");
-include (__DIR__ . "/functions/functions.php");
+require_once (__DIR__ . "/functions/functions.php");
 ?>
 
 <!-- Modal Book Review -->
