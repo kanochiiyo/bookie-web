@@ -170,7 +170,7 @@ LIMIT 10");
                     <div class="row justify-content-between mx-1">
                       <?php while ($popular = $populars->fetch_object()) { ?>
                         <div class="custom-card col-2 mx-1 mb-5">
-                          <a href="detail.php" class="text-decoration-none">
+                          <a href="detail.php?detail=<?= $popular->book_id ?>" class="text-decoration-none">
                             <img src="assets/books/<?= $popular->img ?>" alt="Moby-Dick by Harper Lee"
                               class="rounded-end-1 object-fit-fill" style="width: 100%; height: auto; max-height: 250px;" />
                             <div class="card-body">
@@ -228,7 +228,7 @@ LIMIT 5");
       <div class="row justify-content-between mx-1">
         <?php while ($best_seller = $best_sellers->fetch_object()) { ?>
           <div class="custom-card col-2 mx-1 mb-5">
-            <a href="detail.php" class="text-decoration-none">
+            <a href="detail.php?detail=<?= $best_seller->book_id ?>" class="text-decoration-none">
               <img src="assets/books/<?= $best_seller->img ?>" alt="Moby-Dick by Harper Lee"
                 class="rounded-end-1 object-fit-fill" style="width: 100%; height: auto; max-height: 250px;" />
               <div class="card-body">
