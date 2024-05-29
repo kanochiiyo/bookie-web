@@ -4,6 +4,7 @@ session_start();
 require_once (__DIR__ . "/../functions/authentication.php");
 require_once (__DIR__ . "/../functions/connection.php");
 require_once (__DIR__ . "/../functions/functions.php");
+include (__DIR__ . "/../templates/header.php");
 
 $connection = getConnection();
 
@@ -32,16 +33,14 @@ if (isset($_SESSION["success"])) {
 }
 
 include (__DIR__ . "/../templates/header.php");
-include (__DIR__ . "/../templates/modal.php");
 
 // Read Category
 $author = query("SELECT id AS author_id, name AS author_name FROM author");
 $genre = query("SELECT id AS genre_id, name AS genre_name FROM genre");
 $publisher = query("SELECT id AS publisher_id, name AS publisher_name FROM publisher");
-
 ?>
 
-<main id="book-crud" class="font-notosans no-padding-margin" style="background-color: #e2ac6b; background-image:
+<main id="category-crud" class="font-notosans no-padding-margin" style="background-color: #e2ac6b; background-image:
   linear-gradient(315deg, #e2ac6b 0%, #cba36d 74%)">
   <div class="container-fluid no-padding-margin">
     <div class="row no-padding-margin">
@@ -58,13 +57,22 @@ $publisher = query("SELECT id AS publisher_id, name AS publisher_name FROM publi
 
             <div class="row my-3 d-flex justify-content-around">
               <div class="col-auto">
-                <a href="" class="links-bg-white mt-1 mb-3">Add Data Author</a>
+                <button id="addAuthorBtn" class="links-bg-white" type="button" data-bs-toggle="modal"
+                  data-bs-target="#categoryModal" data-type="author">
+                  <i class="fa-solid fa-plus"></i> Add Author
+                </button>
               </div>
               <div class="col-auto">
-                <a href="" class="links-bg-white mt-1 mb-3">Add Data Publisher</a>
+                <button id="addPublisherBtn" class="links-bg-white" type="button" data-bs-toggle="modal"
+                  data-bs-target="#categoryModal" data-type="publisher">
+                  <i class="fa-solid fa-plus"></i> Add Publisher
+                </button>
               </div>
               <div class="col-auto">
-                <a href="" class="links-bg-white mt-1 mb-3">Add Data Genre</a>
+                <button id="addGenreBtn" class="links-bg-white" type="button" data-bs-toggle="modal"
+                  data-bs-target="#categoryModal" data-type="genre">
+                  <i class="fa-solid fa-plus"></i> Add Genre
+                </button>
               </div>
             </div>
 
@@ -84,10 +92,10 @@ $publisher = query("SELECT id AS publisher_id, name AS publisher_name FROM publi
                         <td class="text-center"><?= $row["author_id"] ?> </td>
                         <td class="text-center"><?= $row["author_name"] ?> </td>
                         <td>
-                          <a href="category.php?type=author&id=<?= $row["author_id"] ?>"><i
+                          <a href="../functions/handle_category.php?op=edit&type=author&id=<?= $row["author_id"] ?>"><i
                               class="fa-solid fa-pen"></i></a>
-                          <a href="category.php?type=author&id=<?= $row["author_id"] ?>"><i
-                              class="fa-solid fa-trash"></i></a>
+                          <a href="../functions/handle_category.php?op=delete&type=author&id=<?= $row["author_id"] ?>"
+                            onclick="return confirm('Are you sure?')"><i class="fa-solid fa-trash"></i></a>
                         </td>
                       </tr>
                     <?php } ?>
@@ -110,10 +118,11 @@ $publisher = query("SELECT id AS publisher_id, name AS publisher_name FROM publi
                         <td class="text-center"><?= $row["publisher_id"] ?> </td>
                         <td class="text-center"><?= $row["publisher_name"] ?> </td>
                         <td>
-                          <a href="edit_category.php?type=publisher&id=<?= $row["publisher_id"] ?>"><i
+                          <a
+                            href="../functions/handle_category.php?op=edit&type=publisher&id=<?= $row["publisher_id"] ?>"><i
                               class="fa-solid fa-pen"></i></a>
-                          <a href="delete_category.php?type=publisher&id=<?= $row["publisher_id"] ?>"><i
-                              class="fa-solid fa-trash"></i></a>
+                          <a href="../functions/handle_category.php?op=delete&type=publisher&id=<?= $row["publisher_id"] ?>"
+                            onclick="return confirm('Are you sure?')"><i class="fa-solid fa-trash"></i></a>
                         </td>
                       </tr>
                     <?php } ?>
@@ -136,10 +145,10 @@ $publisher = query("SELECT id AS publisher_id, name AS publisher_name FROM publi
                         <td class="text-center"><?= $row["genre_id"] ?> </td>
                         <td class="text-center"><?= $row["genre_name"] ?> </td>
                         <td>
-                          <a href="edit_category.php?type=genre&id=<?= $row["genre_id"] ?>"><i
+                          <a href="../functions/handle_category.php?op=edit&type=genre&id=<?= $row["genre_id"] ?>"><i
                               class="fa-solid fa-pen"></i></a>
-                          <a href="delete_category.php?type=genre&id=<?= $row["genre_id"] ?>"><i
-                              class="fa-solid fa-trash"></i></a>
+                          <a href="../functions/handle_category.php?op=delete&type=genre&id=<?= $row["genre_id"] ?>"
+                            onclick="return confirm('Are you sure?')"><i class="fa-solid fa-trash"></i></a>
                         </td>
                       </tr>
                     <?php } ?>
@@ -155,5 +164,6 @@ $publisher = query("SELECT id AS publisher_id, name AS publisher_name FROM publi
 </main>
 
 <?php
+include (__DIR__ . "/../templates/category_modal.php");
 include (__DIR__ . "/../templates/footer.php");
 ?>

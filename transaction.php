@@ -40,21 +40,25 @@ foreach ($data as $row) {
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
       <div class="modal-body">
-        <form action="" method="post" id="bookReviewForm">
+        <form action="functions/handle_review.php" method="post" id="bookReviewForm">
           <div class="mb-3">
-            <p>Review for <?= $data["book_id"] ?> by <?= $data["book_id"] ?> </p>
+            <p>Review for <?= $data["title"] ?> by <?= $data["author"] ?> </p>
           </div>
           <div class="mb-3">
+            <div class="mb-3">
+              <label for="review" class="form-label">Review</label>
+              <input class="hidden" id="review_id" name="reviewId" value="<?= $data["review_id"] ?>"></input>
+            </div>
             <label for="rating" class="form-label">Rating</label><br>
             <div class="d-flex align-items-center">
               <span class="first font-inter me-2"></span>
-              <input type="range" class="rating me-2" name="rating" min="0" max="5" id="rating">
+              <input type="range" class="rating me-2" name="reviewRating" min="0" max="5" id="rating">
               <span class="last font-inter"></span>
             </div>
           </div>
           <div class="mb-3">
             <label for="review" class="form-label">Review</label>
-            <textarea class="form-control" id="review" rows="3"></textarea>
+            <textarea class="form-control" id="review" rows="3" name="reviewContent"></textarea>
           </div>
         </form>
       </div>
@@ -99,7 +103,7 @@ foreach ($data as $row) {
                 <td>Rp <?= number_format($row["price"], 0, ',', '.') ?></td>
                 <td><?= $row["qty"] ?></td>
                 <td><?= $total ?></td>
-                <td> <a href="#" class=" fs-6 mt-1 mb-3" data-bs-toggle="modal" data-bs-target="#bookReviewModal"><i
+                <td> <a href="" class=" fs-6 mt-1 mb-3" data-bs-toggle="modal" data-bs-target="#bookReviewModal"><i
                       class="fa-solid fa-pen"></i></a></td>
               </tr>
             <?php } ?>
