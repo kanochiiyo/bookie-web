@@ -153,7 +153,18 @@ include (__DIR__ . "/templates/modal.php");
       </div>
       <!-- end details -->
 
-
+      <?php
+      $reviews = $connection->query("SELECT r.*, t.name
+FROM books b,
+transaction_detail tr LEFT JOIN review r ON tr.review_id = r.id,
+(SELECT t.id, u.name 
+FROM transaction t, user u
+WHERE t.user_id = u.id ) t
+WHERE b.id = tr.book_id 
+AND t.id = tr.transaction_id 
+AND b.id = $id
+LIMIT 3")
+        ?>
       <!-- start reviews -->
       <div class="mx-5" id="reviews">
         <h2 class="mb-0 fw-bold">Reviews</h2>
@@ -164,69 +175,78 @@ include (__DIR__ . "/templates/modal.php");
           </p>
         </div>
         <hr class="mt-0">
-        <div class="card p-2 m-3">
-          <div class="row">
-            <div class="col-1 d-flex mx-0 justify-content-center">
-              <img class="user-review" src="assets/user/user.png" alt="user">
-            </div>
-            <div class="col-11 mx-0">
-              <p class="fw-bold medium-brown mb-0"> user12323232</p>
-              <p class=" fw-bold mb-0 dark-brown" style="font-size:12px">
-                <i class="fa-solid fa-star"></i>
-                5
-              </p>
-              <p class="mb-0">Lorem ipsum dolor sit amet consectetur adipisicing elit. Ullam, id sapiente magnam
-                consequuntur eius ad
-                autem
-                odio tempore, dignissimos, animi vel impedit iure. Cumque perspiciatis, consectetur quidem delectus
-                voluptatibus beatae?</p>
+        <?php while ($review = $reviews->fetch_object()) { ?>
+          <div class="card p-2 m-3">
+            <div class="row">
+              <div class="col-1 d-flex mx-0 justify-content-center">
+                <img class="user-review" src="assets/user/user.png" alt="user">
+              </div>
+              <div class="col-11 mx-0">
+                <p class="fw-bold medium-brown mb-0"> <?= $review->name ?></p>
+                <p class=" fw-bold mb-0 dark-brown" style="font-size:12px">
+                  <i class="fa-solid fa-star"></i>
+                  <?= $review->rate ?>
+                </p>
+                <p class="mb-0"><?= $review->content ?></p>
+              </div>
             </div>
           </div>
-        </div>
-        <div class="card p-2 m-3">
-          <div class="row">
-            <div class="col-1 d-flex mx-0 justify-content-center">
-              <img class="user-review" src="assets/user/user.png" alt="user">
-            </div>
-            <div class="col-11 mx-0">
-              <p class="fw-bold medium-brown mb-0"> user12323232</p>
-              <p class=" fw-bold mb-0 dark-brown" style="font-size:12px">
-                <i class="fa-solid fa-star"></i>
-                5
-              </p>
-              <p class="mb-0">Lorem ipsum dolor sit amet consectetur adipisicing elit. Ullam, id sapiente magnam
-                consequuntur eius ad
-                autem
-                odio tempore, dignissimos, animi vel impedit iure. Cumque perspiciatis, consectetur quidem delectus
-                voluptatibus beatae?</p>
-            </div>
-          </div>
-        </div>
-        <div class="card p-2 m-3">
-          <div class="row">
-            <div class="col-1 d-flex mx-0 justify-content-center">
-              <img class="user-review" src="assets/user/user.png" alt="user">
-            </div>
-            <div class="col-11 mx-0">
-              <p class="fw-bold medium-brown mb-0"> user12323232</p>
-              <p class=" fw-bold mb-0 dark-brown" style="font-size:12px">
-                <i class="fa-solid fa-star"></i>
-                5
-              </p>
-              <p class="mb-0">Lorem ipsum dolor sit amet consectetur adipisicing elit. Ullam, id sapiente magnam
-                consequuntur eius ad
-                autem
-                odio tempore, dignissimos, animi vel impedit iure. Cumque perspiciatis, consectetur quidem delectus
-                voluptatibus beatae?</p>
-            </div>
-          </div>
-        </div>
+        <?php } ?>
         <div class="d-flex justify-content-end pb-5">
           <a href="#" class="dark-brown fw-bold" data-bs-toggle="modal" data-bs-target="#reviewModal"
             type="button"><u>More reviews..</u></a>
         </div>
       </div>
       <!-- end reviews -->
+
+      <?php
+      $fullreview = $connection->query("SELECT r.*, t.name
+FROM books b,
+transaction_detail tr LEFT JOIN review r ON tr.review_id = r.id,
+(SELECT t.id, u.name 
+FROM transaction t, user u
+WHERE t.user_id = u.id ) t
+WHERE b.id = tr.book_id 
+AND t.id = tr.transaction_id 
+AND b.id = $id")
+        ?>
+      <!-- modal reviews -->
+      <div class="modal fade" id="reviewModal" tabindex="-1" aria-labelledby="reviewModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable modal-lg">
+          <div class="modal-content modal-bg">
+            <div class="modal-header">
+              <div>
+                <h1 class="modal-title fs-5" id="reviewModalLabel">Reviews</h1>
+                <p class="modal-description text-muted mb-0">Lihat apa pendapat mereka</p>
+              </div>
+              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+              <?php while ($reviewData = $fullreview->fetch_object()) { ?>
+                <div class="card p-2 m-3">
+                  <div class="row">
+                    <div class="col-1 d-flex mx-0 justify-content-center">
+                      <img class="user-review" src="assets/user/user.png" alt="user">
+                    </div>
+                    <div class="col-11 mx-0">
+                      <p class="fw-bold medium-brown mb-0"> <?= $reviewData->name ?></p>
+                      <p class=" fw-bold mb-0 dark-brown" style="font-size:12px">
+                        <i class="fa-solid fa-star"></i>
+                        <?= $reviewData->rate ?>
+                      </p>
+                      <p class="mb-0"><?= $reviewData->content ?></p>
+                    </div>
+                  </div>
+                </div>
+              <?php } ?>
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="links-bg" data-bs-dismiss="modal">Close</button>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- end modal reviews -->
     </div>
   </div>
 </section>
