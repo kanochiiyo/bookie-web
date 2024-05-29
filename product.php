@@ -117,11 +117,6 @@ $data = query("SELECT b.id as book_id, b.title, b.img, a.id, a.name as author, b
               <?php } ?>
             </div>
           </div>
-
-
-
-
-
         </div>
       </div>
     </div>

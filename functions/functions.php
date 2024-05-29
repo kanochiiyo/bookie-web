@@ -40,4 +40,9 @@ function getFlash($key)
   return null;
 }
 
+// Function add data
+function addData($rows)
+{
+}
+
 ?>
