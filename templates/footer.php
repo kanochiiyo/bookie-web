@@ -14,21 +14,7 @@
 
 <!-- Nav JS -->
 <script src="./js/script.js"></script>
-
-<script>
-  document.addEventListener("DOMContentLoaded", function () {
-    var editButtons = document.querySelectorAll(".submitcart");
-
-    editButtons.forEach(function (button) {
-      button.addEventListener("click", function () {
-        var id = button.getAttribute("data-id");
-        // var name = button.getAttribute("data-name");
-        document.getElementById("bookId").value = id;
-        // document.getElementById("bookName").value = name;
-      });
-    });
-  });
-</script>
+<script src="../js/script.js"></script>
 
 </body>
 

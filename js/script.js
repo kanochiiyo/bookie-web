@@ -46,6 +46,20 @@ function runRadioChooseBook(modalClass, elementId) {
   }
 }
 
+// untuk ngirim book id ke cart modallllll
+document.addEventListener("DOMContentLoaded", function () {
+  var editButtons = document.querySelectorAll(".submitcart");
+
+  editButtons.forEach(function (button) {
+    button.addEventListener("click", function () {
+      var id = button.getAttribute("data-id");
+      // var name = button.getAttribute("data-name");
+      document.getElementById("bookId").value = id;
+      // document.getElementById("bookName").value = name;
+    });
+  });
+});
+
 // Function untuk slider di Review Buku modal
 document.addEventListener("DOMContentLoaded", function () {
   const slider = document.querySelector("#rating");

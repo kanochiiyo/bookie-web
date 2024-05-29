@@ -5,14 +5,15 @@ $connection = getConnection();
 // Insert
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
   if (isset($_POST['authorName'])) {
-    $authorName = mysqli_real_escape_string($connection, $_POST['authorName']);
-    $query = "INSERT INTO author VALUES '$authorName'";
+    $authorName = $_POST['authorName'];
+    $query = "INSERT INTO author(name) VALUES ('$authorName')";
+    // var_dump($query);
   } elseif (isset($_POST['publisherName'])) {
-    $publisherName = mysqli_real_escape_string($connection, $_POST['publisherName']);
-    $query = "INSERT INTO publisher VALUES '$publisherName'";
+    $publisherName = $_POST['publisherName'];
+    $query = "INSERT INTO publisher(name) VALUES ('$publisherName')";
   } elseif (isset($_POST['genreName'])) {
     $genreName = $_POST['genreName'];
-    $query = "INSERT INTO genre VALUES '$genreName'";
+    $query = "INSERT INTO genre(name) VALUES ('$genreName')";
   }
 
   if (isset($query)) {
@@ -53,7 +54,7 @@ if (isset($_GET['op']) && isset($_GET['type']) && isset($_GET['id'])) {
 
   if (isset($query)) {
     if (mysqli_query($connection, $query)) {
-      $message = "Record added sucessfully.";
+      $message = "Record deleted sucessfully.";
       echo "<script>
             alert('$message');
             window.location.href = './../admin/category_crud.php';
