@@ -93,8 +93,9 @@ $publisher = query("SELECT id AS publisher_id, name AS publisher_name FROM publi
                         <td class="text-center"><?= $row["author_id"] ?> </td>
                         <td class="text-center"><?= $row["author_name"] ?> </td>
                         <td>
-                          <a href="../functions/handle_category.php?op=edit&type=author&id=<?= $row["author_id"] ?>"><i
-                              class="fa-solid fa-pen"></i></a>
+                          <a id="addAuthorBtn" type="button" data-bs-toggle="modal" data-bs-target="#categoryEditModal"
+                            data-type="author" data-id="<?= $row["author_id"] ?>"
+                            data-name="<?= $row["author_name"] ?>"><i class=" fa-solid fa-pen"></i></a>
                           <a href="../functions/handle_category.php?op=delete&type=author&id=<?= $row["author_id"] ?>"
                             onclick="return confirm('Are you sure?')"><i class="fa-solid fa-trash"></i></a>
                         </td>
@@ -119,9 +120,9 @@ $publisher = query("SELECT id AS publisher_id, name AS publisher_name FROM publi
                         <td class="text-center"><?= $row["publisher_id"] ?> </td>
                         <td class="text-center"><?= $row["publisher_name"] ?> </td>
                         <td>
-                          <a
-                            href="../functions/handle_category.php?op=edit&type=publisher&id=<?= $row["publisher_id"] ?>"><i
-                              class="fa-solid fa-pen"></i></a>
+                          <a id="addPublisherBtn" type="button" data-bs-toggle="modal" data-bs-target="#categoryEditModal"
+                            data-type="publisher" data-id="<?= $row["publisher_id"] ?>"
+                            data-name="<?= $row["publisher_name"] ?>"><i class="fa-solid fa-pen"></i></a>
                           <a href="../functions/handle_category.php?op=delete&type=publisher&id=<?= $row["publisher_id"] ?>"
                             onclick="return confirm('Are you sure?')"><i class="fa-solid fa-trash"></i></a>
                         </td>
@@ -146,7 +147,8 @@ $publisher = query("SELECT id AS publisher_id, name AS publisher_name FROM publi
                         <td class="text-center"><?= $row["genre_id"] ?> </td>
                         <td class="text-center"><?= $row["genre_name"] ?> </td>
                         <td>
-                          <a href="../functions/handle_category.php?op=edit&type=genre&id=<?= $row["genre_id"] ?>"><i
+                          <a id="addGenreBtn" type="button" data-bs-toggle="modal" data-bs-target="#categoryEditModal"
+                            data-type="genre" data-id="<?= $row["genre_id"] ?>" data-name="<?= $row["genre_name"] ?>"><i
                               class="fa-solid fa-pen"></i></a>
                           <a href="../functions/handle_category.php?op=delete&type=genre&id=<?= $row["genre_id"] ?>"
                             onclick="return confirm('Are you sure?')"><i class="fa-solid fa-trash"></i></a>

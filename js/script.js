@@ -77,41 +77,67 @@ document.addEventListener("DOMContentLoaded", function () {
 // function untuk modal category
 document.addEventListener("DOMContentLoaded", function () {
   const categoryModal = document.getElementById("categoryModal");
-  const dynamicFields = document.getElementById("dynamicFields");
-  const categoryTypeInput = document.getElementById("categoryType");
+  const categoryEditModal = document.getElementById("categoryEditModal");
 
-  categoryModal.addEventListener("show.bs.modal", function (event) {
-    const button = event.relatedTarget;
-    const type = button.getAttribute("data-type");
+  function setDynamicFields(modal, typeInputId) {
+    modal.addEventListener("show.bs.modal", function (event) {
+      const button = event.relatedTarget;
+      const type = button.getAttribute("data-type");
 
-    categoryTypeInput.value = type;
+      const typeInput = modal.querySelector(typeInputId);
+      typeInput.value = type;
 
-    let fields = "";
-    if (type === "author") {
-      fields = `
-          <div class="mb-3">
-            <label class="fw-bold" class="form-label" for="authorName">Author Name:</label>
-            <input type="text" class="form-control" id="authorName" name="authorName" required>
-          </div>
-        `;
-    } else if (type === "publisher") {
-      fields = `
-          <div class="mb-3">
-            <label class="fw-bold" class="form-label" for="publisherName">Publisher Name:</label>
-            <input type="text" class="form-control" id="publisherName" name="publisherName" required>
-          </div>
-        `;
-    } else if (type === "genre") {
-      fields = `
-          <div class="mb-3">
-            <label class="fw-bold" class="form-label" for="genreName">Genre Name:</label>
-            <input type="text" class="form-control" id="genreName" name="genreName"" required>
-          </div>
-        `;
-    }
+      let fields = "";
+      if (type === "author") {
+        fields = `
+            <div class="mb-3">
+              <label class="fw-bold" class="form-label" for="authorName">Author Name:</label>
+              <input type="text" class="form-control" id="authorName" name="authorName" required>
+            </div>
+          `;
+      } else if (type === "publisher") {
+        fields = `
+            <div class="mb-3">
+              <label class="fw-bold" class="form-label" for="publisherName">Publisher Name:</label>
+              <input type="text" class="form-control" id="publisherName" name="publisherName" required>
+            </div>
+          `;
+      } else if (type === "genre") {
+        fields = `
+            <div class="mb-3">
+              <label class="fw-bold" class="form-label" for="genreName">Genre Name:</label>
+              <input type="text" class="form-control" id="genreName" name="genreName" required>
+            </div>
+          `;
+      }
 
-    dynamicFields.innerHTML = fields;
-  });
+      const dynamicFields = modal.querySelector("#dynamicFields");
+      dynamicFields.innerHTML = fields;
+
+      // ngisi inputan form edit modal
+      if (modal.id === "categoryEditModal") {
+        const id = button.getAttribute("data-id");
+        const name = button.getAttribute("data-name");
+
+        document.getElementById("categoryId").value = id;
+        if (type === "author") {
+          document.getElementById("authorName").value = name;
+        } else if (type === "publisher") {
+          document.getElementById("publisherName").value = name;
+        } else if (type === "genre") {
+          document.getElementById("genreName").value = name;
+        }
+      }
+    });
+  }
+
+  if (categoryModal) {
+    setDynamicFields(categoryModal, "#categoryType");
+  }
+
+  if (categoryEditModal) {
+    setDynamicFields(categoryEditModal, "#editCategoryType");
+  }
 });
 
 // function untuk edit review
