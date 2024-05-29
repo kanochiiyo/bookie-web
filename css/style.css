@@ -381,11 +381,13 @@ footer .fa-brands {
 
 /* transaction admin*/
 
-#transaction-admin a {
+#transaction-admin a,
+#category-crud a {
   text-decoration: none;
 }
 
-#transaction-admin .sidebar {
+#transaction-admin .sidebar,
+#category-crud .sidebar {
   position: sticky;
   top: 0;
   height: 100vh;
@@ -393,14 +395,16 @@ footer .fa-brands {
   z-index: 1;
 }
 
-#transaction-admin .sidebar-item {
+#transaction-admin .sidebar-item,
+#category-crud .sidebar-item {
   display: block;
   padding: 10px;
   margin: 5px;
 }
 
 /* Sebenernya ini untuk kalau page nya aktif */
-#transaction-admin .sidebar-item:hover {
+#transaction-admin .sidebar-item:hover,
+#category-crud .sidebar-item:hover {
   background-color: rgba(255, 255, 255, 0.25);
   border-radius: 20px;
 }

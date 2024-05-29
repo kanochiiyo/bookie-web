@@ -4,7 +4,6 @@ session_start();
 require_once (__DIR__ . "/../functions/authentication.php");
 require_once (__DIR__ . "/../functions/connection.php");
 require_once (__DIR__ . "/../functions/functions.php");
-include (__DIR__ . "/../templates/header.php");
 
 $connection = getConnection();
 
@@ -33,6 +32,7 @@ if (isset($_SESSION["success"])) {
 }
 
 include (__DIR__ . "/../templates/header.php");
+include (__DIR__ . "/../templates/category_modal.php");
 
 // Read Category
 $author = query("SELECT id AS author_id, name AS author_name FROM author");
@@ -48,7 +48,8 @@ $publisher = query("SELECT id AS publisher_id, name AS publisher_name FROM publi
       <?php include (__DIR__ . "/../templates/sidebar.php"); ?>
 
       <!-- Container -->
-      <div class="col-10 d-flex flex-column justify-content-start align-items-center no-padding-margin bg-white">
+      <div class="col-10 d-flex flex-column justify-content-start align-items-center no-padding-margin bg-white" style="border-top-left-radius: 40px;
+    border-bottom-left-radius: 40px">
         <div class="row p-4 w-100">
           <h1 class="text-start fw-3">Category Data</h1>
         </div>
@@ -164,6 +165,5 @@ $publisher = query("SELECT id AS publisher_id, name AS publisher_name FROM publi
 </main>
 
 <?php
-include (__DIR__ . "/../templates/category_modal.php");
 include (__DIR__ . "/../templates/footer.php");
 ?>
