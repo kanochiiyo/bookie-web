@@ -16,7 +16,16 @@ if (isAdmin()) {
 
 include (__DIR__ . "/templates/header.php");
 include (__DIR__ . "/templates/navbar.php");
-include (__DIR__ . "/functions/functions.php");
+require_once (__DIR__ . "/functions/functions.php");
+$loggedInUserId = $_SESSION['id'];
+$data = query("SELECT t.id AS transaction_id, t.transaction_date, b.img, u.id AS user_id, b.id AS book_id, b.title, a.id AS author_id, a.name AS author, td.type, b.price, td.qty, r.id AS review_id, r.content, r.rate FROM transaction t INNER JOIN transaction_detail td ON t.id = td.transaction_id INNER JOIN user u ON t.user_id = u.id INNER JOIN books b ON td.book_id = b.id INNER JOIN author a ON b.author_id = a.id INNER JOIN review r ON td.review_id = r.id WHERE t.user_id = $loggedInUserId");
+$grand_total = 0;
+foreach ($data as $row) {
+  $qty = intval($row["qty"]);
+  $price = intval($row["price"]);
+  $total = $qty * $price;
+  $grand_total += $total;
+}
 ?>
 
 <!-- Modal Book Review -->
@@ -33,7 +42,7 @@ include (__DIR__ . "/functions/functions.php");
       <div class="modal-body">
         <form action="" method="post" id="bookReviewForm">
           <div class="mb-3">
-            <p>Review for Moby-Dick by Harper Lee</p>
+            <p>Review for <?= $data["book_id"] ?> by <?= $data["book_id"] ?> </p>
           </div>
           <div class="mb-3">
             <label for="rating" class="form-label">Rating</label><br>
@@ -63,17 +72,6 @@ include (__DIR__ . "/functions/functions.php");
     <div class="container py-5">
       <h4 class="font-inter ">My Transaction</h4>
       <p class="text-muted my-1 p-0">You've spent</p>
-      <?php
-      $loggedInUserId = $_SESSION['id'];
-      $data = query("SELECT t.id AS transaction_id, t.transaction_date, b.img, u.id AS user_id, b.id AS book_id, b.title, a.id AS author_id, a.name AS author, td.type, b.price, td.qty, r.id AS review_id, r.content, r.rate FROM transaction t INNER JOIN transaction_detail td ON t.id = td.transaction_id INNER JOIN user u ON t.user_id = u.id INNER JOIN books b ON td.book_id = b.id INNER JOIN author a ON b.author_id = a.id INNER JOIN review r ON td.review_id = r.id WHERE t.user_id = $loggedInUserId");
-      $grand_total = 0;
-      foreach ($data as $row) {
-        $qty = intval($row["qty"]);
-        $price = intval($row["price"]);
-        $total = $qty * $price;
-        $grand_total += $total;
-      }
-      ?>
       <h2><?= "Rp " . number_format($grand_total, 0, ',', '.') ?></h2>
 
       <div class="card d-flex justify-content-center align-items-center p-2 my-5">

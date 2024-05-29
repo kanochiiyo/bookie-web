@@ -3,6 +3,7 @@ session_start();
 
 require_once (__DIR__ . "/../functions/authentication.php");
 require_once (__DIR__ . "/../functions/connection.php");
+require_once (__DIR__ . "/../functions/functions.php");
 
 $connection = getConnection();
 
@@ -32,11 +33,12 @@ if (isset($_SESSION["success"])) {
 
 include (__DIR__ . "/../templates/header.php");
 include (__DIR__ . "/../templates/modal.php");
-include (__DIR__ . "/../functions/read.php");
 
-$author = query("SELECT id as author_id, name as author_name FROM author");
-$genre = query("SELECT id as genre_id, name as genre_name FROM genre");
-$publisher = query("SELECT id as publisher_id, name as publisher_name FROM publisher");
+// Read Category
+$author = query("SELECT id AS author_id, name AS author_name FROM author");
+$genre = query("SELECT id AS genre_id, name AS genre_name FROM genre");
+$publisher = query("SELECT id AS publisher_id, name AS publisher_name FROM publisher");
+
 ?>
 
 <main id="book-crud" class="font-notosans no-padding-margin" style="background-color: #e2ac6b; background-image:
@@ -53,18 +55,27 @@ $publisher = query("SELECT id as publisher_id, name as publisher_name FROM publi
         </div>
         <div class="row w-100">
           <div class="card py-3 container-card mb-5 border-0 ">
-            <div class="row">
-              <a href="#" class="links-bg-white mt-1 mb-3" style="width:110px" data-bs-toggle="modal"
-                data-bs-target="#crudModal"><i class="fa-solid fa-plus"></i> Add Data</a>
+
+            <div class="row my-3 d-flex justify-content-around">
+              <div class="col-auto">
+                <a href="" class="links-bg-white mt-1 mb-3">Add Data Author</a>
+              </div>
+              <div class="col-auto">
+                <a href="" class="links-bg-white mt-1 mb-3">Add Data Publisher</a>
+              </div>
+              <div class="col-auto">
+                <a href="" class="links-bg-white mt-1 mb-3">Add Data Genre</a>
+              </div>
             </div>
 
             <div class="row">
-              <div class="col-3">
+              <div class="col">
                 <table class="table align-items-center borderless" style="font-size:14px">
                   <thead>
                     <tr>
                       <th class="text-center">Author ID</th>
                       <th class="text-center">Author Name</th>
+                      <th class="text-center">Action</th>
                     </tr>
                   </thead>
                   <tbody>
@@ -72,37 +83,25 @@ $publisher = query("SELECT id as publisher_id, name as publisher_name FROM publi
                       <tr>
                         <td class="text-center"><?= $row["author_id"] ?> </td>
                         <td class="text-center"><?= $row["author_name"] ?> </td>
+                        <td>
+                          <a href="category.php?type=author&id=<?= $row["author_id"] ?>"><i
+                              class="fa-solid fa-pen"></i></a>
+                          <a href="category.php?type=author&id=<?= $row["author_id"] ?>"><i
+                              class="fa-solid fa-trash"></i></a>
+                        </td>
                       </tr>
                     <?php } ?>
                   </tbody>
                 </table>
               </div>
 
-              <div class="col-3">
+              <div class="col">
                 <table class="table align-items-center borderless" style="font-size:14px">
                   <thead>
                     <tr>
                       <th class="text-center">Publisher ID</th>
                       <th class="text-center">Publisher Name</th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    <?php foreach ($genre as $row) { ?>
-                      <tr>
-                        <td class="text-center"><?= $row["genre_id"] ?> </td>
-                        <td class="text-center"><?= $row["genre_name"] ?> </td>
-                      </tr>
-                    <?php } ?>
-                  </tbody>
-                </table>
-              </div>
-
-              <div class="col-3">
-                <table class="table align-items-center borderless" style="font-size:14px">
-                  <thead>
-                    <tr>
-                      <th class="text-center">Genre ID</th>
-                      <th class="text-center">Genre Name</th>
+                      <th class="text-center">Action</th>
                     </tr>
                   </thead>
                   <tbody>
@@ -110,6 +109,38 @@ $publisher = query("SELECT id as publisher_id, name as publisher_name FROM publi
                       <tr>
                         <td class="text-center"><?= $row["publisher_id"] ?> </td>
                         <td class="text-center"><?= $row["publisher_name"] ?> </td>
+                        <td>
+                          <a href="edit_category.php?type=publisher&id=<?= $row["publisher_id"] ?>"><i
+                              class="fa-solid fa-pen"></i></a>
+                          <a href="delete_category.php?type=publisher&id=<?= $row["publisher_id"] ?>"><i
+                              class="fa-solid fa-trash"></i></a>
+                        </td>
+                      </tr>
+                    <?php } ?>
+                  </tbody>
+                </table>
+              </div>
+
+              <div class="col">
+                <table class="table align-items-center borderless" style="font-size:14px">
+                  <thead>
+                    <tr>
+                      <th class="text-center">Genre ID</th>
+                      <th class="text-center">Genre Name</th>
+                      <th class="text-center">Action</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <?php foreach ($genre as $row) { ?>
+                      <tr>
+                        <td class="text-center"><?= $row["genre_id"] ?> </td>
+                        <td class="text-center"><?= $row["genre_name"] ?> </td>
+                        <td>
+                          <a href="edit_category.php?type=genre&id=<?= $row["genre_id"] ?>"><i
+                              class="fa-solid fa-pen"></i></a>
+                          <a href="delete_category.php?type=genre&id=<?= $row["genre_id"] ?>"><i
+                              class="fa-solid fa-trash"></i></a>
+                        </td>
                       </tr>
                     <?php } ?>
                   </tbody>
@@ -122,7 +153,6 @@ $publisher = query("SELECT id as publisher_id, name as publisher_name FROM publi
     </div>
   </div>
 </main>
-
 
 <?php
 include (__DIR__ . "/../templates/footer.php");

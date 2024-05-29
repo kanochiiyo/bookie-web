@@ -1,6 +1,7 @@
 <?php
 // mengambil fungsi koneksi dari connection
 require_once (__DIR__ . "/connection.php");
+require_once (__DIR__ . "/functions.php");
 
 function register($formData)
 {
@@ -15,19 +16,13 @@ function register($formData)
   // cek udah ada yg make belom usernamenya
   $result = $connection->query("SELECT username FROM user WHERE username = '$username'");
   if ($result->fetch_assoc()) {
-    echo "<script>
-    alert('Registrasi gagal. Username sudah terdaftar.');
-    </script>";
-
+    setFlash('error', 'Login gagal. Username sudah terdaftar.');
     return false;
   }
 
   // kalo password & confirm nggak sama
   if ($password != $confirmpassword) {
-    echo "<script>
-    alert('Registrasi gagal. Confirm password tidak sama.');
-    </script>";
-
+    setFlash('error', 'Login gagal. Password salah.');
     return false;
   }
 
@@ -50,10 +45,7 @@ function loginAttempt($formData)
 
   // kalo username gk ditemuin gaiso login
   if ($result->num_rows !== 1) {
-    echo "<script>
-    alert('Login gagal. Username tidak ditemukan.');
-    </script>";
-
+    setFlash('error', 'Login gagal. Username tidak ditemukan.');
     return false;
   }
 
@@ -61,10 +53,7 @@ function loginAttempt($formData)
 
   // password salah gaiso login juga
   if (!password_verify($password, $userData->password)) {
-    echo "<script>
-    alert('Login gagal. Password salah!');
-    </script>";
-
+    setFlash('error', 'Login gagal. Password salah');
     return false;
   }
 
@@ -74,6 +63,7 @@ function loginAttempt($formData)
 
   return true;
 }
+
 
 function isLogged()
 {

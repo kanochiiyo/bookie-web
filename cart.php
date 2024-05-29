@@ -24,7 +24,7 @@ if (isset($_SESSION["success"])) {
 
 include (__DIR__ . "/templates/header.php");
 include (__DIR__ . "/templates/navbar.php");
-include (__DIR__ . "/functions/functions.php");
+require_once (__DIR__ . "/functions/functions.php");
 
 $loggedInUserId = $_SESSION['id'];
 $data = query("SELECT b.id as book_id, b.img, b.title, b.price, c.id, c.user_id, c.book_id, c.type, c.qty FROM shopping_cart c INNER JOIN books b ON c.book_id = b.id WHERE c.user_id = $loggedInUserId ORDER BY c.id DESC");
