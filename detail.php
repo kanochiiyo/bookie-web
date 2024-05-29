@@ -2,8 +2,38 @@
 session_start();
 
 require_once (__DIR__ . "/functions/authentication.php");
+require_once (__DIR__ . "/functions/functions.php");
 $connection = getConnection();
 
+if (isset($_GET["detail"])) {
+  $id = $_GET["detail"];
+} else {
+  setFlash('select', "Please select an item!");
+  $selectMessage = getFlash('select');
+  // var_dump($selectMessage);
+
+  if ($selectMessage) {
+    echo "<script>
+        alert('$selectMessage');
+        window.location.href = './product.php'; 
+    </script>";
+  }
+
+}
+
+$bookData = $connection->query("SELECT b.*, a.name AS author, g.name AS genre, p.name AS publisher, 
+CASE WHEN (r.rate IS NULL) THEN 0 ELSE round(r.rate, 1) END AS rate
+FROM books b LEFT JOIN author a ON b.author_id = a.id 
+LEFT JOIN genre g ON b.genre_id = g.id 
+LEFT JOIN publisher p ON b.publisher_id = p.id 
+LEFT JOIN (SELECT AVG(r.rate) rate, b.id
+FROM books b,
+transaction_detail tr LEFT JOIN review r ON tr.review_id = r.id
+WHERE b.id = tr.book_id 
+AND b.id = $id
+GROUP BY b.id) r ON b.id = r.id
+WHERE b.id = $id ");
+$book = $bookData->fetch_object();
 
 include (__DIR__ . "/templates/header.php");
 include (__DIR__ . "/templates/navbar.php");
@@ -15,25 +45,26 @@ include (__DIR__ . "/templates/modal.php");
       <!-- foto buku disini -->
       <div class="col-6 p-5">
         <div class="position-absolute d-flex justify-content-center">
-          <img class="detail-img d-block object-fit-cover" src="assets/books/book1.jpg" alt="buku1">
+          <img class="detail-img d-block object-fit-cover" src="assets/books/<?= $book->img ?>"
+            alt="<?= $book->title ?>">
         </div>
       </div>
       <!-- judul buku disini -->
       <div class="col-6 pt-5">
         <h1 class="mt-5 mb-3 fw-bold">
-          Harry Potter:Half Blood Prince
+          <?= $book->title ?>
         </h1>
-        <h2 class="mb-3">Rake Putri Cahyani</h2>
+        <h2 class="mb-3"><?= $book->author ?></h2>
         <p class="">
           Lorem ipsum, dolor sit amet consectetur adipisicing elit. Fugit
           dolorem maxime, esse quod molestias nam ut laborum quos
         </p>
         <p class="dark-brown fw-bold" style="font-size:12px">
           <i class="fa-solid fa-star"></i>
-          4,5
+          <?= $book->rate ?>
         </p>
 
-        <p class="fw-bold mb-0" style="font-size:28px">$20</p>
+        <p class="fw-bold mb-0" style="font-size:28px">$<?= $book->price ?></p>
       </div>
     </div>
 
@@ -44,10 +75,11 @@ include (__DIR__ . "/templates/modal.php");
         </div>
         <div class="col-6">
           <div>
-            <a href="#" class="links-bg mt-1 mb-3" data-bs-toggle="modal" data-bs-target="#buyModal" type="button">Buy
+            <a href="#" class="links-bg mt-1 mb-3" data-bs-toggle="modal" data-bs-target="#buyModal" type="button"
+              data-id="<?= $book->id ?>">Buy
               now</a>
-            <a href="#" class="links-bg-white mt-1 mb-3" data-bs-toggle="modal" data-bs-target="#cartModal"
-              type="button"> Add to cart</a>
+            <a href="#" class="links-bg-white mt-1 mb-3 submitcart" data-bs-toggle="modal" data-bs-target="#cartModal"
+              type="button" data-id="<?= $book->id ?>"> Add to cart</a>
           </div>
           <div class="me-5">
             <div class="d-flex justify-content-end">
@@ -62,15 +94,7 @@ include (__DIR__ . "/templates/modal.php");
       <!-- start synopsis -->
       <div class="m-5" id="synopsis">
         <h2 class="mb-3 fw-bold">Synopsis</h2>
-        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Ullam, id sapiente magnam consequuntur eius ad autem
-          odio tempore, dignissimos, animi vel impedit iure. Cumque perspiciatis, consectetur quidem delectus
-          voluptatibus beatae?</p>
-        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Ullam, id sapiente magnam consequuntur eius ad autem
-          odio tempore, dignissimos, animi vel impedit iure. Cumque perspiciatis, consectetur quidem delectus
-          voluptatibus beatae?</p>
-        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Ullam, id sapiente magnam consequuntur eius ad autem
-          odio tempore, dignissimos, animi vel impedit iure. Cumque perspiciatis, consectetur quidem delectus
-          voluptatibus beatae?</p>
+        <p> <?= $book->synopsis ?></p>
       </div>
       <!-- end synopsis -->
       <!-- start details -->
@@ -82,7 +106,7 @@ include (__DIR__ . "/templates/modal.php");
               number of pages
             </p>
             <p>
-              124
+              <?= $book->totalpage ?>
             </p>
           </div>
           <div class="col-6">
@@ -90,15 +114,15 @@ include (__DIR__ . "/templates/modal.php");
               Publication date
             </p>
             <p>
-              20-04-2020
+              <?= $book->publication_date ?>
             </p>
           </div>
           <div class="col-6">
             <p class="fw-bold medium-brown mb-0">
-              ISBN
+              genre
             </p>
             <p>
-              12434324333
+              <?= $book->genre ?>
             </p>
           </div>
           <div class="col-6">
@@ -106,7 +130,7 @@ include (__DIR__ . "/templates/modal.php");
               Publisher
             </p>
             <p>
-              Gramedia's book
+              <?= $book->publisher ?>
             </p>
           </div>
           <div class="col-6">
@@ -114,7 +138,7 @@ include (__DIR__ . "/templates/modal.php");
               Language
             </p>
             <p>
-              English
+              <?= $book->language ?>
             </p>
           </div>
           <div class="col-6">
@@ -122,35 +146,21 @@ include (__DIR__ . "/templates/modal.php");
               Weight
             </p>
             <p>
-              0.2 kg
-            </p>
-          </div>
-          <div class="col-6 mb-0">
-            <p class="fw-bold medium-brown mb-0">
-              Height
-            </p>
-            <p>
-              18 cm
-            </p>
-          </div>
-          <div class="col-6 mb-0">
-            <p class="fw-bold medium-brown mb-0">
-              Width
-            </p>
-            <p>
-              10 cm
+              <?= $book->weight ?> kg
             </p>
           </div>
         </div>
       </div>
       <!-- end details -->
+
+
       <!-- start reviews -->
       <div class="mx-5" id="reviews">
         <h2 class="mb-0 fw-bold">Reviews</h2>
         <div class="d-flex justify-content-end">
           <p class="dark-brown fw-bold" style="font-size: 22px;">
             <i class="fa-solid fa-star"></i>
-            4,5
+            <?= $book->rate ?>
           </p>
         </div>
         <hr class="mt-0">
