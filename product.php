@@ -95,7 +95,7 @@ $data = query("SELECT b.id as book_id, b.title, b.img, a.id, a.name as author, b
             <div class="row justify-content-between mx-1 mb-5">
               <?php foreach ($data as $row) { ?>
                 <div class="custom-card col-3 mx-1" style="margin-bottom: 100px">
-                  <a href="detail.php" class="text-decoration-none">
+                  <a href="detail.php?detail=<?= $row["book_id"] ?>" class="text-decoration-none">
                     <img src="assets/books/<?= $row["img"] ?>" alt="<?= $row["title"] ?> by <?= $row["author"] ?>"
                       class="rounded-end-1 object-fit-fill" style="width: 100%; height: auto; max-height: 250px;" />
                     <div class="card-body">
