@@ -21,8 +21,8 @@ if (!isLogged()) {
 if (isAdmin()) {
   $message = "Sorry, you're an admin.";
   echo "<script>
-            alert('$message');
-            window.location.href = 'index.php';
+            alert('" . addslashes($message) . "');
+            window.location.href = '../index.php';
           </script>";
   exit();
 }
