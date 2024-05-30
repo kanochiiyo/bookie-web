@@ -185,7 +185,8 @@ LIMIT 10");
                                 <p class="fw-bold mb-0" style="font-size: 17px; margin-bottom: 0;">$<?= $popular->price ?>
                                 </p>
                                 <a href="#" class="submitcart links-bg-white mt-1 mb-3" data-bs-toggle="modal"
-                                  data-bs-target="#cartModal" type="button" data-id="<?= $popular->id ?>">Add to cart</a>
+                                  data-bs-target="#cartModal" type="button" data-id="<?= $popular->book_id ?>">Add to
+                                  cart</a>
                               </div>
                             </div>
                           </a>
@@ -242,7 +243,7 @@ LIMIT 5");
                   <p class="fw-bold mb-0" style="font-size: 17px; margin-bottom: 0;">$<?= $best_seller->price ?>
                   </p>
                   <a href="#" class="submitcart links-bg-white mt-1 mb-3" data-bs-toggle="modal"
-                    data-bs-target="#cartModal" type="button" data-id="<?= $best_seller->id ?>">Add to cart</a>
+                    data-bs-target="#cartModal" type="button" data-id="<?= $best_seller->book_id ?>">Add to cart</a>
                 </div>
               </div>
             </a>
