@@ -16,13 +16,17 @@ function register($formData)
   // cek udah ada yg make belom usernamenya
   $result = $connection->query("SELECT username FROM user WHERE username = '$username'");
   if ($result->fetch_assoc()) {
-    setFlash('error', 'Login gagal. Username sudah terdaftar.');
+    echo "<script>
+    alert('Login gagal. Username tidak tersedia.');
+    </script>";
     return false;
   }
 
   // kalo password & confirm nggak sama
   if ($password != $confirmpassword) {
-    setFlash('error', 'Login gagal. Password salah.');
+    echo "<script>
+    alert('Login gagal. Password salah!');
+    </script>";
     return false;
   }
 
@@ -36,6 +40,7 @@ function register($formData)
 
 function loginAttempt($formData)
 {
+  // ob_start();
   $connection = getConnection();
 
   $username = strtolower($formData["username"]);
@@ -45,7 +50,9 @@ function loginAttempt($formData)
 
   // kalo username gk ditemuin gaiso login
   if ($result->num_rows !== 1) {
-    setFlash('error', 'Login gagal. Username tidak ditemukan.');
+    $messageError = 'Login gagal. Username tidak ditemukan.';
+    echo "<script>alert('" . addslashes($messageError) . "');</script>";
+    ob_end_flush();
     return false;
   }
 
@@ -53,7 +60,9 @@ function loginAttempt($formData)
 
   // password salah gaiso login juga
   if (!password_verify($password, $userData->password)) {
-    setFlash('error', 'Login gagal. Password salah');
+    $message = 'Login gagal. Password salah.';
+    echo "<script>alert('" . addslashes($message) . "');</script>";
+    ob_end_flush();
     return false;
   }
 
