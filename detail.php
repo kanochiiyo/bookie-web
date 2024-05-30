@@ -43,7 +43,7 @@ include (__DIR__ . "/templates/modal.php");
   <div class="container mt-5 pt-5">
     <div class="row ">
       <!-- foto buku disini -->
-      <div class="col-6 p-5">
+      <div class="col-6 p-5 d-flex justify-content-center">
         <div class="position-absolute d-flex justify-content-center">
           <img class="detail-img d-block object-fit-cover" src="assets/books/<?= $book->img ?>"
             alt="<?= $book->title ?>">
@@ -119,7 +119,7 @@ include (__DIR__ . "/templates/modal.php");
           </div>
           <div class="col-6">
             <p class="fw-bold medium-brown mb-0">
-              genre
+              Genre
             </p>
             <p>
               <?= $book->genre ?>
