@@ -6,7 +6,10 @@ require_once (__DIR__ . "/../functions/connection.php");
 require_once (__DIR__ . "/../functions/functions.php");
 
 $connection = getConnection();
-$loggedInUserId = $_SESSION['id'];
+
+if (isset($_SESSION['id'])) {
+  $loggedInUserId = $_SESSION['id'];
+}
 
 if (!isLogged()) {
   $message = "You need to be logged in to add items to the cart.";
