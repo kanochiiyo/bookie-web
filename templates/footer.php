@@ -16,6 +16,41 @@
 <script src="./js/script.js"></script>
 <script src="../js/script.js"></script>
 
+<script>
+  // ngirim data ke modal edit
+  document.addEventListener("DOMContentLoaded", function () {
+    var editButtons = document.querySelectorAll(".editBookBtn");
+
+    editButtons.forEach(function (button) {
+      button.addEventListener("click", function () {
+        var id = button.getAttribute("data-edit-id");
+        var title = button.getAttribute("data-title");
+        var genre = button.getAttribute("data-genre");
+        var synopsis = button.getAttribute("data-synopsis");
+        var author = button.getAttribute("data-author");
+        var publisher = button.getAttribute("data-publisher");
+        var publication = button.getAttribute("data-publication");
+        var language = button.getAttribute("data-language");
+        var pages = button.getAttribute("data-pages");
+        var weight = button.getAttribute("data-weight");
+        var price = button.getAttribute("data-price");
+
+        document.getElementById("edit_id").value = id;
+        document.getElementById("bookTitle").value = title;
+        document.getElementById("bookGenre").value = genre;
+        document.getElementById("bookSynopsis").value = synopsis;
+        document.getElementById("author").value = author;
+        document.getElementById("publisher").value = publisher;
+        document.getElementById("publication").value = publication;
+        document.getElementById("lang").value = language;
+        document.getElementById("pages").value = pages;
+        document.getElementById("weight").value = weight;
+        document.getElementById("price").value = price;
+
+      });
+    });
+  });
+</script>
 </body>
 
 </html>
