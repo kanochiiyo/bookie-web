@@ -4,7 +4,7 @@ session_start();
 
 // Koneksi ke database
 require_once (__DIR__ . "/connection.php");
-include (__DIR__ . "/functions.php");
+require_once (__DIR__ . "/functions.php");
 $connection = getConnection();
 
 $errorMessage = NULL;
@@ -68,13 +68,13 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
       // Pindahkan file ke direktori target dengan nama baru
       if (move_uploaded_file($temp_file, $target_file)) {
-        $successMessage = $successMessage . "File " . htmlspecialchars(basename($_FILES["bookCover"]["name"])) . " berhasil di Upload. ";
+        // $successMessage = $successMessage . "File " . htmlspecialchars(basename($_FILES["bookCover"]["name"])) . " berhasil di Upload. ";
 
         // Update database dengan nama file yang baru
         $update = $connection->query("UPDATE books SET img='$new_file_name' WHERE id='$book_id'");
 
         if ($update) {
-          $successMessage = $successMessage . "Berhasil disimpan ke database.";
+          $successMessage = $successMessage . "Berhasil menambahkan data buku.";
         } else {
           $errorMessage = $errorMessage . $connection->error;
         }
@@ -88,7 +88,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 }
 
 setFlash('error', $errorMessage);
-setFlash('error', $errorMessage);
+setFlash('success', $successMessage);
 
 header("Location: ../admin/book_crud.php");
 
