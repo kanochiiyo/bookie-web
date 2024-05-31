@@ -49,31 +49,37 @@ include (__DIR__ . "/templates/navbar.php");
             </div>
           </div>
           <!-- card produk -->
-          <?php while ($book = $books->fetch_object()) {
-            $total = $book->qty * $book->price;
-            $grand_total += $total; ?>
-            <div class="card p-2 mb-2">
-              <div class="row">
-                <div class="col-2">
-                  <img src="assets/books/<?= $book->img ?>" alt="book" class="rounded object-fit-cover"
-                    style="width: 75px;">
-                </div>
-                <div class="col-4">
-                  <p><?= $book->title ?></p>
-                  <p><?= $book->type ?></p>
-                </div>
-                <div class="col-2">
-                  <input class="form-control" type="number" value="<?= $book->qty ?>" min="1">
-                </div>
-                <div class="col-2">
-                  <p><?= $book->price ?></p>
-                </div>
-                <div class="col-2">
-                  <p><?= $total ?></p>
+          <form action="functions/handle_checkout.php" method="post" id="checkoutForm">
+            <?php while ($book = $books->fetch_object()) {
+              $total = $book->qty * $book->price;
+              $grand_total += $total; ?>
+              <div class="card p-2 mb-2">
+                <div class="row">
+                  <div class="col-2">
+                    <img src="assets/books/<?= $book->img ?>" alt="book" class="rounded object-fit-cover"
+                      style="width: 75px;">
+                  </div>
+                  <div class="col-4">
+                    <p><?= $book->title ?></p>
+                    <p><?= $book->type ?></p>
+                  </div>
+                  <div class="col-2">
+                    <p><?= $book->qty ?></p>
+                  </div>
+                  <div class="col-2">
+                    <p><?= $book->price ?></p>
+                  </div>
+                  <div class="col-2">
+                    <p><?= $total ?></p>
+                  </div>
+                  <input type="hidden" name="qty[]" id="qty" value="<?= $book->qty ?>">
+                  <input type="hidden" name="book_id[]" id="book_id" value="<?= $book->book_id ?>">
+                  <input type="hidden" name="type[]" id="type" value="<?= $book->type ?>">
+                  <input type="hidden" name="id[]" id="id" value="<?= $book->id ?>">
                 </div>
               </div>
-            </div>
-          <?php } ?>
+            <?php } ?>
+          </form>
           <!-- end card produk -->
         </div>
         <div class="col-5 bg-dark-brown text-white">
@@ -103,7 +109,7 @@ include (__DIR__ . "/templates/navbar.php");
             </span>
             <a href="product.php" class="text-center links-co-white mb-3" style="width: 100%; font-size:15px"> Continue
               shopping </a>
-            <button type="submit" class="links-co" style="width: 100%;"> Checkout </button>
+            <button type="submit" class="links-co" style="width: 100%;" form="checkoutForm"> Checkout </button>
           </div>
         </div>
       </div>

@@ -1,8 +1,6 @@
 <?php
-require_once 'authentication.php';
+require_once 'connection.php';
 $connection = getConnection();
-// require_once (__DIR__ . "/../functions/connection.php");
-// $connection = getConnection();
 
 function executeQuery($connection, $query, $successMessage, $errorMessage)
 {

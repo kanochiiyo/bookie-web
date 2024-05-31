@@ -66,7 +66,7 @@ $data = query("SELECT b.id as book_id, b.img, b.title, b.price, c.id, c.user_id,
                   $grand_total += $total;
                   ?>
                   <th scope="row">
-                    <input class="form-check-input" type="checkbox" value="<?= $row["id"]; ?>" name="books[]" required>
+                    <input class="form-check-input" type="checkbox" value="<?= $row["id"]; ?>" name="books[]">
                   </th>
                   <td><img src="assets/books/<?= $row["img"] ?>" alt="" class="book-cover img-fluid border-2"
                       style="width: 70px; height: 100px"> </td>
