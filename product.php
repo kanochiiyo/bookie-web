@@ -19,9 +19,9 @@ $data = query("SELECT b.id as book_id, b.title, b.img, a.id, a.name as author, b
     <div class="container-fluid align-items-center">
       <a class="navbar-brand" href="index.php">Bookie</a>
       <div class="collapse navbar-collapse d-flex justify-content-center" id="navbarNavDropdown">
-        <form class="d-flex" role="search" style="width:70%">
+        <form action="" method="get" class="d-flex" role="search" style="width:70%">
           <input class="form-control me-2 border-1" style="border-color: black" type="search"
-            placeholder="Search book title" aria-label="Search">
+            placeholder="Search book title" aria-label="Search" name="search">
           <button class="btn border-0" type="submit"><i class="fa-solid fa-magnifying-glass"></i></button>
         </form>
       </div>
