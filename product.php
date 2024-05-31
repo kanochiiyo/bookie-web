@@ -9,7 +9,14 @@ include (__DIR__ . "/templates/header.php");
 include (__DIR__ . "/templates/modal.php");
 require_once (__DIR__ . "/functions/functions.php");
 
-$data = query("SELECT b.id as book_id, b.title, b.img, a.id, a.name as author, b.price FROM books b INNER JOIN author a ON b.author_id = a.id");
+if (isset($_GET["search"])) {
+  $search = $_GET["search"];
+  $data = query("SELECT b.id as book_id, b.title, b.img, a.id, a.name as author, b.price FROM books b INNER JOIN author a ON b.author_id = a.id AND lower(b.title) LIKE lower('%$search%')");
+} else {
+  $search = NULL;
+  $data = query("SELECT b.id as book_id, b.title, b.img, a.id, a.name as author, b.price FROM books b INNER JOIN author a ON b.author_id = a.id");
+}
+
 // var_dump($data);
 ?>
 
@@ -19,9 +26,9 @@ $data = query("SELECT b.id as book_id, b.title, b.img, a.id, a.name as author, b
     <div class="container-fluid align-items-center">
       <a class="navbar-brand" href="index.php">Bookie</a>
       <div class="collapse navbar-collapse d-flex justify-content-center" id="navbarNavDropdown">
-        <form class="d-flex" role="search" style="width:70%">
+        <form class="d-flex" role="search" style="width:70%" method="get" action="product.php">
           <input class="form-control me-2 border-1" style="border-color: black" type="search"
-            placeholder="Search book title" aria-label="Search">
+            placeholder="Search book title" aria-label="Search" name="search" value="<?= $search ?? NULL ?>">
           <button class="btn border-0" type="submit"><i class="fa-solid fa-magnifying-glass"></i></button>
         </form>
       </div>
@@ -54,38 +61,40 @@ $data = query("SELECT b.id as book_id, b.title, b.img, a.id, a.name as author, b
   <section class="catalogue" id="catalogue" style="padding-top: 70px;">
     <div class="container py-5 pb-0">
       <div class="row">
-        <div class="col-3">
+        <!-- <div class="col-3">
           <h5 class="fw-bold">Semua Kategori (123)</h5>
 
-        </div>
+        </div> -->
 
-        <div class="col-9">
-          <div class="row mb-4">
-            <div id="carouselExampleIndicators" class="carousel slide" data-bs-ride="carousel">
-              <div class="carousel-indicators">
-                <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="0" class="active"
-                  aria-current="true" aria-label="Slide 1"></button>
-                <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="1"
-                  aria-label="Slide 2"></button>
-                <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="2"
-                  aria-label="Slide 3"></button>
-              </div>
-              <div class="carousel-inner">
-                <div class="carousel-item active">
-                  <img src="assets/product-carousel.png" class="product-carousel-img d-block rounded object-fit-cover"
-                    alt="Carousel 1">
+        <div class="col-12">
+          <?php if (!isset($_GET["search"])) { ?>
+            <div class="row mb-4">
+              <div id="carouselExampleIndicators" class="carousel slide" data-bs-ride="carousel">
+                <div class="carousel-indicators">
+                  <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="0" class="active"
+                    aria-current="true" aria-label="Slide 1"></button>
+                  <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="1"
+                    aria-label="Slide 2"></button>
+                  <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="2"
+                    aria-label="Slide 3"></button>
                 </div>
-                <div class="carousel-item">
-                  <img src="assets/product-carousel2.png" class="product-carousel-img d-block rounded object-fit-cover"
-                    alt="Carousel 2">
-                </div>
-                <div class="carousel-item">
-                  <img src="assets/product-carousel.png" class="product-carousel-img d-block rounded object-fit-cover"
-                    alt="Carousel 3">
+                <div class="carousel-inner">
+                  <div class="carousel-item active">
+                    <img src="assets/product-carousel.png" class="product-carousel-img d-block rounded object-fit-cover"
+                      alt="Carousel 1">
+                  </div>
+                  <div class="carousel-item">
+                    <img src="assets/product-carousel2.png" class="product-carousel-img d-block rounded object-fit-cover"
+                      alt="Carousel 2">
+                  </div>
+                  <div class="carousel-item">
+                    <img src="assets/product-carousel.png" class="product-carousel-img d-block rounded object-fit-cover"
+                      alt="Carousel 3">
+                  </div>
                 </div>
               </div>
             </div>
-          </div>
+          <?php } ?>
 
           <div class="row">
             <h4 class="fw-bold">Books</h4>
