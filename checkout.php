@@ -72,9 +72,10 @@ include (__DIR__ . "/templates/navbar.php");
                   <div class="col-2">
                     <p><?= $total ?></p>
                   </div>
-                  <input type="number" name="qty" id="qty" value="<?= $book->qty ?>">
-                  <input type="number" name="book_id" id="book_id" value="<?= $book->book_id ?>">
-                  <input type="text" name="type" id="type" value="<?= $book->type ?>">
+                  <input type="hidden" name="qty[]" id="qty" value="<?= $book->qty ?>">
+                  <input type="hidden" name="book_id[]" id="book_id" value="<?= $book->book_id ?>">
+                  <input type="hidden" name="type[]" id="type" value="<?= $book->type ?>">
+                  <input type="hidden" name="id[]" id="id" value="<?= $book->id ?>">
                 </div>
               </div>
             <?php } ?>
