@@ -35,18 +35,28 @@ require_once (__DIR__ . "/functions/functions.php");
 $loggedInUserId = $_SESSION['id'];
 $data = query("SELECT t.id AS transaction_id, td.id AS trxdetail_id, t.transaction_date, b.img, u.id AS user_id, b.id AS book_id, b.title, a.id AS author_id, a.name AS author, td.type, b.price, td.qty, r.id AS review_id, r.content, r.rate FROM transaction t INNER JOIN transaction_detail td ON t.id = td.transaction_id INNER JOIN user u ON t.user_id = u.id INNER JOIN books b ON td.book_id = b.id INNER JOIN author a ON b.author_id = a.id LEFT JOIN review r ON td.review_id = r.id WHERE t.user_id = $loggedInUserId ORDER BY t.id ASC");
 $grand_total = 0;
+$previous_transaction_id = null; // Set dulu prev trx id = null
+$rowspans = []; // untuk nyimpen jumlah baris yg mau di rowspan
 foreach ($data as $row) {
   $qty = intval($row["qty"]);
   $price = intval($row["price"]);
   $total = $qty * $price;
   $grand_total += $total;
+
+  // Hitung rowspan tiap trx
+  if ($row["transaction_id"] !== $previous_transaction_id) { // Kalo id saat ini != id sebelumnya, brrti trx nya beda maka gak ada rowspan
+    $rowspans[$row["transaction_id"]] = 0;
+  }
+  // Kalau id saat ini = id sebelumnya, rowspan id ke-n tambah 1
+  $rowspans[$row["transaction_id"]]++;
+  $previous_transaction_id = $row["transaction_id"]; // Simpan id saat ini sebagai id sebelumnya
 }
 ?>
 
 <main class="font-poppins">
   <section id="transaction">
     <div class="container py-5">
-      <h4 class="font-inter ">My Transaction</h4>
+      <h4 class="font-inter">My Transaction</h4>
       <p class="text-muted my-1 p-0">You've spent</p>
       <h2><?= "Rp " . number_format($grand_total, 0, ',', '.') ?></h2>
 
@@ -88,7 +98,6 @@ foreach ($data as $row) {
         </div>
       </div>
 
-
       <div class="card d-flex justify-content-center align-items-center p-2 my-5">
         <table class="table borderless">
           <thead>
@@ -104,16 +113,22 @@ foreach ($data as $row) {
             </tr>
           </thead>
           <tbody>
-            <?php foreach ($data as $row) { ?>
+            <?php
+            $previous_transaction_id = null;
+            foreach ($data as $row) {
+              $total = intval($row["qty"]) * intval($row["price"]);
+              ?>
               <tr>
-                <td><?= $row["transaction_date"] ?></td>
+                <?php if ($row["transaction_id"] !== $previous_transaction_id) { // Ketika ada id trx yang sama ?>
+                  <td rowspan="<?= $rowspans[$row["transaction_id"]] ?>"><?= $row["transaction_date"] ?></td>
+                <?php } ?>
                 <td><img src="assets/books/<?= $row["img"] ?>" alt="" class="book-cover img-fluid"></td>
                 <td><?= $row["title"] ?></td>
                 <td><?= $row["author"] ?></td>
                 <td><?= $row["type"] ?></td>
                 <td>Rp <?= number_format($row["price"], 0, ',', '.') ?></td>
                 <td><?= $row["qty"] ?></td>
-                <td><?= $total ?></td>
+                <td>Rp <?= number_format($total, 0, ',', '.') ?></td>
                 <td>
                   <a href="#" class="fs-6 mt-1 mb-3 reviewBtn" data-bs-toggle="modal" data-bs-target="#bookReviewModal"
                     data-book-title="<?= $row["title"] ?>" data-author="<?= $row["author"] ?>"
@@ -124,15 +139,15 @@ foreach ($data as $row) {
                     <i class="fa-solid fa-pen"></i>
                   </a>
                 </td>
-
-
               </tr>
-            <?php } ?>
+              <?php
+              $previous_transaction_id = $row["transaction_id"];
+            }
+            ?>
           </tbody>
         </table>
       </div>
     </div>
-
   </section>
 </main>
 

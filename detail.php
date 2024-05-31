@@ -39,7 +39,7 @@ include (__DIR__ . "/templates/header.php");
 include (__DIR__ . "/templates/navbar.php");
 include (__DIR__ . "/templates/modal.php");
 ?>
-<section class="sec-detail max-vw-100 min-vh-100" id="detail">
+<section class="sec-detail max-vw-100 min-vh-100 font-inter" id="detail">
   <div class="container mt-5 pt-5">
     <div class="row ">
       <!-- foto buku disini -->
