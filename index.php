@@ -38,9 +38,15 @@ include (__DIR__ . "/templates/modal.php");
             non quidem obcaecati, porro iusto aliquam quam. Quae,
             consectetur minus?
           </p>
-          <span>
+          <!-- <span>
             <a href="product.php" class="links-bg my-3" type="submit">Browse books</a>
-          </span>
+          </span> -->
+          <form class="d-inline-block my-3" role="search" action="product.php" method="get">
+            <input class="form-control me-2" type="text" placeholder="Search books" aria-label="Search" name="search" />
+            <span class="my-3">
+              <button class="links-bg my-3" type="submit">Browse books</button>
+            </span>
+          </form>
         </div>
 
         <div class="col-4" style="height: 480px; margin-top: 40px">
@@ -127,9 +133,11 @@ include (__DIR__ . "/templates/modal.php");
             neque
             a!
           </p>
-          <span>
-            <a href="#" class="links-bg my-3" type="submit">Join for free(?)</a>
-          </span>
+          <?php if (!isLogged()) { ?>
+            <span>
+              <a href="signup.php" class="links-bg my-3" type="submit">Join for free</a>
+            </span>
+          <?php } ?>
         </div>
       </div>
 
@@ -318,9 +326,11 @@ LIMIT 5");
             adipisicing
             elit. A earum optio atque delectus dolor, deserunt provident natus maxime consectetur cumque esse vitae
             reprehenderit porro accusantium reiciendis amet cum dolorem. Sunt!</p>
-          <div class="d-flex justify-content-center">
-            <a href="#" class="links-bg" type="submit">Join for free</a>
-          </div>
+          <?php if (!isLogged()) { ?>
+            <div class="d-flex justify-content-center">
+              <a href="signup.php" class="links-bg" type="submit">Join for free</a>
+            </div>
+          <?php } ?>
         </div>
       </div>
     </div>
