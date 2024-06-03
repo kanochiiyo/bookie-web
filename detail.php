@@ -75,8 +75,8 @@ include (__DIR__ . "/templates/modal.php");
         </div>
         <div class="col-6">
           <div>
-            <a href="#" class="links-bg mt-1 mb-3" data-bs-toggle="modal" data-bs-target="#buyModal" type="button"
-              data-id="<?= $book->id ?>">Buy
+            <a href="#" class="links-bg mt-1 mb-3 submit-buy" data-bs-toggle="modal" data-bs-target="#buyModal"
+              type="button" data-buy-id="<?= $book->id ?>">Buy
               now</a>
             <a href="#" class="links-bg-white mt-1 mb-3 submitcart" data-bs-toggle="modal" data-bs-target="#cartModal"
               type="button" data-id="<?= $book->id ?>"> Add to cart</a>

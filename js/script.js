@@ -60,6 +60,20 @@ document.addEventListener("DOMContentLoaded", function () {
   });
 });
 
+//ngirim book id ke buy modalllll
+document.addEventListener("DOMContentLoaded", function () {
+  var editButtons = document.querySelectorAll(".submit-buy");
+
+  editButtons.forEach(function (button) {
+    button.addEventListener("click", function () {
+      var id = button.getAttribute("data-buy-id");
+      // var name = button.getAttribute("data-name");
+      document.getElementById("buy_id").value = id;
+      // document.getElementById("bookName").value = name;
+    });
+  });
+});
+
 // Function untuk slider di Review Buku modal
 document.addEventListener("DOMContentLoaded", function () {
   const slider = document.querySelector("#rating");
