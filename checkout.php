@@ -52,8 +52,8 @@ include (__DIR__ . "/templates/navbar.php");
                       style="width: 75px;"></td>
                   <td><?= $book->title ?></td>
                   <td><?= $book->qty ?></td>
-                  <td><?= $book->price ?></td>
-                  <td><?= $total ?></td>
+                  <td>Rp <?= number_format($book->price, 0, ',', '.') ?></td>
+                  <td>Rp <?= number_format($total, 0, ',', '.') ?></td>
                 </tr>
                 <input type="hidden" name="qty[]" value="<?= $book->qty ?>">
                 <input type="hidden" name="book_id[]" value="<?= $book->book_id ?>">
@@ -92,9 +92,9 @@ include (__DIR__ . "/templates/navbar.php");
             <span class="d-flex justify-content-end" style="width: 100%;">
               <p class="fw-bold pe-3" style="font-size: 20px;">Rp <?= number_format($grand_total, 0, ',', '.') ?></p>
             </span>
-            <a href="product.php" class="text-center links-co-white mb-3" style="width: 100%; font-size:15px"> Continue
+            <a href="product.php" class="text-center links-co mb-3" style="width: 100%; font-size:15px"> Continue
               shopping </a>
-            <button type="submit" class="links-co" style="width: 100%;" form="checkoutForm"> Checkout </button>
+            <button type="submit" class="links-co-white" style="width: 100%;" form="checkoutForm"> Checkout </button>
           </div>
         </div>
       </div>
