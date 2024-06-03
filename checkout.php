@@ -107,10 +107,8 @@ include (__DIR__ . "/templates/navbar.php");
               <p class="fw-bold pe-3" style="font-size: 20px;">Rp <?= number_format($grand_total, 0, ',', '.') ?></p>
             </span>
             <a href="product.php" class="text-center links-co mb-3" style="width: 100%; font-size:15px"> Continue
-              <a href="product.php" class="text-center links-co mb-3" style="width: 100%; font-size:15px"> Continue
-                shopping </a>
-              <button type="submit" class="links-co-white" style="width: 100%;" form="checkoutForm"> Checkout </button>
-              <button type="submit" class="links-co-white" style="width: 100%;" form="checkoutForm"> Checkout </button>
+              shopping </a>
+            <button type="submit" class="links-co-white" style="width: 100%;" form="checkoutForm"> Checkout </button>
           </div>
         </div>
       </div>

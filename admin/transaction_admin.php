@@ -20,11 +20,27 @@ include (__DIR__ . "/../templates/header.php");
 include (__DIR__ . "/../templates/modal.php");
 require_once (__DIR__ . "/../functions/functions.php");
 
-$data = query("SELECT t.id, t.transaction_date, u.username, b.title, b.price, b.img, td.qty, td.type 
+$data = query("SELECT t.id as transaction_id, t.transaction_date, u.username, b.title, b.price, b.img, td.qty, td.type 
 FROM transaction t 
 INNER JOIN user u ON t.user_id = u.id 
 INNER JOIN transaction_detail td ON t.id = td.transaction_id 
-INNER JOIN books b ON td.book_id = b.id");
+INNER JOIN books b ON td.book_id = b.id ORDER BY t.id ASC");
+
+$previous_transaction_id = null; // Set dulu prev trx id = null
+$rowspans = []; // untuk nyimpen jumlah baris yg mau di rowspan
+foreach ($data as $row) {
+  $qty = intval($row["qty"]);
+  $price = intval($row["price"]);
+  $total = $qty * $price;
+
+  // Hitung rowspan tiap trx
+  if ($row["transaction_id"] !== $previous_transaction_id) { // Kalo id saat ini != id sebelumnya, brrti trx nya beda maka gak ada rowspan
+    $rowspans[$row["transaction_id"]] = 0;
+  }
+  // Kalau id saat ini = id sebelumnya, rowspan id ke-n tambah 1
+  $rowspans[$row["transaction_id"]]++;
+  $previous_transaction_id = $row["transaction_id"]; // Simpan id saat ini sebagai id sebelumnya
+}
 ;
 // var_dump($data);
 ?>
@@ -46,9 +62,9 @@ INNER JOIN books b ON td.book_id = b.id");
             <table class="table align-items-center borderless" style="font-size:14px">
               <thead>
                 <tr>
-                  <th class="text-center">Transaction ID</th>
-                  <th class="text-center">Buyer Username</th>
+                  <th class="text-center">IDs</th>
                   <th class="text-center">Date</th>
+                  <th class="text-center">Buyer Username</th>
                   <th colspan="2" class="text-center">Book</th>
                   <th class="text-center">Quantity</th>
                   <th class="text-center">Type</th>
@@ -56,24 +72,28 @@ INNER JOIN books b ON td.book_id = b.id");
                 </tr>
               </thead>
               <tbody>
-                <?php foreach ($data as $row) { ?>
+                <?php
+                $previous_transaction_id = null;
+                foreach ($data as $row) {
+                  $total = intval($row["qty"]) * intval($row["price"]);
+                  ?>
                   <tr>
-                    <?php
-                    $qty = intval($row["qty"]);
-                    $price = intval($row["price"]);
-                    $total = $qty * $price;
-                    ?>
-                    <td class="text-center"><?= $row["id"] ?></td>
+                    <?php if ($row["transaction_id"] !== $previous_transaction_id) { // Ketika ada id trx yang sama ?>
+                      <td rowspan="<?= $rowspans[$row["transaction_id"]] ?>"><?= $row["transaction_id"] ?></td>
+                      <td rowspan="<?= $rowspans[$row["transaction_id"]] ?>"><?= $row["transaction_date"] ?></td>
+                    <?php } ?>
                     <td class="text-center"><?= $row["username"] ?></td>
-                    <td class="text-center"><?= $row["transaction_date"] ?> </td>
                     <td><img src="../assets/books/<?= $row["img"] ?>" alt="" class="book-cover img-fluid border-2"
-                        style="width: 200px; height: 100px"> </td>
+                        style="width: 120px; height: 110px; border-radius:2px;"> </td>
                     <td class="text-center"><?= $row["title"] ?> </td>
                     <td class="text-center"><?= $row["qty"] ?> </td>
                     <td class="text-center"><?= $row["type"] ?> </td>
                     <td class="text-center">Rp <?= number_format($total, 0, ',', '.') ?></td>
                   </tr>
-                <?php } ?>
+                  <?php
+                  $previous_transaction_id = $row["transaction_id"];
+                }
+                ?>
               </tbody>
             </table>
           </div>

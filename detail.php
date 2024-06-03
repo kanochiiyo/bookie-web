@@ -55,16 +55,12 @@ include (__DIR__ . "/templates/modal.php");
           <?= $book->title ?>
         </h1>
         <h2 class="mb-3"><?= $book->author ?></h2>
-        <p class="">
-          Lorem ipsum, dolor sit amet consectetur adipisicing elit. Fugit
-          dolorem maxime, esse quod molestias nam ut laborum quos
-        </p>
         <p class="dark-brown fw-bold" style="font-size:12px">
           <i class="fa-solid fa-star"></i>
           <?= $book->rate ?>
         </p>
 
-        <p class="fw-bold mb-0" style="font-size:28px">$<?= $book->price ?></p>
+        <p class="fw-bold mb-0" style="font-size:28px">Rp <?= number_format($book->price, 0, ',', '.') ?></p>
       </div>
     </div>
 

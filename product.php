@@ -11,10 +11,10 @@ require_once (__DIR__ . "/functions/functions.php");
 
 if (isset($_GET["search"])) {
   $search = $_GET["search"];
-  $data = query("SELECT b.id as book_id, b.title, b.img, a.id, a.name as author, b.price, g.name AS genre, p.name AS publisher FROM books b INNER JOIN author a ON b.author_id = a.id INNER JOIN genre g ON b.genre_id = g.id INNER JOIN publisher p ON p.id = b.publisher_id AND (lower(b.title) LIKE lower('%$search%') or lower(a.name) LIKE lower('%$search%') or lower(g.name) LIKE lower('%$search%') or lower(p.name) LIKE lower('%$search%'))");
+  $data = query("SELECT b.id as book_id, b.title, b.img, a.id, a.name as author, b.price, g.name AS genre, p.name AS publisher,  CASE WHEN (r.rate IS NULL) THEN 0 ELSE ROUND(r.rate, 1) END AS rate FROM books b INNER JOIN author a ON b.author_id = a.id INNER JOIN genre g ON b.genre_id = g.id INNER JOIN publisher p ON p.id = b.publisher_id AND (lower(b.title) LIKE lower('%$search%') or lower(a.name) LIKE lower('%$search%') or lower(g.name) LIKE lower('%$search%') or lower(p.name) LIKE lower('%$search%'))");
 } else {
   $search = NULL;
-  $data = query("SELECT b.id as book_id, b.title, b.img, a.id, a.name as author, b.price FROM books b INNER JOIN author a ON b.author_id = a.id");
+  $data = query("SELECT b.id AS book_id, b.title, b.img, a.id AS author_id, a.name AS author, b.price, CASE WHEN (r.rate IS NULL) THEN 0 ELSE ROUND(r.rate, 1) END AS rate FROM books b INNER JOIN author a ON b.author_id = a.id LEFT JOIN (SELECT AVG(r.rate) AS rate, b.id FROM books b, transaction_detail tr LEFT JOIN review r ON tr.review_id = r.id WHERE b.id = tr.book_id GROUP BY b.id) r ON b.id = r.id");
 }
 
 // var_dump($data);
@@ -62,11 +62,6 @@ if (isset($_GET["search"])) {
   <section class="catalogue" id="catalogue" style="padding-top: 70px;">
     <div class="container py-5 pb-0">
       <div class="row">
-        <!-- <div class="col-3">
-          <h5 class="fw-bold">Semua Kategori (123)</h5>
-
-        </div> -->
-
         <div class="col-12">
           <?php if (!isset($_GET["search"])) { ?>
             <div class="row mb-4">
@@ -113,9 +108,9 @@ if (isset($_GET["search"])) {
           </div>
 
           <div class="container pt-3 pb-5">
-            <div class="row justify-content-between mx-1 mb-5">
+            <div class="row justify-content-start mb-5">
               <?php foreach ($data as $row) { ?>
-                <div class="custom-card col-3 mx-1" style="margin-bottom: 100px">
+                <div class="custom-card col-3 m-3 px-1" style="margin-bottom: 100px">
                   <a href="detail.php?detail=<?= $row["book_id"] ?>" class="text-decoration-none">
                     <img src="assets/books/<?= $row["img"] ?>" alt="<?= $row["title"] ?> by <?= $row["author"] ?>"
                       class="rounded-end-1 object-fit-fill" style="width: 100%; height: auto; max-height: 250px;" />
@@ -123,8 +118,9 @@ if (isset($_GET["search"])) {
                       <h5 class="m-1 fw-bold text-truncate" style="font-size: 17px; color:#000"><?= $row["title"] ?></h5>
                       <p class="m-1"><?= $row["author"] ?></p>
                       <p class="m-1 fw-bold" style="font-size: 13px; margin-bottom: 0;"><i class="fa-solid fa-star"></i>
-                        4.5</p>
-                      <div class="d-flex justify-content-between align-items-center m-1">
+                        <?= $row["rate"] ?>
+                      </p>
+                      <div class="d-flex justify-content-start align-items-center m-1">
                         <p class="fw-bold mb-0" style="font-size: 17px; margin-bottom: 0;">Rp
                           <?= number_format($row["price"], 0, ',', '.') ?>
                         </p>
@@ -138,6 +134,9 @@ if (isset($_GET["search"])) {
               <?php } ?>
             </div>
           </div>
+
+
+
         </div>
       </div>
     </div>

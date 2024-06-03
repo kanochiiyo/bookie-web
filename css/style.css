@@ -218,12 +218,14 @@ footer .fa-brands {
 }
 
 .detail-img {
-  width: 325px;
-  height: 465px;
+  width: 275px;
+  height: 415px;
+  border-radius: 5px;
   box-shadow: -10px 10px 20px rgba(0, 0, 0, 0.5);
 }
 
 .mini-nav {
+  padding-top: 20px;
   color: #71613c;
 }
 
