@@ -99,7 +99,7 @@ include (__DIR__ . "/templates/modal.php");
         <div class="row">
           <div class="col-6">
             <p class="fw-bold medium-brown mb-0">
-              number of pages
+              Total Pages
             </p>
             <p>
               <?= $book->totalpage ?>

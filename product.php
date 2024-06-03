@@ -11,10 +11,10 @@ require_once (__DIR__ . "/functions/functions.php");
 
 if (isset($_GET["search"])) {
   $search = $_GET["search"];
-  $data = query("SELECT b.id as book_id, b.title, b.img, a.id, a.name as author, b.price, g.name AS genre, p.name AS publisher,  CASE WHEN (r.rate IS NULL) THEN 0 ELSE ROUND(r.rate, 1) END AS rate FROM books b INNER JOIN author a ON b.author_id = a.id LEFT JOIN (SELECT AVG(r.rate) AS rate,  b.id FROM books b, transaction_detail tr LEFT JOIN review r ON tr.review_id = r.id WHERE b.id = tr.book_id GROUP BY b.id) r ON b.id = r.id INNER JOIN genre g ON b.genre_id = g.id INNER JOIN publisher p ON p.id = b.publisher_id AND (lower(b.title) LIKE lower('%$search%') or lower(a.name) LIKE lower('%$search%') or lower(g.name) LIKE lower('%$search%') or lower(p.name) LIKE lower('%$search%'))");
+  $data = query("SELECT b.id as book_id, b.title, b.img, a.id, a.name as author, b.price, g.name AS genre, p.name AS publisher,  CASE WHEN (r.rate IS NULL) THEN 0 ELSE ROUND(r.rate, 1) END AS rate FROM books b INNER JOIN author a ON b.author_id = a.id LEFT JOIN (SELECT AVG(r.rate) AS rate,  b.id FROM books b, transaction_detail tr LEFT JOIN review r ON tr.review_id = r.id WHERE b.id = tr.book_id GROUP BY b.id) r ON b.id = r.id INNER JOIN genre g ON b.genre_id = g.id INNER JOIN publisher p ON p.id = b.publisher_id AND (lower(b.title) LIKE lower('%$search%') or lower(a.name) LIKE lower('%$search%') or lower(g.name) LIKE lower('%$search%') or lower(p.name) LIKE lower('%$search%')) ORDER BY b.title ASC");
 } else {
   $search = NULL;
-  $data = query("SELECT b.id AS book_id, b.title, b.img, a.id AS author_id, a.name AS author, b.price, CASE WHEN (r.rate IS NULL) THEN 0 ELSE ROUND(r.rate, 1) END AS rate FROM books b INNER JOIN author a ON b.author_id = a.id LEFT JOIN (SELECT AVG(r.rate) AS rate, b.id FROM books b, transaction_detail tr LEFT JOIN review r ON tr.review_id = r.id WHERE b.id = tr.book_id GROUP BY b.id) r ON b.id = r.id");
+  $data = query("SELECT b.id AS book_id, b.title, b.img, a.id AS author_id, a.name AS author, b.price, CASE WHEN (r.rate IS NULL) THEN 0 ELSE ROUND(r.rate, 1) END AS rate FROM books b INNER JOIN author a ON b.author_id = a.id LEFT JOIN (SELECT AVG(r.rate) AS rate, b.id FROM books b, transaction_detail tr LEFT JOIN review r ON tr.review_id = r.id WHERE b.id = tr.book_id GROUP BY b.id) r ON b.id = r.id ORDER BY b.title ASC");
 }
 
 // var_dump($data);

@@ -37,25 +37,12 @@ $data = query("SELECT b.id, b.img, b.title, b.genre_id, b.author_id, b.publisher
 FROM books b
 INNER JOIN genre g ON b.genre_id = g.id 
 INNER JOIN author a ON b.author_id = a.id
-INNER JOIN publisher p ON b.publisher_id = p.id ORDER BY b.id ASC");
+INNER JOIN publisher p ON b.publisher_id = p.id");
 // var_dump($data);
 ?>
 
 <!-- Create modal -->
-<style>
-  .content_td p {
-    max-width: 100%;
-    max-height: 100px;
-    overflow-y: scroll;
-    text-overflow: ellipsis;
-  }
 
-  .action-icons {
-    display: flex;
-    align-items: center;
-    gap: 10px;
-  }
-</style>
 <div class="modal fade font-inter" id="crudModal" tabindex="-1" aria-labelledby="crudModalLabel" aria-hidden="true">
   <div class="modal-dialog modal-dialog-centered  modal-dialog-scrollable modal-lg">
     <div class="modal-content modal-bg">
@@ -322,9 +309,7 @@ INNER JOIN publisher p ON b.publisher_id = p.id ORDER BY b.id ASC");
                     <td><img src="../assets/books/<?= $row["img"] ?>" alt="" class="book-cover img-fluid"> </td>
                     <td><?= $row["title"] ?> </td>
                     <td><?= $row["genre"] ?> </td>
-                    <td class="content_td">
-                      <p><?= $row["synopsis"] ?></p>
-                    </td>
+                    <td><?= $row["synopsis"] ?> </td>
                     <td><?= $row["author"] ?> </td>
                     <td><?= $row["publisher"] ?> </td>
                     <td><?= $row["publication_date"] ?> </td>
@@ -333,20 +318,17 @@ INNER JOIN publisher p ON b.publisher_id = p.id ORDER BY b.id ASC");
                     <td><?= $row["weight"] ?> </td>
                     <td><?= $row["price"] ?> </td>
                     <td>
-                      <div class="action-"><a class="p-2 text-black editBookBtn" data-bs-toggle="modal"
-                          data-bs-target="#editBookModal" data-edit-id="<?= $row["id"] ?>"
-                          data-title="<?= $row["title"] ?>" data-genre="<?= $row["genre_id"] ?>"
-                          data-synopsis="<?= $row["synopsis"] ?>" data-author="<?= $row["author_id"] ?>"
-                          data-publisher="<?= $row["publisher_id"] ?>" data-publication="<?= $row["publication_date"] ?>"
-                          data-language="<?= $row["language"] ?>" data-pages="<?= $row["totalpage"] ?>"
-                          data-weight="<?= $row["weight"] ?>"
-                          data-price="Rp <?= number_format($row["price"], 0, ',', '.') ?>">
-                          <i class="fa-solid fa-pen"></i>
-                        </a>
-                        <a href="../functions/upload.php?op=delete&id=<?= $row["id"] ?>"
-                          onclick="return confirm('Are you sure?')"><i class="fa fa-trash"></i></a>
-                      </div>
-
+                      <a class="p-2 text-black editBookBtn" data-bs-toggle="modal" data-bs-target="#editBookModal"
+                        data-edit-id="<?= $row["id"] ?>" data-title="<?= $row["title"] ?>"
+                        data-genre="<?= $row["genre_id"] ?>" data-synopsis="<?= $row["synopsis"] ?>"
+                        data-author="<?= $row["author_id"] ?>" data-publisher="<?= $row["publisher_id"] ?>"
+                        data-publication="<?= $row["publication_date"] ?>" data-language="<?= $row["language"] ?>"
+                        data-pages="<?= $row["totalpage"] ?>" data-weight="<?= $row["weight"] ?>"
+                        data-price="<?= $row["price"] ?>">
+                        <i class="fa-solid fa-pen"></i>
+                      </a>
+                      <a href="../functions/upload.php?op=delete&id=<?= $row["id"] ?>"
+                        onclick="return confirm('Are you sure?')"><i class="fa fa-trash"></i></a>
                     </td>
                   </tr>
                 <?php } ?>

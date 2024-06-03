@@ -58,7 +58,7 @@ foreach ($data as $row) {
           <h1 class="text-start fw-3">Transaction Data</h1>
         </div>
         <div class="row">
-          <div class="card p-4 container-card mb-5 border-0" style="width: 1000px">
+          <div class="card p-2 container-card mb-5 border-1" style="width: 1000px; border-color: #eaeaea;">
             <table class="table align-items-center borderless" style="font-size:14px">
               <thead>
                 <tr>

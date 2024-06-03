@@ -9,7 +9,7 @@ if (isset($_GET['message'])) {
   if ($_GET['message'] == "not_admin") {
     ?>
     <script>
-      alert('Hanya Admin yang bisa mengakses halaman admin!')
+      alert('This page is limited to admin!')
     </script>
     <?php
   }
@@ -33,16 +33,10 @@ include (__DIR__ . "/templates/modal.php");
             Discover Worlds Between Pages
           </h1>
           <p class="mt-3 mb-3">
-            Lorem ipsum, dolor sit amet consectetur adipisicing elit. Fugit
-            dolorem maxime, esse quod molestias nam ut laborum quos quo sint
-            non quidem obcaecati, porro iusto aliquam quam. Quae,
-            consectetur minus?
+            Dive into a vast collection of books across various genres. Whether you're looking for the latest bestseller
+            or a hidden gem, our bookstore has something for every reader.
           </p>
-          <!-- <span>
-            <a href="product.php" class="links-bg my-3" type="submit">Browse books</a>
-          </span> -->
           <form class="d-inline-block my-3" role="search" action="product.php" method="get">
-            <input class="form-control me-2" type="text" placeholder="Search books" aria-label="Search" name="search" />
             <span class="my-3">
               <button class="links-bg my-3" type="submit">Browse books</button>
             </span>
@@ -63,7 +57,6 @@ include (__DIR__ . "/templates/modal.php");
               </div>
             </div>
           </div>
-          <!-- <img class="hero-img rounded d-block object-fit-cover" src="assets/hero.jpg" alt="Bookstore image" /> -->
         </div>
       </div>
     </div>
@@ -80,32 +73,29 @@ include (__DIR__ . "/templates/modal.php");
         Best way to manage your <br> reading life
       </h1>
       <p class="mt-3 mb-3">
-        Lorem ipsum, dolor sit amet consectetur adipisicing elit. <br> Fugit
-        dolorem maxime, esse quod molestias nam ut laborum quos
+        Explore, discover, and enjoy a curated selection of books. Find your next favorite read and immerse yourself in
+        the world of literature with Bookie.
       </p>
       <div class="row text-center my-5">
         <div class="col-4 p-5">
           <i class="fa-solid fa-magnifying-glass mb-3"></i>
           <h2>Book Discovery</h2>
           <p class="mt-2 mb-3">
-            Lorem ipsum, dolor sit amet consectetur adipisicing elit. Fugit
-            dolorem maxime, esse quod molestias nam ut laborum quos
+            Easily find books that match your interests with our powerful search and recommendation engine.
           </p>
         </div>
         <div class="col-4 p-5">
           <i class="fa-solid fa-users mb-3"></i>
           <h2>Friends and Community</h2>
           <p class="mt-2 mb-3">
-            Lorem ipsum, dolor sit amet consectetur adipisicing elit. Fugit
-            dolorem maxime, esse quod molestias nam ut laborum quos
+            Connect with other book lovers, share your reviews, and join discussions.
           </p>
         </div>
         <div class="col-4 p-5">
           <i class="fa-solid fa-star mb-3"></i>
           <h2>Book Review</h2>
           <p class="mt-2 mb-3">
-            Lorem ipsum, dolor sit amet consectetur adipisicing elit. Fugit
-            dolorem maxime, esse quod molestias nam ut laborum quos
+            Read reviews from other readers to help you decide on your next book.
           </p>
         </div>
       </div>
@@ -128,10 +118,8 @@ include (__DIR__ . "/templates/modal.php");
             Best way to discover, track, and share your reading life
           </h1>
           <p class="mt-3 mb-2">
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Quo enim officiis minima itaque, tenetur aliquid
-            quae fuga, voluptatum vero voluptatem architecto exercitationem, labore dolor dolorum quibusdam cum id
-            neque
-            a!
+            Bookie is your ultimate companion for discovering new books, tracking your reading progress, and sharing
+            your favorite reads with friends.
           </p>
           <?php if (!isLogged()) { ?>
             <span>
@@ -283,34 +271,22 @@ LIMIT 5");
       </div>
       <div class="row justify-content-center pt-5">
         <div class="card col mx-2 py-4 px-3" style="width: 350px; border-color: #f1f1f1">
-          <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Mollitia facilis molestiae ipsum
-            accusamus non,
-            minus modi cumque, nesciunt tenetur excepturi, temporibus aut. Accusamus veritatis, suscipit
-            voluptatem
-            vitae
-            est tempora quas.</p>
+          <p>"I found so many amazing books through Bookie! It's my go-to place for discovering new reads and sharing
+            reviews. The vibes is great!"</p>
           <h6 class="fw-bold">Kiyotaka Ayanokouji</h6>
+          <p style="color: grey">Avid Reader</p>
+        </div>
+        <div class="card col mx-2 py-4 px-3" style="width: 350px; border-color: #f1f1f1">
+          <p>"The community on Bookie is fantastic. I've connected with so many fellow book lovers and gotten great
+            recommendations. I would love to share with others."</p>
+          <h6 class="fw-bold">Shima Rin</h6>
           <p style="color: grey">Highschool Student</p>
         </div>
         <div class="card col mx-2 py-4 px-3" style="width: 350px; border-color: #f1f1f1">
-          <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Mollitia facilis molestiae ipsum
-            accusamus non,
-            minus modi cumque, nesciunt tenetur excepturi, temporibus aut. Accusamus veritatis, suscipit
-            voluptatem
-            vitae
-            est tempora quas.</p>
-          <h6 class="fw-bold">Kiyotaka Ayanokouji</h6>
-          <p style="color: grey">Highschool Student</p>
-        </div>
-        <div class="card col mx-2 py-4 px-3" style="width: 350px; border-color: #f1f1f1">
-          <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Mollitia facilis molestiae ipsum
-            accusamus non,
-            minus modi cumque, nesciunt tenetur excepturi, temporibus aut. Accusamus veritatis, suscipit
-            voluptatem
-            vitae
-            est tempora quas.</p>
-          <h6 class="fw-bold">Kiyotaka Ayanokouji</h6>
-          <p style="color: grey">Highschool Student</p>
+          <p>"Bookie has made it so easy to track my reading progress and keep my library organized. Highly recommend it
+            to all readers!"</p>
+          <h6 class="fw-bold">Midoriya Izuku</h6>
+          <p style="color: grey">Book Enthusiast</p>
         </div>
       </div>
     </div>
@@ -327,13 +303,11 @@ LIMIT 5");
       </div>
       <div class="row">
         <div class="custom-card border-0 p-5 rounded-2" style=" background-color: #f4f1ea; height: 100%;">
-          <h5 class="p-2 m-0 text-center">Lorem, ipsum dolor sit amet consectetur adipisicing elit. Accusamus
-            sapiente
-            eius omnis</h5>
-          <p class="p-2 m-0 text-center" style="font-size: 14px;">Lorem ipsum dolor sit, amet consectetur
-            adipisicing
-            elit. A earum optio atque delectus dolor, deserunt provident natus maxime consectetur cumque esse vitae
-            reprehenderit porro accusantium reiciendis amet cum dolorem. Sunt!</p>
+          <h5 class="p-2 m-0 text-center">Join our community of book lovers!</h5>
+          <p class="p-2 m-0 text-center" style="font-size: 14px;">Become a member of Bookie to discover new books,
+            connect with fellow readers, and track your reading journey. Our platform offers personalized
+            recommendations, book reviews, and a vibrant community. Join now for free and start your reading adventure
+            today!</p>
           <?php if (!isLogged()) { ?>
             <div class="d-flex justify-content-center">
               <a href="signup.php" class="links-bg" type="submit">Join for free</a>
