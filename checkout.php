@@ -8,6 +8,14 @@ $connection = getConnection();
 if (!isLogged()) {
   header("Location:login.php");
 }
+if (isAdmin()) {
+  $message = "Sorry, you're an admin.";
+  echo "<script>
+            alert('" . addslashes($message) . "');
+            window.location.href = 'index.php';
+          </script>";
+  exit();
+}
 
 $loggedInUserId = $_SESSION['id'];
 
@@ -64,8 +72,8 @@ include (__DIR__ . "/templates/navbar.php");
                 <tr>
                   <td><img src="assets/books/<?= $book->img ?>" alt="book" class="rounded object-fit-cover"
                       style="width: 75px;"></td>
-                  <td><?= $book->title ?></td>
-                  <td><?= $book->qty ?></td>
+                  <td><?= $book->title . "<br> <span style='font-size:12px'>" . $type . "</span>" ?></td>
+                  <td><?= $qty ?></td>
                   <td>Rp <?= number_format($book->price, 0, ',', '.') ?></td>
                   <td>Rp <?= number_format($total, 0, ',', '.') ?></td>
                 </tr>
