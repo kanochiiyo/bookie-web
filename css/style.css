@@ -420,6 +420,12 @@ footer .fa-brands {
 }
 /* End transaction admin*/
 
+/* Checkout */
+#checkout .card {
+  background-color: #f4f1ea;
+}
+/* End Checkout */
+
 /* start book crud */
 #book-crud a {
   text-decoration: none;
