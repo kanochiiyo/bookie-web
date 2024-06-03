@@ -54,6 +54,7 @@ INNER JOIN publisher p ON b.publisher_id = p.id");
       </div>
       <div class="modal-body">
         <form action="../functions/upload.php" method="post" id="crudForm" enctype="multipart/form-data">
+          <input type="hidden" name="op" value="create">
           <div class="mb-3">
             <label for="bookCover" class="form-label">Book Cover</label>
             <input class="form-control" type="file" id="bookCover" name="bookCover" required>
@@ -166,10 +167,11 @@ INNER JOIN publisher p ON b.publisher_id = p.id");
       </div>
       <div class="modal-body">
         <form action="../functions/upload.php" method="post" id="editBookForm" enctype="multipart/form-data">
+          <input type="hidden" name="op" value="edit">
           <input class="form-control" type="hidden" id="edit_id" name="edit_id" required>
           <div class="mb-3">
             <label for="bookCover" class="form-label">Book Cover</label>
-            <input class="form-control" type="file" id="bookCover" name="bookCover" required>
+            <input class="form-control" type="file" id="bookCover" name="bookCover">
           </div>
           <div class="mb-3 row d-flex align-items-center">
             <label for="bookTitle" class="col-sm-2 col-form-label">Book Title</label>
@@ -325,7 +327,8 @@ INNER JOIN publisher p ON b.publisher_id = p.id");
                         data-price="<?= $row["price"] ?>">
                         <i class="fa-solid fa-pen"></i>
                       </a>
-                      <a class="p-2 text-black" href=""><i class="fa fa-trash" aria-hidden="true"></i></a>
+                      <a href="../functions/upload.php?op=delete&id=<?= $row["id"] ?>"
+                        onclick="return confirm('Are you sure?')"><i class="fa fa-trash"></i></a>
                     </td>
                   </tr>
                 <?php } ?>
