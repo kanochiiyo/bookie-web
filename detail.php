@@ -66,7 +66,7 @@ include (__DIR__ . "/templates/modal.php");
 
     <!-- content bg putih -->
     <div class="container bg-white min-vh-100">
-      <div class="row mt-5 pt-4">
+      <div class="row pt-4" style="margin-top: 90px">
         <div class="col-6">
         </div>
         <div class="col-6">
