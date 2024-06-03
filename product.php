@@ -49,7 +49,7 @@ if (isset($_GET["search"])) {
             </a>
           <?php } ?>
           <p class="nav-link m-0"><?= $_SESSION['username'] ?></p>
-          <a href="logout.php" class="links-bg ms-3">Logout</a>
+          <a href="logout.php" class="links-bg ms-3" onclick="return confirm('Are you sure?')">Logout</a>
         </span>
         <?php
       }
