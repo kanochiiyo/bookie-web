@@ -185,3 +185,26 @@ document.addEventListener("DOMContentLoaded", function () {
     });
   });
 });
+
+// disable klik checkout kalo blm milih item di keranjangg
+document.addEventListener("DOMContentLoaded", function () {
+  const checkboxes = document.querySelectorAll('input[type="checkbox"]');
+  const submitButton = document.querySelector(".submitButton");
+
+  function checkCheckboxes() {
+    let isChecked = false;
+    checkboxes.forEach((checkbox) => {
+      if (checkbox.checked) {
+        isChecked = true;
+      }
+    });
+    submitButton.disabled = !isChecked;
+  }
+
+  checkboxes.forEach((checkbox) => {
+    checkbox.addEventListener("change", checkCheckboxes);
+  });
+
+  // Initial check
+  checkCheckboxes();
+});

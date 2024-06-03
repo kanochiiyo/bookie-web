@@ -99,12 +99,13 @@ $data = query("SELECT b.id as book_id, b.img, b.title, b.price, c.id, c.user_id,
                   < Continue shopping</u></a>
             </div>
             <div class="col-6 d-flex justify-content-end">
-              <button type="submit" class="links-bg">Buy now</button>
+              <button type="submit" id="submitButton" class="links-bg submitButton" disabled>Buy now</button>
             </div>
           </div>
-        </form>
       </div>
+      </form>
     </div>
+  </div>
   </div>
 </section>
 <?php
