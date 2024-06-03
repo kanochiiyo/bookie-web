@@ -146,77 +146,84 @@ include (__DIR__ . "/templates/modal.php");
 
   <!-- Popular Books Section -->
   <?php
-  $populars = $connection->query("SELECT b.id as book_id, b.title, b.img, a.id, a.name as author, b.price, c.shopping_cart
+  $populars = $connection->query("SELECT b.id as book_id, b.title, b.img, a.id, a.name as author, b.price, c.shopping_cart, CASE WHEN (r.rate IS NULL) THEN 0 ELSE ROUND(r.rate, 1) END AS rate 
 FROM books b INNER JOIN author a ON b.author_id = a.id 
+LEFT JOIN (SELECT AVG(r.rate) AS rate, b.id FROM books b, transaction_detail tr LEFT JOIN review r ON tr.review_id = r.id WHERE b.id = tr.book_id GROUP BY b.id) r ON b.id = r.id
 INNER JOIN (SELECT count(sc.book_id) shopping_cart, sc.book_id FROM shopping_cart sc GROUP BY sc.book_id) c ON b.id = c.book_id
 ORDER BY c.shopping_cart DESC 
 LIMIT 10");
-  ?>
+
+  $popularsArray = [];
+  while ($popular = $populars->fetch_object()) {
+    $popularsArray[] = $popular;
+  }
+  $chunkedPopulars = array_chunk($popularsArray, ceil(count($popularsArray) / 2)); ?>
   <section class="popular-books pb-5" id="popular-books" data-aos="fade-right">
-    <div class="container">
+    <div class="container pt-4 px-0">
       <div class="row">
         <div class="col-6">
           <h1 class="mt-1 mb-3">Popular Books</h1>
         </div>
         <div class="col-6 d-flex justify-content-end align-items-center text-end p-0">
           <div class="col-6">
-            <a href="">Featured Products</a>
+            <a href="#">Featured Products</a>
           </div>
           <div class="col-3">
-            <a href="">New Arrivals</a>
+            <a href="#">New Arrivals</a>
           </div>
           <div class="col-3">
-            <a href="">Most Viewed</a>
+            <a href="#">Most Viewed</a>
           </div>
-        </div>
-        <div class="row">
-          <div class="col-12 pb-5">
-            <div id="carouselExampleIndicators" class="carousel slide" data-bs-ride="carousel">
-              <div class="carousel-inner">
-                <?php for ($j = 1; $j <= 2; $j++) { ?>
-                  <div class="carousel-item <?php echo ($j == 1) ? 'active' : ''; ?>">
-                    <div class="row justify-content-between mx-1">
-                      <?php while ($popular = $populars->fetch_object()) { ?>
-                        <div class="custom-card col-2 mx-1 mb-5">
-                          <a href="detail.php?detail=<?= $popular->book_id ?>" class="text-decoration-none">
-                            <img src="assets/books/<?= $popular->img ?>" alt="Moby-Dick by Harper Lee"
-                              class="rounded-end-1 object-fit-fill" style="width: 100%; height: auto; max-height: 250px;" />
-                            <div class="card-body">
-                              <h5 class="m-1 fw-bold text-truncate" style="font-size: 17px; color:#000">
-                                <?= $popular->title ?>
-                              </h5>
-                              <p class="m-1"><?= $popular->author ?></p>
-                              <p class="m-1 fw-bold" style="font-size: 13px; margin-bottom: 0;"><i
-                                  class="fa-solid fa-star"></i> 4.5
-                              </p>
-                              <div class="d-flex justify-content-between align-items-center m-1">
-                                <p class="fw-bold mb-0" style="font-size: 17px; margin-bottom: 0;">$<?= $popular->price ?>
-                                </p>
-                                <a href="#" class="submitcart links-bg-white mt-1 mb-3" data-bs-toggle="modal"
-                                  data-bs-target="#cartModal" type="button" data-id="<?= $popular->book_id ?>">Add to
-                                  cart</a>
-                              </div>
-                            </div>
-                          </a>
-                        </div>
-                      <?php } ?>
-                    </div>
-                  </div>
-                <?php } ?>
-              </div>
-            </div>
-          </div>
-
-
         </div>
       </div>
+      <div class="row justify-content-between mx-1">
+        <div class="col-12 pb-5">
+          <div id="carouselExampleIndicators" class="carousel slide" data-bs-ride="carousel">
+            <div class=" carousel-inner">
+              <?php for ($j = 0; $j < count($chunkedPopulars); $j++) { ?>
+                <div class="carousel-item <?php echo ($j == 0) ? 'active' : ''; ?>">
+                  <div class="row justify-content-between mx-1">
+                    <?php foreach ($chunkedPopulars[$j] as $popular) { ?>
+                      <div class="custom-card col-2 mx-1 mb-5" style="height: 380px">
+                        <a href="detail.php?detail=<?= $popular->book_id ?>" class="text-decoration-none">
+                          <img src="assets/books/<?= $popular->img ?>"
+                            alt="<?= $popular->title ?> by <?= $popular->author ?>" class="rounded-end-1 object-fit-fill"
+                            style="width: 100%; height: auto; max-height: 250px;" />
+                          <div class="card-body">
+                            <h5 class="m-1 fw-bold text-truncate" style="font-size: 17px; color:#000"><?= $popular->title ?>
+                            </h5>
+                            <p class="m-1"><?= $popular->author ?></p>
+                            <p class="m-1 fw-bold" style="font-size: 13px; margin-bottom: 0;"><i
+                                class="fa-solid fa-star"></i>
+                              <?= $popular->rate ?></p>
+                            <div class="d-flex justify-content-between align-items-center m-1">
+                              <p class="fw-bold mb-0" style="font-size: 17px; margin-bottom: 0;">Rp
+                                <?= number_format($popular->price, 0, ',', '.') ?>
+                              </p>
+                              <a href="#" class="submitcart links-bg-white mt-1 mb-3" data-bs-toggle="modal"
+                                data-bs-target="#cartModal" type="button" data-id="<?= $popular->book_id ?>">Add to cart</a>
+                            </div>
+                          </div>
+                        </a>
+                      </div>
+                    <?php } ?>
+                  </div>
+                </div>
+              <?php } ?>
+
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
   </section>
   <!-- End Popular Books Section -->
 
   <!-- Best Seller Section -->
   <?php
-  $best_sellers = $connection->query("SELECT b.id as book_id, b.title, b.img, a.id, a.name as author, b.price, t.qty
+  $best_sellers = $connection->query("SELECT b.id as book_id, b.title, b.img, a.id, a.name as author, b.price, t.qty, CASE WHEN (r.rate IS NULL) THEN 0 ELSE ROUND(r.rate, 1) END AS rate
 FROM books b INNER JOIN author a ON b.author_id = a.id 
+LEFT JOIN (SELECT AVG(r.rate) AS rate, b.id FROM books b, transaction_detail tr LEFT JOIN review r ON tr.review_id = r.id WHERE b.id = tr.book_id GROUP BY b.id) r ON b.id = r.id
 INNER JOIN (SELECT SUM(td.qty) qty, td.book_id  FROM transaction_detail td GROUP BY td.book_id) t ON b.id = t.book_id
 ORDER BY t.qty DESC 
 LIMIT 5");
@@ -230,7 +237,7 @@ LIMIT 5");
           </h1>
         </div>
         <div class="col-6 d-flex justify-content-end align-items-center text-end p-0">
-          <a href="">View All <i class="fa-solid fa-arrow-right"></i></a>
+          <a href="product.php">View All <i class="fa-solid fa-arrow-right"></i></a>
         </div>
       </div>
 
@@ -238,17 +245,18 @@ LIMIT 5");
         <?php while ($best_seller = $best_sellers->fetch_object()) { ?>
           <div class="custom-card col-2 mx-1 mb-5">
             <a href="detail.php?detail=<?= $best_seller->book_id ?>" class="text-decoration-none">
-              <img src="assets/books/<?= $best_seller->img ?>" alt="Moby-Dick by Harper Lee"
+              <img src="assets/books/<?= $best_seller->img ?>" alt="<?= $popular->title ?> by <?= $popular->author ?>"
                 class="rounded-end-1 object-fit-fill" style="width: 100%; height: auto; max-height: 250px;" />
               <div class="card-body">
                 <h5 class="m-1 fw-bold text-truncate" style="font-size: 17px; color:#000">
                   <?= $best_seller->title ?>
                 </h5>
                 <p class="m-1"><?= $best_seller->author ?></p>
-                <p class="m-1 fw-bold" style="font-size: 13px; margin-bottom: 0;"><i class="fa-solid fa-star"></i> 4.5
-                </p>
+                <p class="m-1 fw-bold" style="font-size: 13px; margin-bottom: 0;"><i class="fa-solid fa-star"></i>
+                  <?= $best_seller->rate ?></p>
                 <div class="d-flex justify-content-between align-items-center m-1">
-                  <p class="fw-bold mb-0" style="font-size: 17px; margin-bottom: 0;">$<?= $best_seller->price ?>
+                  <p class="fw-bold mb-0" style="font-size: 17px; margin-bottom: 0;">Rp
+                    <?= number_format($best_seller->price, 0, ',', '.') ?>
                   </p>
                   <a href="#" class="submitcart links-bg-white mt-1 mb-3" data-bs-toggle="modal"
                     data-bs-target="#cartModal" type="button" data-id="<?= $best_seller->book_id ?>">Add to cart</a>
