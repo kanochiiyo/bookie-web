@@ -102,6 +102,7 @@ foreach ($data as $row) {
         <table class="table borderless">
           <thead>
             <tr>
+              <th class="text-center">IDs</th>
               <th class="text-center">Transaction Date</th>
               <th colspan="2" class="text-center">Book</th>
               <th class="text-center">Author</th>
@@ -120,6 +121,7 @@ foreach ($data as $row) {
               ?>
               <tr>
                 <?php if ($row["transaction_id"] !== $previous_transaction_id) { // Ketika ada id trx yang sama ?>
+                  <td rowspan="<?= $rowspans[$row["transaction_id"]] ?>"><?= $row["transaction_id"] ?></td>
                   <td rowspan="<?= $rowspans[$row["transaction_id"]] ?>"><?= $row["transaction_date"] ?></td>
                 <?php } ?>
                 <td><img src="assets/books/<?= $row["img"] ?>" alt="" class="book-cover img-fluid"></td>

@@ -10,7 +10,8 @@
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
       <div class="modal-body">
-        <form id="purchaseForm">
+        <form id="PurchaseFormOrder" action="checkout.php" method="post">
+          <input type="hidden" id="buy_id" class="form-control" name="book_id">
           <div class="form-group">
             <label class="fw-bold" for="type">Type of book:</label>
             <p class="mb-0" style="font-size: 12px">*select one</p>
@@ -33,14 +34,14 @@
           </div>
           <div id="input-number-purchase-buy" class="form-group mt-3 d-none">
             <label class="fw-bold" for="size">number of add cart:</label>
-            <input type="number" class="form-control" id="size" min="1" placeholder="Enter the number of purchases"
-              name="size" required>
+            <input type="number" class="form-control" id="size" name="size" min="1"
+              placeholder="Enter the number of purchases" name="size" required>
           </div>
         </form>
       </div>
       <div class="modal-footer">
         <button type="button" class="links-bg-white" data-bs-dismiss="modal">Close</button>
-        <button type="submit" class="links-bg" form="purchaseForm">Buy now</button>
+        <button type="submit" class="links-bg" form="PurchaseFormOrder">Buy now</button>
       </div>
     </div>
   </div>

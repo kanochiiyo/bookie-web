@@ -11,7 +11,7 @@ require_once (__DIR__ . "/functions/functions.php");
 
 if (isset($_GET["search"])) {
   $search = $_GET["search"];
-  $data = query("SELECT b.id as book_id, b.title, b.img, a.id, a.name as author, b.price FROM books b INNER JOIN author a ON b.author_id = a.id AND lower(b.title) LIKE lower('%$search%')");
+  $data = query("SELECT b.id as book_id, b.title, b.img, a.id, a.name as author, b.price, g.name AS genre, p.name AS publisher FROM books b INNER JOIN author a ON b.author_id = a.id INNER JOIN genre g ON b.genre_id = g.id INNER JOIN publisher p ON p.id = b.publisher_id AND (lower(b.title) LIKE lower('%$search%') or lower(a.name) LIKE lower('%$search%') or lower(g.name) LIKE lower('%$search%') or lower(p.name) LIKE lower('%$search%'))");
 } else {
   $search = NULL;
   $data = query("SELECT b.id as book_id, b.title, b.img, a.id, a.name as author, b.price FROM books b INNER JOIN author a ON b.author_id = a.id");
@@ -28,7 +28,8 @@ if (isset($_GET["search"])) {
       <div class="collapse navbar-collapse d-flex justify-content-center" id="navbarNavDropdown">
         <form class="d-flex" role="search" style="width:70%" method="get" action="product.php">
           <input class="form-control me-2 border-1" style="border-color: black" type="search"
-            placeholder="Search book title" aria-label="Search" name="search" value="<?= $search ?? NULL ?>">
+            placeholder="Search book title, author, genre, or publisher" aria-label="Search" name="search"
+            value="<?= $search ?? NULL ?>">
           <button class="btn border-0" type="submit"><i class="fa-solid fa-magnifying-glass"></i></button>
         </form>
       </div>
@@ -48,7 +49,7 @@ if (isset($_GET["search"])) {
             </a>
           <?php } ?>
           <p class="nav-link m-0"><?= $_SESSION['username'] ?></p>
-          <a href="logout.php" class="links-bg ms-3">Logout</a>
+          <a href="logout.php" class="links-bg ms-3" onclick="return confirm('Are you sure?')">Logout</a>
         </span>
         <?php
       }
@@ -97,7 +98,18 @@ if (isset($_GET["search"])) {
           <?php } ?>
 
           <div class="row">
-            <h4 class="fw-bold">Books</h4>
+            <?php
+            if (isset($_GET["search"])) {
+              ?>
+              <h4 class="fw-bold">Hasil pencarian '<?= $search ?>'</h4>
+              <?php
+            } else {
+              ?>
+              <h4 class="fw-bold">Books</h4>
+              <?php
+            }
+            ?>
+
           </div>
 
           <div class="container pt-3 pb-5">

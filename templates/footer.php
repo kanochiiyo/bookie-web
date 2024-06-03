@@ -25,10 +25,10 @@
       button.addEventListener("click", function () {
         var id = button.getAttribute("data-edit-id");
         var title = button.getAttribute("data-title");
-        var genre = button.getAttribute("data-genre");
         var synopsis = button.getAttribute("data-synopsis");
         var author = button.getAttribute("data-author");
-        var publisher = button.getAttribute("data-publisher");
+        var genreId = button.getAttribute("data-genre");
+        var publisherId = button.getAttribute("data-publisher");
         var publication = button.getAttribute("data-publication");
         var language = button.getAttribute("data-language");
         var pages = button.getAttribute("data-pages");
@@ -36,17 +36,16 @@
         var price = button.getAttribute("data-price");
 
         document.getElementById("edit_id").value = id;
-        document.getElementById("bookTitle").value = title;
-        document.getElementById("bookGenre").value = genre;
-        document.getElementById("bookSynopsis").value = synopsis;
-        document.getElementById("author").value = author;
-        document.getElementById("publisher").value = publisher;
-        document.getElementById("publication").value = publication;
-        document.getElementById("lang").value = language;
-        document.getElementById("pages").value = pages;
-        document.getElementById("weight").value = weight;
-        document.getElementById("price").value = price;
-
+        document.getElementById("edit_book_title").value = title;
+        document.getElementById("edit_book_genre").value = genreId;
+        document.getElementById("edit_book_synopsis").value = synopsis;
+        document.getElementById("edit_author").value = author;
+        document.getElementById("edit_publisher").value = publisherId;
+        document.getElementById("edit_publication").value = publication;
+        document.getElementById("edit_lang").value = language;
+        document.getElementById("edit_pages").value = pages;
+        document.getElementById("edit_weight").value = weight;
+        document.getElementById("edit_price").value = price;
       });
     });
   });

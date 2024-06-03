@@ -54,6 +54,7 @@ INNER JOIN publisher p ON b.publisher_id = p.id");
       </div>
       <div class="modal-body">
         <form action="../functions/upload.php" method="post" id="crudForm" enctype="multipart/form-data">
+          <input type="hidden" name="op" value="create">
           <div class="mb-3">
             <label for="bookCover" class="form-label">Book Cover</label>
             <input class="form-control" type="file" id="bookCover" name="bookCover" required>
@@ -166,21 +167,22 @@ INNER JOIN publisher p ON b.publisher_id = p.id");
       </div>
       <div class="modal-body">
         <form action="../functions/upload.php" method="post" id="editBookForm" enctype="multipart/form-data">
-          <input class="form-control" type="number" id="edit_id" name="edit_id" required>
+          <input type="hidden" name="op" value="edit">
+          <input class="form-control" type="hidden" id="edit_id" name="edit_id" required>
           <div class="mb-3">
             <label for="bookCover" class="form-label">Book Cover</label>
-            <input class="form-control" type="file" id="bookCover" name="bookCover" required>
+            <input class="form-control" type="file" id="bookCover" name="bookCover">
           </div>
           <div class="mb-3 row d-flex align-items-center">
             <label for="bookTitle" class="col-sm-2 col-form-label">Book Title</label>
             <div class="col-sm-10">
-              <input type="text" id="bookTitle" class="form-control" name="bookTitle" required>
+              <input type="text" id="edit_book_title" class="form-control" name="bookTitle" required>
             </div>
           </div>
           <div class="mb-3 row d-flex align-items-center">
             <label for="bookGenre" class="col-sm-2 col-form-label">Genre</label>
             <div class="col-sm-10">
-              <select class="form-control" id="bookGenre" name="bookGenre" required>
+              <select class="form-control" id="edit_book_genre" name="bookGenre" required>
                 <option value="" disabled selected>Select one option</option>
                 <?php
                 $genres = $connection->query("SELECT * FROM genre ORDER BY name ASC");
@@ -194,13 +196,13 @@ INNER JOIN publisher p ON b.publisher_id = p.id");
           <div class="mb-3 row d-flex align-items-center">
             <label for="bookSynopsis" class="col-sm-2 col-form-label">Synopsis</label>
             <div class="col-sm-10">
-              <input type="text" id="bookSynopsis" class="form-control" name="bookSynopsis" required>
+              <input type="text" id="edit_book_synopsis" class="form-control" name="bookSynopsis" required>
             </div>
           </div>
           <div class="mb-3 row d-flex align-items-center">
             <label for="author" class="col-sm-2 col-form-label">Author</label>
             <div class="col-sm-10">
-              <select class="form-control" id="author" name="author" required>
+              <select class="form-control" id="edit_author" name="author" required>
                 <option value="" disabled selected>Select one option</option>
                 <?php
                 $authors = $connection->query("SELECT * FROM author ORDER BY name ASC");
@@ -214,7 +216,7 @@ INNER JOIN publisher p ON b.publisher_id = p.id");
           <div class="mb-3 row d-flex align-items-center">
             <label for="publisher" class="col-sm-2 col-form-label">Publisher</label>
             <div class="col-sm-10">
-              <select class="form-control" id="publisher" name="publisher" required>
+              <select class="form-control" id="edit_publisher" name="publisher" required>
                 <option value="" disabled selected>Select one option</option>
                 <?php
                 $publishers = $connection->query("SELECT * FROM publisher ORDER BY name ASC");
@@ -228,31 +230,31 @@ INNER JOIN publisher p ON b.publisher_id = p.id");
           <div class="mb-3 row d-flex align-items-center">
             <label for="publication" class="col-sm-2 col-form-label">Publication date</label>
             <div class="col-sm-10">
-              <input type="date" id="publication" class="form-control" name="publication" required>
+              <input type="date" id="edit_publication" class="form-control" name="publication" required>
             </div>
           </div>
           <div class="mb-3 row d-flex align-items-center">
             <label for="lang" class="col-sm-2 col-form-label">Language</label>
             <div class="col-sm-10">
-              <input type="text" id="lang" class="form-control" name="lang" required>
+              <input type="text" id="edit_lang" class="form-control" name="lang" required>
             </div>
           </div>
           <div class="mb-3 row d-flex align-items-center">
             <label for="pages" class="col-sm-2 col-form-label">Pages</label>
             <div class="col-sm-10">
-              <input type="number" id="pages" class="form-control" name="pages" min=0 required>
+              <input type="number" id="edit_pages" class="form-control" name="pages" min=0 required>
             </div>
           </div>
           <div class="mb-3 row d-flex align-items-center">
             <label for="weight" class="col-sm-2 col-form-label">Weight</label>
             <div class="col-sm-10">
-              <input type="number" id="weight" class="form-control" name="weight" min=0 step="0.1" required>
+              <input type="number" id="edit_weight" class="form-control" name="weight" min=0 step="0.1" required>
             </div>
           </div>
           <div class="mb-3 row d-flex align-items-center">
             <label for="price" class="col-sm-2 col-form-label">Price</label>
             <div class="col-sm-10">
-              <input type="number" id="price" class="form-control" name="price" min=0 required>
+              <input type="number" id="edit_price" class="form-control" name="price" min=0 required>
             </div>
           </div>
         </form>
@@ -318,14 +320,15 @@ INNER JOIN publisher p ON b.publisher_id = p.id");
                     <td>
                       <a class="p-2 text-black editBookBtn" data-bs-toggle="modal" data-bs-target="#editBookModal"
                         data-edit-id="<?= $row["id"] ?>" data-title="<?= $row["title"] ?>"
-                        data-genre="<?= $row["genre"] ?>" data-synopsis="<?= $row["synopsis"] ?>"
-                        data-author="<?= $row["author"] ?>" data-publisher="<?= $row["publisher"] ?>"
+                        data-genre="<?= $row["genre_id"] ?>" data-synopsis="<?= $row["synopsis"] ?>"
+                        data-author="<?= $row["author_id"] ?>" data-publisher="<?= $row["publisher_id"] ?>"
                         data-publication="<?= $row["publication_date"] ?>" data-language="<?= $row["language"] ?>"
                         data-pages="<?= $row["totalpage"] ?>" data-weight="<?= $row["weight"] ?>"
                         data-price="<?= $row["price"] ?>">
                         <i class="fa-solid fa-pen"></i>
                       </a>
-                      <a class="p-2 text-black" href=""><i class="fa fa-trash" aria-hidden="true"></i></a>
+                      <a href="../functions/upload.php?op=delete&id=<?= $row["id"] ?>"
+                        onclick="return confirm('Are you sure?')"><i class="fa fa-trash"></i></a>
                     </td>
                   </tr>
                 <?php } ?>

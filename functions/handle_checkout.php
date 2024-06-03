@@ -33,8 +33,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
       } else {
         $successMessage = "Pembelian berhasil!";
       }
-
-      $delete_cart = $connection->query("DELETE FROM shopping_cart WHERE id=$cart_id");
+      //hapus dari cart kalo itu dari cart
+      if ($cart_id) {
+        $delete_cart = $connection->query("DELETE FROM shopping_cart WHERE id=$cart_id");
+      }
     }
 
   } else {
