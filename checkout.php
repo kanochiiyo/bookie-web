@@ -64,10 +64,10 @@ include (__DIR__ . "/templates/navbar.php");
                 <tr>
                   <td><img src="assets/books/<?= $book->img ?>" alt="book" class="rounded object-fit-cover"
                       style="width: 75px;"></td>
-                  <td><?= $book->title . "<br> <span style='font-size:12px'>" . $type . "</span>" ?></td>
-                  <td><?= $qty ?></td>
-                  <td><?= $book->price ?></td>
-                  <td><?= $total ?></td>
+                  <td><?= $book->title ?></td>
+                  <td><?= $book->qty ?></td>
+                  <td>Rp <?= number_format($book->price, 0, ',', '.') ?></td>
+                  <td>Rp <?= number_format($total, 0, ',', '.') ?></td>
                 </tr>
                 <input type="hidden" name="qty[]" value="<?= $qty ?>">
                 <input type="hidden" name="book_id[]" value="<?= $book->book_id ?>">
@@ -107,8 +107,10 @@ include (__DIR__ . "/templates/navbar.php");
               <p class="fw-bold pe-3" style="font-size: 20px;">Rp <?= number_format($grand_total, 0, ',', '.') ?></p>
             </span>
             <a href="product.php" class="text-center links-co mb-3" style="width: 100%; font-size:15px"> Continue
-              shopping </a>
-            <button type="submit" class="links-co-white" style="width: 100%;" form="checkoutForm"> Checkout </button>
+              <a href="product.php" class="text-center links-co mb-3" style="width: 100%; font-size:15px"> Continue
+                shopping </a>
+              <button type="submit" class="links-co-white" style="width: 100%;" form="checkoutForm"> Checkout </button>
+              <button type="submit" class="links-co-white" style="width: 100%;" form="checkoutForm"> Checkout </button>
           </div>
         </div>
       </div>

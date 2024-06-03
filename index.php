@@ -221,7 +221,7 @@ INNER JOIN (SELECT SUM(td.qty) qty, td.book_id  FROM transaction_detail td GROUP
 ORDER BY t.qty DESC 
 LIMIT 5");
   ?>
-  <section class="best-seller" id="best-seller" data-aos="fade-right">
+  <section class="best-seller pb-5" id="best-seller" data-aos="fade-right">
     <div class="container pt-4 px-0">
       <div class="row">
         <div class="col-6">
