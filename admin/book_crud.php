@@ -42,7 +42,6 @@ INNER JOIN publisher p ON b.publisher_id = p.id");
 ?>
 
 <!-- Create modal -->
-
 <div class="modal fade font-inter" id="crudModal" tabindex="-1" aria-labelledby="crudModalLabel" aria-hidden="true">
   <div class="modal-dialog modal-dialog-centered  modal-dialog-scrollable modal-lg">
     <div class="modal-content modal-bg">

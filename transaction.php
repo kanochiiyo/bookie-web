@@ -125,7 +125,7 @@ foreach ($data as $row) {
                   <td rowspan="<?= $rowspans[$row["transaction_id"]] ?>"><?= $row["transaction_date"] ?></td>
                 <?php } ?>
                 <td><img src="assets/books/<?= $row["img"] ?>" alt="" class="book-cover img-fluid border-2"
-                    style="width: 80px; height: 110px; border-radius:2px;" </td>
+                    style="width: 90px; height: 110px; border-radius:2px;" </td>
                 <td><?= $row["title"] ?></td>
                 <td><?= $row["author"] ?></td>
                 <td><?= $row["type"] ?></td>
